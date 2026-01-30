@@ -1,3 +1,5 @@
+#/usr/sbin/python3.14 /home/matteo/Documenti/uni/lab/catenaria.py ./lab/provaCatenaCarta.jpg 86 15
+#^py                    ^percorso file .py                        ^percorso file di rif      ^nd ^numero di bordi da mostare
 import cv2 as cv
 import numpy as np
 from matplotlib import pyplot as plt
