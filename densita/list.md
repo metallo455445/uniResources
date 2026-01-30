@@ -1,14 +1,14 @@
 TODO list:
-- [] rifare le immagini in formato LaTeX
-- [] guinnes
-- [] finire di scrivere l'analisi dat
-- [] finire di scrivere le conclusioni
-- [] guinnes
-- [] riflettere sulle proprio scelte di vita
-- [] guinnes
-- [] piangere
-- [] guinnes
-- [] amaro del capo
-- [] nanna
-- [] cagarsi fortissimo
-- [] guinnes
+- [ ] rifare le immagini in formato LaTeX
+- [ ] guinnes
+- [ ] finire di scrivere l'analisi dat
+- [ ] finire di scrivere le conclusioni
+- [ ] guinnes
+- [ ] riflettere sulle proprio scelte di vita
+- [ ] guinnes
+- [ ] piangere
+- [ ] guinnes
+- [ ] amaro del capo
+- [ ] nanna
+- [ ] cagarsi fortissimo
+- [ ] guinnes
