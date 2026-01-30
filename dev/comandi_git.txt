@@ -1,0 +1,4 @@
+git add .           <-- upload dei file nel commit (. seleziona tutto)
+git commit -m "messaggio"       <-- crea il commit necessario prima del push
+git push        <-- pusha le modifiche nel repositorio
+git pull        <-- scarica il repositorio (necessario se non sono sincronizzati)
