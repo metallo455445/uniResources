@@ -1,0 +1,297 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath} %per le formule matematiche
+\usepackage{mathrsfs} %font e simboli fighi
+
+\usepackage{latexsym} %altri simboli
+\usepackage{nicefrac} %frazioni belle
+\usepackage{amsthm}
+\usepackage{geometry} %per dimensioni margini
+\usepackage{epigraph}
+%le ho incluse per le tabelle carine
+\usepackage{amsfonts}
+\usepackage{booktabs}
+\usepackage{siunitx}
+
+\usepackage{tikz} 
+
+\usepackage{tikz} %disegnini :3
+
+\linespread{1,1} %interlinea
+
+\geometry{hmargin = {3cm,3cm},vmargin = {3cm,3cm}} %settaggio margini
+
+
+\title{Relazione conducibilità termica}
+\author{GABRIELE FRUGONI (713463) e MATTEO LEONARDI(713343)\\ gruppo B2-3 tavolo 9}
+\date{\today}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Scopo dell'esperienza}
+Lo scopo di questa esperienza è misurare la costante di conducibilità termica del rame e dell'alluminio attraverso le misure dirette della temperatura prese su vari punti di un'asta di rame e su una di alluminio attraversate da uno stesso flusso di calore.
+
+\section{Cenni teorici}
+
+Il flusso~di~calore è definito come la quantità di calore trasferito per conduzione in unità di tempo:\\ \begin{equation}
+    W=\frac{dQ}{dt}\label{def.W}
+\end{equation} 
+Per un corpo all'equilibrio termico $W$ risulta costante. Il flusso~di~calore attraverso un cilindro è descritta~dall'equazione:\\ \begin{equation}
+    W = -\lambda S \frac{\Delta T}{\Delta x}\label{Fourier}
+\end{equation}
+dove $\lambda$ è la costante di conducibilità termica del materiale, $S$ è la sezione del cilindro e $\Delta T$ è la differenza di temperatura tra due punti a distanza $\Delta x$. La frazione~$\frac{\Delta T}{\Delta x}$ è detto "gradiente~termico" ed il segno meno nell'equazione dipende dal fatto che, avendo scelto la direzione positiva dell'asse $x$ come la direzione di propagazione del calore, il gradiente termico risulta negativo.\\ In questo esperimento potenza $W$ (e dunque il calore) era fornito per effetto joule da un generatore  di tensione e corrente elettrica, dunque la legge che lega la potenza all'intensità di corrente $I$(misurata in ampere) ed al voltaggio $V$ (misurato in volt) è data dall'equazione: \\ 
+\begin{equation}
+    W=VI\label{effettojoule}
+\end{equation}
+
+\section{Materiale a disposizione}
+\begin{enumerate}
+    \item sbarra in rame e sbarra in alluminio collegate ciascuna ad una resistenza, a sua volta collegata ad un generatore di tensione ad un estremo e ad un sistema di raffreddamento ad acqua all'altro estremo.
+    \item due termocoppie collegate ad un microcontrollore Arduino per la misura della temperatura con risoluzione di $0.01^0 C$
+    \item calibro ventesimale con risoluzione di $0.05 mm$
+    
+\end{enumerate}
+
+
+\section{Misure ed analisi}
+
+\subsection{Calcolo del flusso di calore}
+Il nostro generatore produceva una differenza di potenziale $\Delta V = (10.4\pm0.1)V $ ed erogava una corrente di intensità $I = (1.59\pm0.01) A$. Per entrambe le grandezze abbiamo 
+preso il valore segnato dal generatore come valore centrale e la risoluzione dello strumento come incertezza sulla misura.\\ Il flusso di calore totale che attraversa le due sbarre metalliche è uguale, per effetto~Joule, al prodotto tra intensità di corrente e differenza di potenziale e poichè le sbarre erano riscaldate grazie due resistenze uguali collegate in serie, il flusso di calore su ogni barra sarà la metà di quello totale:\\ 
+
+$W=\frac{\Delta V I}{2} = (8.27 \pm 0.09)W$\\
+
+Dove l'incertezza su $W$ è data dalla radice della somma in quadratura degli errori relativi moltiplicati per il valore centrale della potenza.\\ 
+
+$\displaystyle\sigma_{W}=V\cdot I\sqrt{\left( \frac{\sigma_I}{I}\right )^2+\left( \frac{\sigma_V}{V}\right )^2}$
+\subsection{Misura delle distanze tra i fori}
+Per calcolare la distanza media tra due fori abbiamo misurato con il calibro ventesimale la distanza minima $x$ e la distanza massima $X$ tra i due fori, abbiamo poi
+fatto la media aritmetica tra le due lunghezze per stimare la distanza $\hat x$ tra i due
+centri prendendo la risoluzione del calibro come incertezza su entrambe le misure.
+In questo modo l’incertezza sulla distanza media risulta uguale alla media tra le
+incertezze sulle distanze:: \begin{equation}
+\hat x = \frac{x+X}{2}
+\end{equation}\\
+\begin{equation}
+    \sigma_{\hat x}=\dfrac{\sigma_x + \sigma_X}{2}
+\end{equation}
+
+\begin{tikzpicture}[pillar/.style={thin, draw=black!60},
+                    dim/.style={thin,<->, draw=black},
+                    label/.style={anchor=north west, font=\scriptsize}]
+
+\draw[pillar] (0,1) -- (0,-1);
+\draw[pillar] (2,1) -- (2,-1);
+\draw[pillar] (8,1) -- (8,-1);
+\draw[pillar] (10,1) -- (10,-1);
+
+\draw[dim] (2,0) -- (8,0) node[label] {x};
+\draw[dim] (0,1.1) -- (10,1.1) node[label] {X};
+
+\node at (1,0) {foro};
+\node at (9,0) {foro};
+
+\end{tikzpicture}
+\\
+
+
+Per ogni sbarra abbiamo effettuato la misura sui primi due fori a partire da sinistra (il lato raffreddato) e sui primi due fori da destra (il lato riscaldato). Abbiamo
+quindi preso la media aritmetica tra le lunghezze misurate per ogni sbarra come
+valore centrale della lunghezza e la risoluzione del calibro come incertezza. Nei successivi calcoli per la conducibilità termica abbiamo supposto che la distanza tra i
+fori intermedi fosse costante. Di seguito sono riportate le misure sperimentali:
+
+
+\begin{table}[ht]
+\caption{Fori barra in Rame}
+\vspace{0.3em}
+\centering
+    \begin{tabular}{lSS}\toprule
+    {lato barra} & {x $mm$} & {X $mm$}\\ \midrule
+    freddo & 16.80 & 26.00 \\
+    caldo & 17.00 & 25.85 \\ \bottomrule
+    \end{tabular}
+    \label{Tab:tcr}
+\end{table}
+
+\begin{table}[ht]
+\caption{Fori barra in Alluminio}
+\vspace{0.3em}
+\centering
+    \begin{tabular}{lSS}\toprule
+    {lato barra} & {x $mm$} & {X $mm$}\\ \midrule
+    freddo & 20.80 & 29.40 \\
+    caldo & 20.70 & 29.40 \\ \bottomrule
+    \end{tabular}
+    \label{Tab:tcr}
+   
+\end{table}
+Abbiamo così ottenuto le seguenti misure per la distanza dei fori:\\
+
+$x_{Cu}=(21.41\pm 0.05) mm$\\
+
+$x_{Al}=(25.07\pm0.05)mm$ 
+
+\subsection{Misura del diametro delle sbarre}
+Sia per la sbarra di rame che per la sbarra di alluminio abbiamo misurato il diametro $D$ in tre punti: all'estremo sinistro, al centro ed all'estremo destro. La misurazione è avvenuta attraverso il calibro ventesimale, stretto in modo da risultare perpendicolare alla sbarra. Abbiamo ottenuto le misure riportate nelle Tabelle \ref{Tab:diamCu}, \ref{Tab:diamAl}\\
+\begin{table}[ht]
+\caption{Diametro sbarra di Rame}
+\vspace{0.3em}
+\centering
+    \begin{tabular}{lSS}\toprule
+    {$D_{c}mm$} & {$D_{sx} mm$} & {$D_{dx} mm$}\\ \midrule
+    
+    24.95& 25.00 & 25.00 \\ \bottomrule
+    \end{tabular}
+    \label{Tab:diamCu}
+   
+\end{table}
+\begin{table}[ht]
+\caption{Diametro sbarra di Alluminio}
+\vspace{0.3em}
+\centering
+    \begin{tabular}{lSS}\toprule
+    {$D_{c}mm$} & {$D_{sx} mm$} & {$D_{dx} mm$}\\ \midrule
+    
+    25.00& 25.00 & 25.00 \\ \bottomrule
+    \end{tabular}
+    \label{Tab:diamAl}
+   
+\end{table}\\
+
+Dove $D_c$ , $D_{sx}$ e $D_{dx}$ sono le misure del diametro prese rispettivamente al centro, all'estremo sinistro e a quello destro.\\ Prendendo come valore centrale la media aritmetica delle misure e come incertezza, la risoluzione dello strumento, otteniamo le seguenti misure per i diametri:\\
+
+$D_{Cu}=(24.98\pm0.05)mm$\\
+
+$D_{Al}=(25.00\pm0.05)mm$
+
+\subsubsection{Calcolo della sezione circolare}
+
+Una volta ottenuti i diametri delle sbarre calcoliamo il valore centrale della sezione circolare (necessario per il calcolo del coefficiente di conducibilità termica) con la formula per l'area di un cerchio.\\
+
+$\hat S=\pi r^2=\pi\left ( \dfrac{d}{2} \right )^2$   
+
+Mentre per l'incertezza sulla misura, dato che $S$ è proporzionale al quadrato di $D$, l'errore  relativo sulla sezione sarà il doppio dell'errore relativo sul diametro:\\
+
+$\dfrac{\sigma_S}{\hat S}=2\dfrac{\sigma_D}{\hat D}$\\ 
+
+dunque semplificando:\\
+
+$\sigma_S=\pi \dfrac{\hat D}{2}\sigma_D$\\
+
+Abbiamo così ottenuto le seguenti misure:\\
+
+$S_{Cu}=(490.09\pm1.96)mm^2$\\
+
+$S_{Al}=(490.90\pm1.96)mm^2$\\
+
+\subsection{Misura della temperatura}
+Per misurare la temperatura della sbarra inserivamo la termocoppia nel foro (ogni foro era riempito di olio per migliorare la conduzione del calore), la termocoppia era collegata ad un arduino, a sua volta connesso ad un computer in cui un programma mandava a schermo, su un grafico, i valori registrati. Il grafico aveva la temperatura in ${}^0C$ sulle ordinate ed il tempo di misurazione sulle ascisse. In ogni foro raccoglievamo dati sulla temperatura per un minuto. Per stimare il valore centrale della temperatura, in ogni misurazione, abbiamo osservato il grafico (temperatura/tempo) generato dal software delle termocoppie e preso il valore della temperatura più frequente; mentre per stimare l'incertezza calcolavamo la metà della differenza tra i valori massimi e i valori minimi registrati. Nelle tabelle \ref{Tab:tempCu} e \ref{Tab:tempAl} sono riportati i valori della temperatura minima, massima e centrale relativa al foro su cui è stata presa la misura.
+%vecchio: |c|l|l|r| 
+\begin{table}[h]
+\caption{Barra in Rame}
+\vspace{0.3em}
+\centering
+    \begin{tabular}{SSSS}\toprule
+    {$N^o$ foro} & {$T_{min}({}^0 C)$} & {$T_{max}({}^0 C)$} & {$\hat{T}({}^0 C)$}\\ \midrule
+1 & 38.54 & 38.90 & 38.78\\
+2 & 37.97 & 38.19 & 38.07\\
+3 & 37.24 & 37.36 & 37.24\\
+4 & 36.54 & 36.77 & 36.66\\
+5 & 35.96 & 36.19 & 36.08\\
+6 & 35.28 & 35.50 & 35.39\\
+7 & 34.48 & 34.82 & 34.70\\
+8 & 34.03 & 34.25 & 34.14\\
+9 & 33.57 & 33.69 & 33.69\\
+10 & 32.80 & 33.01 & 32.90\\
+11 & 32.24 & 32.34 & 32.24\\
+12 & 31.79 & 31.90 & 31.90\\
+13 & 30.92 & 31.03 & 31.03\\
+14 & 30.53 & 30.59 & 30.59\\
+15 & 30.30 & 30.48 & 30.37\\
+16 & 30.05 & 30.15 & 30.15\\
+17 & 29.61 & 29.94 & 29.72\\
+18 & 29.07 & 29.29 & 29.18\\
+19 & 28.44 & 28.86 & 28.54\\
+20 & 27.60 & 27.79 & 27.69\\
+     \bottomrule
+    \end{tabular}
+    \label{Tab:tempCu}
+\end{table}
+\\ 
+
+%vecchio: |c|l|l|r| 
+\begin{table}[h]
+\caption{Barra in Alluminio}
+\vspace{0.3em}
+\centering
+
+    \begin{tabular}{SSSS}\toprule
+    {$N^o$ foro} & {$T_{min}({}^0 C)$} & {$T_{max}({}^0 C)$} & {$\hat{T}({}^0 C)$}\\ \midrule
+1 & 44.12 & 44.24 & 44.12\\
+2 & 41.86 & 42.20 & 41.95\\
+3 & 40.48 & 40.60 & 40.59\\
+4 & 39.14 & 39.38 & 39.26\\
+5 & 37.99 & 38.18 & 38.07\\
+6 & 36.66 & 36.77 & 36.77\\
+7 & 34.95 & 35.27 & 35.16\\
+8 & 33.91 & 34.02 & 34.02\\
+9 & 32.57 & 32.79 & 32.68\\
+10 & 31.35 & 31.46 & 31.46\\
+11 & 30.07 & 30.26 & 30.15\\
+12 & 28.76 & 29.06 & 28.86\\
+13 & 27.47 & 27.90 & 27.47\\
+14 & 26.10 & 26.63 & 26.10\\
+15 & 24.85 & 25.37 & 24.95\\       \bottomrule
+    \end{tabular}
+    \label{Tab:tempAl}
+\end{table}
+
+\subsection{Analisi dei dati e curve fitting}
+Come si ottiene dall'equazione \ref{Fourier}, la temperatura $T$ in funzione della distanza $x$ segue la legge:\\
+
+$T=T_0-\dfrac{W}{\lambda S}(x-x_0)$\\
+
+che essendo della forma: $T=\alpha (x-x_0) + \beta$, rappresenta una retta nel piano $T,x$ con coefficiente angolare \begin{equation}
+    \alpha = -\dfrac{W}{\lambda S}\label{coeff.ang.}
+\end{equation}. Per il nostro grafico abbiamo posto la posizione iniziale (ovvero la posizione del primo foro delle sbarre) $x_0=0$. Abbiamo utilizzato la funzione $curvefit$ della libreria SciPy per generare una retta che possa (per ogni materiale) approssimare nel miglior modo possibile l'andamento dei nostri dati. Dalla stessa funzione abbiamo anche potuto ricavare il coefficente angolare della retta di approssimazione e il relativo errore:\\
+$\hat\alpha_{Cu}= -0.026$ $\sigma_{\alpha_{Cu}}=0.00019$\\
+$\hat\alpha_{Al}= -0.053$ $\sigma_{\alpha_{Al}}= 0.00026$\\
+Il grafico dei fit, renderizzato grazie alla libreria $matplotlib$ sono visibili in Figura~\ref{fig:fit_rame} e Figura~\ref{fig:fit_alluminio}\\
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{RameFit.png}
+    \caption{Risultati Fit per la barra in rame}
+    \label{fig:fit_rame}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{AlluminioFit.png}
+    \caption{Risultati Fit per la barra in alluminio}
+    \label{fig:fit_alluminio}
+\end{figure}
+
+A questo punto, conoscendo $\hat \alpha$, con la formula inversa dell'equazione \ref{coeff.ang.} otteniamo la conducibilità termica media:\\
+
+$\hat \lambda = -\dfrac{\hat W}{\hat\alpha \hat S}$\\
+
+L'incertezza su $\lambda$ propagando le incertezze dei singoli termini con la seguente somma in quadratura:\\
+
+$\sigma_{\lambda}=\hat\lambda\sqrt{\left (\dfrac{\sigma_\alpha}{\hat \alpha}\right )^2+\left (\dfrac{\sigma_W}{\hat W}\right )^2+\left (\dfrac{\sigma_S}{\hat S}\right )^2} $\\
+
+Sostituendo i valori calcolati in precedenza, otteniamo le seguenti~misure:\\
+
+$\lambda_{Cu}=(649.02 \pm 8.88) \dfrac{J}{mK}$\\
+
+$\lambda_{Al}= (318.38 \pm 3.92) \dfrac{J}{mK}$
+
+
+\section{Conclusioni}
+I valori per i due coefficienti di conducibilità termica sono risultati compatibili con i valori tabulati per la conducibilità termica del rame e dell'alluminio. \\($\lambda_{Al}~\approx~200~-~240~W~/~(m~\cdot ~K);\lambda_{Cu}\approx390-400W/(m\cdot K)$)\\ Quindi nel complesso l'esperimento ha dimostrato ciò che ci aspettavamo dalla teoria. Alcuni problemi sono sorti nella misurazione della temperatura sulla sbarra di rame che, come appare dal fit dei dati, non ha l'andamento lineare che si è evidenziato invece con la temperatura della sbarra di alluminio. Tale problema si può addurre a vari fattori di natura strumentale, come un lieve malfunzionamento della termocoppia relativa a quelle misure, problemi legati alla resistenza o al sistema di raffreddamento.
+C'è inoltre da sottolineare come non tutto il calore generato dalle resistenze si sia propagato nelle barre; è prevedibile quindi che parte del calore sia stato dissipato a contato con l'aria della stanza.
+\end{document}

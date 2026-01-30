@@ -1,0 +1,288 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath} %per le formule matematiche
+\usepackage{mathrsfs} %font e simboli fighi
+\usepackage[italian]{babel} %Perchè a noi piace soltanto l'italico idioma
+\usepackage{latexsym} %altri simboli
+\usepackage{nicefrac} %frazioni belle
+\usepackage{amsthm}
+\usepackage{geometry} %per dimensioni margini
+\usepackage{epigraph}
+%le ho incluse per le tabelle carine
+\usepackage{amsfonts}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{tikz} 
+
+\usepackage{tikz} %disegnini :3
+
+\linespread{1,2} %interlinea
+
+\geometry{hmargin = {3cm,3cm},vmargin = {3cm,3cm}} %settaggio margini
+
+
+\title{Relazione Densità}
+\author{GABRIELE FRUGONI (713463) e MATTEO LEONARDI(713343)\\ gruppo B2-3 tavolo 9}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Scopo dell'esperienza}
+Lo scopo di quest'esperienza è misurare la densità di alcuni solidi che avevamo a disposizione di tre materiali diversi (metalli ignoti, che chiameremo Materiale $A$, Materiale $B$ e Materiale $C$) attraverso le misure dirette della massa e delle loro dimensioni, verificare, per quanto concerne le sfere, la legge di potenza della densità con l'ausilio di un tool grafico (nel nostro caso, Desmos) ed eventualmente determinare il materiale degli oggetti confrontando i valori ottenuti della densità con i valori tabulati di alcuni metalli.
+\section{Cenni teorici}
+ La densità è definita come il rapporto tra una massa e un volume. Per un corpo omogeneo, la densità è uguale al rapporto tra la sua massa totale e il suo volume totale:\\
+
+\begin{equation}
+    \varrho=\dfrac{M}{V} \label{densitadefn}
+\end{equation}
+
+
+
+\section{Strumenti e Materiali a Disposizione}
+Per ogni materiale avevamo a disposizione cinque solidi diversi: per il materiale $A$ avevamo a disposizione due parallelepipedi e tre cilindri, tutti di dimensioni diverse.\\ Per il materiale $B$. avevamo a disposizione cinque sfere di dimensioni diverse. \\Per il materiale $C$ disponevamo di un prisma a base esagonale, un parallelepipedo e di tre cilindri di dimensioni diverse.\\
+Gli strumenti di misura che avevamo a disposizione erano:
+\begin{enumerate}
+    \item Calibro cinquantesimale, risoluzione: $0.02mm$
+    \item Calibro Palemer, risoluzione: $0.01mm$
+    \item Bilancia di precisione, risoluzione: $10^{-3} g$
+  
+\end{enumerate}
+
+\section{Misure ed analisi}
+\subsection{Misure Dirette di Dimensioni e Massa} 
+\subsubsection{Materiale $A$}
+Per la misura delle dimensioni dei parallelepipedi abbiamo usato il calibro cinquantesimale. In tutti i calcoli abbiamo supposto i parallelepipedi regolari, dunque abbiamo preso una singola misura per ogni spigolo. Con la bilancia di precisione abbiamo quindi effettuato la misura della massa $m$. Chiameremo i tre spigoli $\ell$, $d$ e $h$; nella tabella \ref{materialeAParall}
+sono riportate le misure dei due parallelepipedi.\\
+
+\begin{table}[h!]
+\vspace{0.3em}
+
+    \centering
+    \begin{tabular}{c|cccc}
+    \toprule
+     Parallelepipedo&  $\ell(mm)$  & $d(mm)$ & $h(mm)$ & $m(\cdot10^{-3}kg)$ \\
+       \hline
+     1&   $8.10 \pm 0.02$& $18.00\pm 0.02 $&$20.40\pm0.02$&$7.874\pm0.001$\\
+     2&  $17.80\pm 0.02$ &$10.04\pm0.02$ & $10.04\pm0.02$&$4.833\pm0.001$\\
+        \bottomrule
+        
+    \end{tabular}
+    \caption{Parallelepipedi}
+    \label{materialeAParall}
+\end{table}
+
+Nei cilindri abbi misurato con il calibro cinquantesimale l'altezza e con il calibro Palmer il diametro. Come per i parallelepipedi abbiamo supposto i cilindri regolari. Abbiamo quindi effettuato una misura per il diametro $d$ e per l'altezza $h$. Le misure dei tre cilindri sono riportate nella tabella \ref{CilindriA}\\
+
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{c|ccc}
+    \toprule
+     Cilindro & $d(mm)$   & $h(mm)$ &$m(\cdot10^{-3}kg)$ \\
+      \hline
+     1 & $5.88\pm0.01$  & $18.92\pm0.02$ & $1.427\pm0.001$\\
+     2 & $11.92\pm0.01$ & $19.28\pm0.02$ & $5.862\pm0.001$\\
+     3 & $19.76\pm0.01$ & $19.04\pm0.02$ & $15.873\pm0.001$\\
+      \bottomrule
+    \end{tabular}
+    \caption{Cilindri}
+    \label{CilindriA}
+\end{table}
+\subsubsection{Materiale $B$}
+Per ridurre eventuali errori di misura, in ogni sfera abbiamo preso con il calibro Palmer le misure di tre diametri $d_1$,$d_2$,$d_3$in punti diversi, poi ne abbiamo misurato la massa con la bilancia di precisione. I dati ottenuti sono riportati nella tabella \ref{SfereB}\\
+
+\begin{table}[h!]
+\vspace{0.3em}
+
+    \centering
+    \begin{tabular}{c|cccc}
+    \toprule
+     Sfera &  $d_1(mm)$  & $d_2(mm)$ & $d_3(mm)$ & $m(\cdot10^{-3}kg)$ \\
+       \hline
+     1&   $12.70 \pm 0.01$& $12.70\pm 0.01 $&$12.70\pm0.01$& $8.359\pm0.001$\\
+     2&  $14.28\pm 0.01$ &$14.28\pm0.01$ & $14.28\pm0.01$&$11.890\pm0.001$\\
+     3 & $14.28\pm0.01$ & $14.28\pm0.01$ & $14.28\pm0.01$ & $11.890\pm0.001$ \\
+     4 & $18.25\pm0.01$ & $18.25\pm0.01$ & $18.25\pm0.01$ & $24.822\pm0.001$\\
+     5 & $22.22\pm0.01$ & $22.21\pm0.01$ & $22.22\pm0.01$ & $44.707\pm0.001$\\
+        \bottomrule
+        
+    \end{tabular}
+    \caption{Sfere}
+    \label{SfereB}
+\end{table}
+\subsubsection{Materiale $C$}
+Per le misure delle dimensioni dei cilindri abbiamo utilizzato il calibro Palmer per misurare il diametro in tre punti diversi (alle due estremità ed al centro dei cilindri) mentre abbiamo utilizzato il calibro cinquantesimale per misurare l'altezza $h$. Tutte i dati sulle dimensioni e della massa dei cilindri sono raccolte nella tabella \ref{materialeCcilindri}.
+
+\begin{table}[h!]
+\vspace{0.3em}
+
+    \centering
+    \begin{tabular}{c|ccccc}
+    \toprule
+     Cilindro&  $d_1(mm)$  & $d_2(mm)$ & $d_3(mm)$ & $h(mm)$ & $m(\cdot10^{-3}kg)$ \\
+       \hline
+     1&   $5.99 \pm 0.01$& $6.00\pm 0.01 $&$6.00\pm0.01$ &$13.94\pm0.02$&$29.500\pm0.001$\\ 
+     2&  $9.96\pm 0.01$ &$9.95\pm0.01$ & $9.95\pm0.01$ &$37.38\pm0.02$&$24.579\pm0.001$\\ 
+     3 & $9.96\pm0.01$ & $9.96\pm0.01$ & $9.96\pm0.01$ & $16.18\pm0.02$ & $10.669\pm0.001$\\
+     
+        \bottomrule
+        
+    \end{tabular}
+    \caption{Cilindri; materiale C}
+    \label{materialeCcilindri}
+\end{table}
+
+Per le dimensioni del prisma a base esagonale abbiamo utilizzato il calibro cinquantesimale per misurare i tre apotemi $a_1$,$a_2$ ed $a_3$ e l'altezza $h$. Tutte le misure sono riportate nella tabella \ref{prisma}.
+\begin{table}[h!]
+\vspace{0.3em}
+
+    \centering
+    \begin{tabular}{c|ccccc}
+    \toprule
+     Prisma&  $a_1(mm)$  & $a_2(mm)$ & $a_3(mm)$ & $h(mm)$&$m(\cdot10^{-3}kg)$ \\
+       \hline
+     {}&   $15.00 \pm 0.02$& $15.00\pm 0.02 $&$14.92\pm0.02$&$17.74\pm0.02$&$28.656\pm0.001$\\
+     
+        \bottomrule
+        
+    \end{tabular}
+    \caption{Prisma}
+    \label{prisma}
+\end{table}
+
+
+Per quanto riguarda il parallelepipedo, abbiamo proceduto come nel caso precendente misurando con il calibro cinquantesimale le tre dimensioni $\ell$, $h$ e $d$. Massa e dimensioni sono riportate nella tabella \ref{materialeCParall}
+\begin{table}[h!]
+\vspace{0.3em}
+
+    \centering
+    \begin{tabular}{c|cccc}
+    \toprule
+     Parallelepipedo&  $\ell(mm)$  & $d(mm)$ & $h(mm)$ & $m(\cdot10^{-3}kg)$ \\
+       \hline
+     {}&   $10.00 \pm 0.02$& $41.80\pm 0.02 $&$10.00\pm0.02$&$34.930\pm0.001$\\
+     
+        \bottomrule
+        
+    \end{tabular}
+    \caption{Parallelepipedo}
+    \label{materialeCParall}
+\end{table}
+\subsection{Analisi Dati}
+\subsubsection{Stima della densità}
+Per trovare la densità necessitavamo del volume dei vari solidi che abbiamo calcolato con le usuali formule di geometria elementare per i solidi regolari:\\
+\begin{center}
+    $V_{Parallelepipedo}=\ell h d$\\ 
+    
+    $V_{Sfera}=\dfrac{\pi}{6}d^3$\\ 
+    
+    $V_{Cilindro}=\dfrac{\pi}{4}d^2h$\\ 
+
+    $V_{prisma}=\sqrt{3}a^2h$
+    
+
+\end{center}
+Nel caso delle sfere e del prisma a base esagonale è emerso che non si trattava effettivamente di solidi regolari, tuttavia per semplificare i calcoli successivi abbiamo scelto di approssimarli a solidi regolari e considerando la media delle misure delle dimensioni risultate irregolari. \\
+
+\'E stato dunque possibile determinare la densità di ogni solido di seguito raccolte nella Tabella \ref{densita}
+
+\begin{table}[h!]
+\vspace{0.3em}
+
+    \centering
+    \begin{tabular}{c|ccccc}
+    \toprule
+     Materiale $A$ &  Parallelepipdeo 1  & Parallelepipedo 2 & Cilindro 1 & Cilindro 2 & Cilindro 3 \\
+       \hline
+     $\varrho(kg / m^3)$ &   $2647.3 \pm 12.4$& $2693.5\pm 14.3 $&$2777.5\pm 14.3$ &$2724.5\pm 7.8$ & $2718.5\pm5.8$\\ 
+    \toprule
+    Materiale $B$ & Sfera 1 & Sfera 2 & Sfera 3 & Sfera 4 & Sfera 5\\
+     \hline
+     $\varrho(kg / m^3)$ &   $7793.7 \pm 19.3$ & $7792.8 \pm 17.0 $ & $7798.3 \pm 17.0$ & $ 7799.2 \pm 13.1$ & $ 7786.5 \pm 10.7$\\
+    \toprule
+    Materiale $C$ & Cilindro 1 & Cilindro 2 & cilindro 3 & Prisma & Parallelepipedo\\
+        \hline
+        $\varrho(kg / m^3)$ & $8293.7 \pm 29.3$ & $8454.8 \pm 21.8 $ & $8463.2 \pm 28.2$ & $8319.2 \pm 31.9$ & $8356.5 \pm 37.7$\\
+        \bottomrule
+        
+    \end{tabular}
+    \caption{Densità}
+    \label{densita}
+\end{table}
+
+\'E stata poi calcolata la media aritmetica delle densità per ogni materiale, i risultati sono riportati nella Tabella \ref{Media_densità_per_materiale}
+
+\begin{table}[h!]
+\vspace{0.3em}
+    \centering
+    \begin{tabular}{cc}
+    \toprule
+     Materiale & $\varrho (\nicefrac{kg}{m^3})$ \\
+       \hline
+       $A$ & $2712.3 \pm 10.9$ \\
+       $B$ & $7794.1 \pm 15.4$ \\
+       $C$ & $8376.6 \pm 29.8$ \\
+        \bottomrule
+        
+    \end{tabular}
+    \caption{Media densità per materiale}
+    \label{Media_densità_per_materiale}
+\end{table}
+
+\subsubsection{Verifica delle densità stimate tramite fit}
+Per ogni materia è stato realizzato un grafico Massa/Volume nel quale sono stati riportati i vaolri relativi ad ogni oggetto analizzato: Figura \ref{fig:massa/vol_A}, Figura \ref{fig:massa/vol_B} e Figura \ref{fig:massa/vol_C}\\
+Questi grafici, oltre a mostrarci la correttezza dei dati rilevati, ci permettono di verifcare le densità stimate in precedenza: difatti l'inverso del coefficiente angolare di ogni retta dovrebbe coincidere con il valore della densità del materiale corrispondente\\
+
+\begin{table}[h!]
+\vspace{0.3em}
+    \centering
+    \begin{tabular}{ccc}
+    \toprule
+     Materiale & $\varrho (\nicefrac{kg}{m^3})$ & $\nicefrac{1}{\varrho} (\nicefrac{g}{mm^3})$ \\
+       \hline
+       $A$ & $2712.9 \pm 3.8$ & $368.6 \pm 3.8$ \\
+       $B$ & $7788.2 \pm 0.1$ & $128.4 \pm 0.1$ \\
+       $C$ & $8271.3 \pm 1.3$ & $120.9 \pm 1.3$ \\
+        \bottomrule
+        
+    \end{tabular}
+    \caption{Coefficienti angolari fit}
+    \label{Coefficienti_angolari_fit}
+\end{table}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{Grafico_massa-volume_materiale_A.png}
+    \caption{Materiale $A$}
+    \label{fig:massa/vol_A}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{Grafico_massa-volume_materiale_B.png}
+    \caption{Materiale $B$}
+    \label{fig:massa/vol_B}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{Grafico_massa-volume_materiale_C.png}
+    \caption{Materiale $C$}
+    \label{fig:massa/vol_C}
+\end{figure}
+
+
+
+\subsection{Verifica della legge di potenze per le sfere}
+
+Abbiamo registrato i valori di massa e raggio delle sfere e li abbiamo inseriti all'interno di un grafico a scala bilogaritmica. Sapendo che la relazione tra massa e raggio è una legge di potenza
+\begin{center}
+    \[m = \frac{4}{3} \pi \varrho r^3 = k r^3\]\\
+\end{center}
+i punti dovrebbero disporti su una linea retta. Attraverso un calcolatore garfico (Desmos) è stata disegnata una retta che descrivesse, in modo quanto più preciso, l'andamento dei punti.
+\section{Conclusioni}
+Questa esperienza ha dimostrato, in accordo con la teoria, che massa e volume di corpi omogenei hanno una dipendenza lineare.
+\end{document}
