@@ -1,6 +1,20 @@
 import numpy as np
 from matplotlib import pyplot as plt
 from scipy.optimize import curve_fit
+import matplotlib as mpl
+
+mpl.use("pgf")
+
+plt.rcParams.update({
+    "pgf.texsystem": "xelatex",
+    "text.usetex": True,
+    "pgf.rcfonts": False,
+    # Trasforma la lista in una stringa unica separata da \n
+    "pgf.preamble": (
+        r"\usepackage{unicode-math}"
+        r"\setmainfont{Latin Modern Roman}"
+    )
+})
 
 nMisurazioni = 1
 numeroFissoEsagono = 0.866
@@ -353,7 +367,7 @@ plt.plot(x, line(x, a0, b0))
 plt.ylabel('Volume [mm$^3$]')
 plt.xlabel('Massa [g]')
 plt.grid(which='both', ls='dashed', color='gray')
-plt.savefig('massa_volume.pdf')
+plt.savefig('massa_volume_A.pgf')
 
 residuiA = (volA - line(massA, a0, b0))/sigma_b
 chi2 = np.sum(np.power(residuiA,2))
@@ -388,7 +402,7 @@ plt.plot(x, line(x, a0, b0))
 plt.ylabel('Volume [mm$^3$]')
 plt.xlabel('Massa [g]')
 plt.grid(which='both', ls='dashed', color='gray')
-plt.savefig('massa_volume.pdf')
+plt.savefig('massa_volume_B.pgf')
 
 residuiB = (volB - line(massB, a0, b0))/sigma_b
 chi2 = np.sum(np.power(residuiB,2))
@@ -423,7 +437,7 @@ plt.plot(x, line(x, a0, b0))
 plt.ylabel('Volume [mm$^3$]')
 plt.xlabel('Massa [g]')
 plt.grid(which='both', ls='dashed', color='gray')
-plt.savefig('massa_volume.pdf')
+plt.savefig('massa_volume_C.pgf')
 
 residuiC = (volC - line(massC, a0, b0))/sigma_b
 chi2 = np.sum(np.power(residuiC,2))
@@ -461,7 +475,7 @@ for i in range(len(r)):
              testo_punto, 
              fontsize=7, color='red')
              
-plt.savefig('massa_raggio.pdf')
+plt.savefig('massa_raggio.pgf')
 
 #------------------------------------ GRAFICO TOTALE ------------------------------------#
 
@@ -477,6 +491,7 @@ x = np.linspace(0., 40., 100)
 plt.ylabel('Volume [mm$^3$]')
 plt.xlabel('Massa [g]')
 plt.grid(which='both', ls='dashed', color='gray')
-plt.savefig('massa_volume.pdf')
+plt.savefig('massa_volume_tot.pgf')
 
-plt.show() 
+#plt.show()
+#plt.savefig("grafico_densita.pgf") 
