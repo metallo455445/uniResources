@@ -1,5 +1,5 @@
 TODO list:
-- [ ] rifare le immagini in formato LaTeX
+- [X] rifare le immagini in formato LaTeX
 - [ ] guinnes
 - [ ] finire di scrivere l'analisi dat
 - [ ] finire di scrivere le conclusioni
