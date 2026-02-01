@@ -1,13 +1,29 @@
 import numpy as np
 from matplotlib import pyplot as plt
 from scipy.optimize import curve_fit
+import matplotlib as mpl
 
-misten = 10
+#decommentare fino alla riga 19 per scaricare i file in .pgf Inoltre è necessario il comando plt.savefig("pendolo.pgf") a fine documento
+mpl.use("pgf")
 
+plt.rcParams.update({
+    "pgf.texsystem": "xelatex",
+    "text.usetex": True,
+    "pgf.rcfonts": False,
+    # Trasforma la lista in una stringa unica separata da \n
+    "pgf.preamble": (
+        r"\usepackage{unicode-math}"
+        r"\setmainfont{Latin Modern Roman}"
+    )
+})
+
+
+nMisure = 10    #n° di misure da selezionare, si ricorda di modificare di conseguenza distanzeFori e TenOscillazioni
+                #nello specifico: eliminare i valori nei blocchi centrali di distanzeFori (520, poi 419, ...) e commentare la riga corrispondente in TenOscillazioni
 baricentro = 502 #[mm] distanza del baricentro dal lato corto
 errorBar = 1 #[mm]
-                                                #!v 520 !!!!
-distanzeFori = np.array([19, 119, 219, 319, 419, 520, 620, 720, 820, 920]) #[mm] a partirre dal lato corto
+                                                #!v, 520, 419!!!!
+distanzeFori = np.array([19, 119, 219, 319, 620, 720, 820, 920]) #[mm] a partirre dal lato corto
 errorFori = 1 #[mm]
 
 distanzeFori = distanzeFori + 0.25                  #distanza dal centro del foro
@@ -21,9 +37,9 @@ TenOscillazioni = np.array([[16.18, 15.91, 15.95, 15.99, 15.91, 15.05, 15.92, 16
                            [15.89, 15.43, 15.53, 15.59, 15.37, 15.28, 15.39, 15.74, 15.17, 15.47],
                            [15.27, 14.89, 14.98, 15.05, 14.93, 14.95, 15.14, 15.27, 15.04, 15.12],
                            [15.84, 16.09, 15.86, 15.77, 15.89, 16.09, 15.87, 16.01, 15.80, 16.16],
-                           [21.09, 20.99, 21.17, 21.15, 21.14, 21.38, 21.07, 21.23, 21.16, 21.59],
+                           #[21.09, 20.99, 21.17, 21.15, 21.14, 21.38, 21.07, 21.23, 21.16, 21.59],
                            #sbarra rovesciata
-                           [38.93, 39.31, 38.86, 38.97, 38.92, 39.35, 39.13, 39.15, 39.27, 39.11],
+                           #[38.93, 39.31, 38.86, 38.97, 38.92, 39.35, 39.13, 39.15, 39.27, 39.11],    <---
                            [17.67, 17.63, 17.71, 17.75, 17.60, 16.11, 17.82, 17.60, 17.89, 18.03],
                            [15.31, 15.48, 15.58, 15.25, 15.29, 15.27, 15.27, 15.17, 15.43, 15.29],
                            [15.18, 15.17, 15.03, 15.07, 15.03, 15.07, 15.08, 15.53, 15.06, 15.06],
@@ -33,7 +49,7 @@ SingleOscillazioni = TenOscillazioni / 10
 print(SingleOscillazioni)
 
 #calcola la media per ogni riga
-mediariga = np.empty(10)                                 #<---- 10 !!!
+mediariga = np.empty(8)                                 #<---- 10 !!!
 for i in range(mediariga.size):
     mediariga[i] = np.mean(SingleOscillazioni[i, :])
 print(mediariga, "\n#####")
@@ -44,7 +60,7 @@ sballo = mediariga[:, None] - SingleOscillazioni
 print(sballo)
 
 #calcolo deviazione standard per ogni foro
-devStd = np.empty(10)                                   #<--- 10 !!!
+devStd = np.empty(8)                                   #<--- 10 !!!
 for i in range(devStd.size):
     diff = SingleOscillazioni[i, :] - mediariga[i]
     devStd[i] = np.sqrt(np.sum(diff**2) / (len(diff) - 1))
@@ -72,19 +88,21 @@ print(f'l0 = {l0} +/- {sigma_l}')
 
 fig, (ax1, ax2) = plt.subplots(2, 1, sharex=True, height_ratios=[3, 1])
 
+residui = (T - period_model(d, l0))/ sigma_T
+#chi2 = np.sum(np.power((T - period_model(d,l0)/(sigma_T)),2))
+chi2 = np.sum(np.power(residui,2))
+
 # --- Grafico fit ---
 ax1.errorbar(d, T, yerr=None, xerr=sigma_d, fmt='o', label="errore metro[1mm]", color="C0")
 ax1.errorbar(d, T, yerr=sigma_T, fmt="o", label="deviazione standard", color="C0")
 x = np.linspace(min(d), max(d), 200)
-ax1.plot(x, period_model(x, l0), color="orange")
+#ax1.plot(x, period_model(x, l0), color="orange")
+ax1.plot(x, period_model(x, l0), color="orange", label=rf"$\chi^2/ndf = {chi2:.2f}/{len(d)-len(popt)}$" "\n" rf"$l_0 = {l0:.3f} \pm {sigma_l:.3f}$ m")
 ax1.set_ylabel("Periodo [s]")
 ax1.grid(ls='dashed')
 ax1.legend()
 
 # --- Grafico residui ---
-residui = (T - period_model(d, l0))/ sigma_T
-#chi2 = np.sum(np.power((T - period_model(d,l0)/(sigma_T)),2))
-chi2 = np.sum(np.power(residui,2))
 ax2.axhline(0, color='black', linestyle='dashed')
 ax2.errorbar(d, residui, sigma_T, fmt='o')
 ax2.set_xlabel("d [m]")
@@ -93,4 +111,5 @@ ax2.grid(ls='dashed')
 print(f"chi2: {chi2}")
 print(f"lung popt {len(popt)}")
 plt.tight_layout()
-plt.show()
+#plt.show()
+plt.savefig("pendolo_8.pgf")

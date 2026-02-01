@@ -1,0 +1,2 @@
+- [ ] rifare le immagini il formato pgf
+- [ ] spiegare perché si sono tolti alcuni dati e rifatti i fit 
