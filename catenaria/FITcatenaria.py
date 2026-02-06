@@ -1,4 +1,4 @@
-#/usr/sbin/python3.14 /home/matteo/Documenti/uni/lab/FITcatenaria.py lab/coord.txt        
+#/usr/sbin/python3.14 /home/matteo/Documenti/uni/lab/catenaria/FITcatenaria.py lab/catenaria/coord.txt      
 #                                                                        ^percorso del txt coord
 import numpy as np
 from matplotlib import pyplot as plt

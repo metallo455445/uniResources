@@ -1,26 +1,26 @@
-#/usr/sbin/python3.14 /home/matteo/Documenti/uni/lab/catenaria.py ./lab/provaCatenaCarta.jpg 86 15
-#^py                    ^percorso file .py                        ^percorso file di rif      ^nd ^numero di bordi da mostare
+#/usr/sbin/python3.14 lab/catenaria/catenaria.py lab/catenaria/provaCatenaCarta.jpg 15 lab/catenaria/coord.txt
+#^py                    ^percorso file .py          ^percorso file di rif           ^numero di bordi da mostare   ^percorso del file su cui salvare le coordinate
+#                                                                                                                   se non esiste, lo crea
 import cv2 as cv
 import numpy as np
 from matplotlib import pyplot as plt
 import sys
 
-#percorso file coordinate punti della parabola da fittare
-
-coord_path = './lab/coord.txt'
-open(coord_path, 'w').close()   #formatta il file delle coord prima di riscrivere
-
-
 # Ottieni il percorso del file dall'argomento
 if len(sys.argv) > 1:
     file_path = sys.argv[1]
-    contour_index = int(sys.argv[2]) if len(sys.argv) > 2 else 4
-    n_top_countours = int(sys.argv[3]) if len(sys.argv) > 2 else 5
+    #contour_index = int(sys.argv[2]) if len(sys.argv) > 2 else 4   #<--Non uso più questo variabile, la rimuovo
+    n_top_countours = int(sys.argv[2]) if len(sys.argv) > 2 else 5  #aggionato il nomero dell'argv da 3 a 2
+    coord_path = sys.argv[3]                                        #aggiunto, in effetti è comodo passarlo da terminale
 else:
     file = input("Inserisci il nome del file: ")
-    file_path = './lab/' + file
-    contour_index = 4
+    file_path = './' + file
+    #contour_index = 4
     n_top_countours = 5
+    coord_path = './coord.txt'
+
+open(coord_path, 'w').close()   #formatta il file delle coord prima di riscrivere
+#percorso file coordinate punti della parabola da fittare
 
 # Usa file_path ovunque
 img = cv.imread(file_path, cv.IMREAD_GRAYSCALE)
