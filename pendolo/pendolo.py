@@ -7,14 +7,14 @@ import matplotlib as mpl
 mpl.use("pgf")
 
 plt.rcParams.update({
-    "pgf.texsystem": "xelatex",
+    "font.family": "serif",     #!!Riga incriminata  "pgf.texsystem": "xelatex", è utilizza un'altro tipo di font
     "text.usetex": True,
     "pgf.rcfonts": False,
     # Trasforma la lista in una stringa unica separata da \n
-    "pgf.preamble": (
-        r"\usepackage{unicode-math}"
-        r"\setmainfont{Latin Modern Roman}"
-    )
+    # "pgf.preamble": (
+    #     r"\usepackage{unicode-math}"
+    #     r"\setmainfont{Latin Modern Roman}"
+    # )
 })
 
 
@@ -22,8 +22,8 @@ nMisure = 10    #n° di misure da selezionare, si ricorda di modificare di conse
                 #nello specifico: eliminare i valori nei blocchi centrali di distanzeFori (520, poi 419, ...) e commentare la riga corrispondente in TenOscillazioni
 baricentro = 502 #[mm] distanza del baricentro dal lato corto
 errorBar = 1 #[mm]
-                                                #!v, 520!!!!
-distanzeFori = np.array([19, 119, 219, 319, 419, 520, 620, 720, 820, 920]) #[mm] a partirre dal lato corto
+                                                #!v, 419, 520!!!!
+distanzeFori = np.array([19, 119, 219, 319, 620, 419, 520, 720, 820, 920]) #[mm] a partirre dal lato corto
 errorFori = 1 #[mm]
 
 distanzeFori = distanzeFori + 0.25                  #distanza dal centro del foro
@@ -37,9 +37,9 @@ TenOscillazioni = np.array([[16.18, 15.91, 15.95, 15.99, 15.91, 15.05, 15.92, 16
                            [15.89, 15.43, 15.53, 15.59, 15.37, 15.28, 15.39, 15.74, 15.17, 15.47],
                            [15.27, 14.89, 14.98, 15.05, 14.93, 14.95, 15.14, 15.27, 15.04, 15.12],
                            [15.84, 16.09, 15.86, 15.77, 15.89, 16.09, 15.87, 16.01, 15.80, 16.16],
-                           [21.09, 20.99, 21.17, 21.15, 21.14, 21.38, 21.07, 21.23, 21.16, 21.59],
+                           [21.09, 20.99, 21.17, 21.15, 21.14, 21.38, 21.07, 21.23, 21.16, 21.59],     #<--8
                            #sbarra rovesciata
-                           [38.93, 39.31, 38.86, 38.97, 38.92, 39.35, 39.13, 39.15, 39.27, 39.11],    #<---
+                           [38.93, 39.31, 38.86, 38.97, 38.92, 39.35, 39.13, 39.15, 39.27, 39.11],    #<---9
                            [17.67, 17.63, 17.71, 17.75, 17.60, 16.11, 17.82, 17.60, 17.89, 18.03],
                            [15.31, 15.48, 15.58, 15.25, 15.29, 15.27, 15.27, 15.17, 15.43, 15.29],
                            [15.18, 15.17, 15.03, 15.07, 15.03, 15.07, 15.08, 15.53, 15.06, 15.06],
@@ -60,7 +60,7 @@ sballo = mediariga[:, None] - SingleOscillazioni
 print(sballo)
 
 #calcolo deviazione standard per ogni foro
-devStd = np.empty(10)                                   #<--- 10 !!!
+devStd = np.empty(9)                                   #<--- 10 !!!
 for i in range(devStd.size):
     diff = SingleOscillazioni[i, :] - mediariga[i]
     devStd[i] = np.sqrt(np.sum(diff**2) / (len(diff) - 1))

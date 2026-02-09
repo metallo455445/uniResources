@@ -1,0 +1,112 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath} %per le formule matematiche
+\usepackage{mathrsfs} %font e simboli fighi
+\usepackage[italian]{babel} %Perchè a noi piace soltanto l'italico idioma
+\usepackage{latexsym} %altri simboli
+\usepackage{nicefrac} %frazioni belle
+\usepackage{amsthm}
+\usepackage{geometry} %per dimensioni margini
+\usepackage{epigraph}
+%le ho incluse per le tabelle carine
+\usepackage{amsfonts}
+\usepackage{booktabs}
+\usepackage{siunitx}
+
+\usepackage{tikz} %disegnini :3
+
+\usepackage{pgf} %immagini pgf
+\newcommand{\mathdefault}[1]{#1}
+
+\linespread{1,2} %interlinea
+
+\geometry{hmargin = {3cm,3cm},vmargin = {3cm,3cm}} %settaggio margini
+
+
+\title{Relazione di Laboratorio: Pendolo}
+\author{GABRIELE FRUGONI (713463) e MATTEO LEONARDI(713343)\\ gruppo B2-3 tavolo 9}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Scopo dell'Esperienza}
+Lo scopo dell'esperienza è misurare il periodo di un pendolo, schematizzato da un'asta rigida, in relazione alla distanza dal centro di oscillazione e verificare la legge del periodo per un corpo rigido oscillante in regime di piccole oscillazioni.
+\section{Cenni teorici}
+In un'asta rigida omogenea, la forza responsabile delle oscillazioni è la forza peso. Consideriamo un'asta di lunghezza $\ell$. Il modulo del momento della forza peso sarà uguale a
+\begin{center}
+    $\mathcal M =- m g d \sin\vartheta$
+\end{center}
+Dove $d$ è la distanza del polo dal centro di massa. Essendo in un regime di piccole oscillazioni (quindi con $\vartheta\rightarrow0$) approssimiamo considerando soltanto il primo termine non nullo dell'espansione di Taylor di $\sin\vartheta$
+\begin{center}
+    $\mathcal M \approx -mgd\vartheta$
+\end{center}
+In generale il modulo del momento di un corpo rigido è uguale a
+\begin{center}
+    $\mathcal{M}=\mathcal{I} \ddot{\vartheta}$
+\end{center}
+E nel caso di un'asta rigida, il momento di inerzia $\mathcal I$ è 
+\begin{center}
+    $\mathcal I = md^2 + \dfrac{m\ell^2}{12}$
+\end{center}
+Eguagliando quindi i momenti otteniamo la seguente equazione differenziale:
+\begin{center}
+    $mgd\vartheta +\mathcal I \ddot{\vartheta}=0$
+\end{center}
+Da cui
+\begin{center}
+    $\ddot \vartheta = -\dfrac{mgd}{\mathcal I}\vartheta$
+\end{center}
+Che è l'equazione di un moto armonico con pulsazione
+\begin{center}
+    $\omega=\sqrt{\dfrac{mgd}{\mathcal I}}$
+   
+\end{center}
+Da cui otteniamo l'espressione del periodo:
+\begin{center}
+    $T=2\pi\sqrt{\dfrac{\mathcal I}{mgd}}=2\pi\sqrt{\dfrac{d^2+\nicefrac{\ell^2}{12}}{gd}}$
+\end{center}
+\section{Materiali e Strumenti di Misura}
+\begin{enumerate}
+    \item Pendolo: asta rigida di metallo, forata !!!!!!, di lunghezza $\ell = 10^3 \pm 1 mm$
+    \item Metro a nastro con risoluzione di $1mm$
+    \item Calibro ventesimale con risoluzione di $0.05mm$
+    \item Cronometro con risoluzione di $0.01 s$%controllato :)
+    
+\end{enumerate}
+
+\section{Misura e Analisi dei Dati}
+
+\begin{figure}
+    \centering
+    \sffamily
+    \resizebox{0.85\textwidth}{!}{%  <-- Ridimensiona all'80% della larghezza del testo
+        \input{pendolo_10.pgf}
+    }
+    \caption{risultati fit pendolo per 10 misure}
+    \label{fig:10musre}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \sffamily
+    \resizebox{0.85\textwidth}{!}{%  <-- Ridimensiona all'80% della larghezza del testo
+        \input{pendolo_9.pgf}
+    }
+    \caption{risultati fit pendolo per 9 misure}
+    \label{fig:8misure}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \resizebox{0.85\textwidth}{!}{%  <-- Ridimensiona all'80% della larghezza del testo
+        \input{pendolo_8.pgf}
+    }
+    \caption{risultati fit pendolo per 8 misure}
+    \label{fig:8misure}
+\end{figure}
+
+
+\end{document}
