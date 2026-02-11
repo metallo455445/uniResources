@@ -1,5 +1,5 @@
-#/usr/sbin/python3.14 lab/catenaria/catenaria.py lab/catenaria/provaCatenaCarta.jpg 15 lab/catenaria/coord.txt
-#^py                    ^percorso file .py          ^percorso file di rif           ^numero di bordi da mostare   ^percorso del file su cui salvare le coordinate
+#py ./catenaria/catenaria.py ./catenaria/catenaTerraPulita.png 20 ./catenaria/coord.txt
+#^py     ^percorso file .py          ^percorso file di rif     ^numero di bordi da mostare   ^percorso del file su cui salvare le coordinate
 #                                                                                                                   se non esiste, lo crea
 import cv2 as cv
 import numpy as np
@@ -178,22 +178,8 @@ if img_color is not None and len(contours) > 0:
             plt.imshow(cv.cvtColor(img_single, cv.COLOR_BGR2RGB))
             plt.title(f'Contorno {indiceContornoTarget} (Visualizzazione Standard)')
 #####
-    getCoord(86)
-    getCoord(87)
-    getCoord(89)
-    getCoord(192)
-    getCoord(25)
-    getCoord(26)
-    getCoord(102)
-    getCoord(37)
-    getCoord(130)
-    getCoord(21)
-    getCoord(201)
-    #getCoord(206)          #Interferenza
-    getCoord(172)
-    #getCoord(55)           #Interferenza
-    #getCoord(184)          #Interferenza
-        
+    #INCOLLA QUI I getCoord()
+ 
 else:
     print("Impossibile caricare l'immagine a colori o nessun contorno trovato")
 
