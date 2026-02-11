@@ -70,7 +70,7 @@ Verranno aperte più finestre rispetto a prima (una per ogni bordo che si sta ve
 Una volta fatto questo lavoro per ogni contorno, tornare sul codice python [catenaria](catenaria.py) e eliminare le righe di "*getCoord(ID)*" con gli Id segnati in precedenza (ovvero quelli dei contorni "sbagliati").<br>
 Fatto ciò salvare il codice python e rinviare il comando per l'ultima volta, ricontrollare che tutti i bordi siano solo ed esclusivamente della catena e se tutti i check sono andati a buon fine si può passare al seguente punto.
 
-### Fit dei dati
+### 5. Fit dei dati
 Arrivati a questo punto il file [coord.txt](coord.txt) sarà pieno di dati, è arrivata l'ora di analizzarli.Eseguire sul terminale il seguente codice
 
     py FITcatenaria.py coord.txt  
