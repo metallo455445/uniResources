@@ -1,7 +1,7 @@
 import numpy as np
 import time
 
-word = "Ciao Mondo!"
+word = "matteo leonardi puzza"
 comp = np.array([''] * len(word))
 stop = False
 i = 0
