@@ -70,19 +70,10 @@ Verranno aperte più finestre rispetto a prima (una per ogni bordo che si sta ve
 Una volta fatto questo lavoro per ogni contorno, tornare sul codice python [catenaria](catenaria.py) e eliminare le righe di "*getCoord(ID)*" con gli Id segnati in precedenza (ovvero quelli dei contorni "sbagliati").<br>
 Fatto ciò salvare il codice python e rinviare il comando per l'ultima volta, ricontrollare che tutti i bordi siano solo ed esclusivamente della catena e se tutti i check sono andati a buon fine si può passare al seguente punto.
 
-### Fit dei dati
+### 5. Fit dei dati
 Arrivati a questo punto il file [coord.txt](coord.txt) sarà pieno di dati, è arrivata l'ora di analizzarli.Eseguire sul terminale il seguente codice
 
     py FITcatenaria.py coord.txt  
 
 Se tutto ha funzionato al meglio si aprirà la finestra con il Fit del grafico della catenaria. <br>
 Sul terminale verranno stampate diverse voci tra le quali: "*chi2*" e "*Gradi di libertà*"
-
-# Extra
-## Pulizia approfondita
-
-Se la catena non viene completamente colorata di verde quando si cercano tutti i bordi un'alternativa può essere quella di applicare un filtro di pulizia. Aprire il file [catenaria](catenaria.py) e dirigersi nella [riga 67](https://github.com/metallo455445/uniResources/blob/169a4e3acf4a179558b80af5d935627feca946cc/catenaria/catenaria.py#L67):
-
-    ret, thresh = cv.threshold(edgesPURE, 127, 255, 0)
-
-cambiare la voce "*edgesPURE*" con "*edges*". Attenzione, **non è assicurato che questo metodo funzioni al 100%**, dipende da tanti fattori, primo dei quali la quantità di "sporcizia" nell'immagine (ovvero tutti quegli elementi che non sono la catena che compaiono nello sfondo)
