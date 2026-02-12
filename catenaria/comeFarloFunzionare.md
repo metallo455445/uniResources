@@ -17,7 +17,7 @@
 
 Il programma è formato da due codici python distinti: [catenaria](catenaria.py) e [FITcatenaria](FITcatenaria.py). Conviene scaricare entrambi i codici e metterli nella stessa cartella. <br>
 
-- [catenaria](catenaria.py) prende l'immagine fornita, la ripulisce da errori deovuti alla luce, rileva i bodi e crea un file [coord.txt](coord.txt) dove all'interno inserisce i punti rilevati della catena <br>
+- [catenaria](catenaria.py) prende l'immagine fornita, la ripulisce da errori dovuti alla luce, rileva i bordi e crea un file [coord.txt](coord.txt) dove all'interno inserisce i punti rilevati della catena <br>
 - [FITcatenaria](FITcatenaria.py) legge il file [coord.txt](coord.txt) e esegue il FIT restituendo il grafico, i residui e il chi^2 <br>
 
 ### 2. Pima esecuzione di [catenaria](catenaria.py)
@@ -30,7 +30,7 @@ Un esempio di utilizzo di questo comando è il seguente
     py catenaria.py catenaTerraPulita.png 20 coord.txt
 
 In questo caso ho eseguito il codice python nella stessa cartella nel quale è contenuto. La prima volta che viene Runnato [catenaria](catenaria.py) non è importante il valore di *"N_bordi"* (consiglio di metterlo ad 1). <br>
-La prima volta che viene eseguito [catenaria](catenaria.py) serve principalmente a capire se si è settato correttamente il comando di esecuzione; se tutto è andato bene verranno aperte diverse finestre di *matplotlib* (molte sono di debugging, non davvero interessanti...), quelle su cui porre l'attenzione sono: "*Tutti i contorni*" e "*Top **n** contorni*" . Il primo mostra in verde tutti i contorni rilevati dal programma, la catena deve essere competamente verde; il secondo mostra i *"N_bordi"* più grandi rilevati dal programma (per l'esempio di prima, mostrerà i 20 contorni più grandi). 
+La prima volta che viene eseguito [catenaria](catenaria.py) serve principalmente a capire se si è settato correttamente il comando di esecuzione; se tutto è andato bene verranno aperte diverse finestre di *matplotlib* (molte sono di debugging, non davvero interessanti...), quelle su cui porre l'attenzione sono: "*Tutti i contorni*" e "*Top **n** contorni*" . Il primo mostra in verde tutti i contorni rilevati dal programma, la catena deve essere competamente verde (in caso contrario bisogna cambiare immagine oppure vedere [puliia_approfondita](#pulizia-approfondita)); il secondo mostra i *"N_bordi"* più grandi rilevati dal programma (per l'esempio di prima, mostrerà i 20 contorni più grandi). 
 
 ### 3. Eseguire per completare la catena
 Questo punto è abbastanza autoesplicativo, si continua a inviare il comando
@@ -77,3 +77,12 @@ Arrivati a questo punto il file [coord.txt](coord.txt) sarà pieno di dati, è a
 
 Se tutto ha funzionato al meglio si aprirà la finestra con il Fit del grafico della catenaria. <br>
 Sul terminale verranno stampate diverse voci tra le quali: "*chi2*" e "*Gradi di libertà*"
+
+# Extra
+## Pulizia approfondita
+
+Se la catena non viene completamente colorata di verde quando si cercano tutti i bordi un'alternativa può essere quella di applicare un filtro di pulizia. Aprire il file [catenaria](catenaria.py) e dirigersi nella [riga 67](https://github.com/metallo455445/uniResources/blob/169a4e3acf4a179558b80af5d935627feca946cc/catenaria/catenaria.py#L67):
+
+    ret, thresh = cv.threshold(edgesPURE, 127, 255, 0)
+
+cambiare la voce "*edgesPURE*" con "*edges*". Attenzione, **non è assicurato che questo metodo funzioni al 100%**, dipende da tanti fattori, primo dei quali la quantità di "sporcizia" nell'immagine (ovvero tutti quegli elementi che non sono la catena che compaiono nello sfondo)
