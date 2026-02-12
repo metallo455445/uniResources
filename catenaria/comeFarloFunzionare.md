@@ -82,7 +82,7 @@ Sul terminale verranno stampate diverse voci tra le quali: "*chi2*" e "*Gradi di
 
 ## Migliorare la qualità dei bordi
 
-Può capitare che quando viene eseguito [catenaria](catenaria.py) nella finestra "*Tutti i bordi*" la catena non venga colorata totalmente di verde, questo vuol dire che il programma non riesce a leggere bene l'immagine (dovuto, nella maggior parte dei casi, alla presenza di oggetti nello sfondo che si "confondono" con la catena). Per ovviare a ciò si può provare a modificare la [riga 67](https://github.com/metallo455445/uniResources/blob/169a4e3acf4a179558b80af5d935627feca946cc/catenaria/catenaria.py#L67) di [catenaria](catenaria.py):
+Può capitare che quando viene eseguito [catenaria](catenaria.py) nella finestra "*Tutti i bordi*" la catena non venga colorata totalmente di verde, questo vuol dire che il programma non riesce a leggere bene l'immagine (dovuto, nella maggior parte dei casi, alla presenza di oggetti nello sfondo che si "confondono" con la catena). Per ovviare a ciò si può provare a modificare la [riga 67](https://github.com/metallo455445/uniResources/blob/3e8dcdbd2da2447eb01687aafab32d8d6d26af0b/catenaria/catenaria.py#L67) di [catenaria](catenaria.py):
 
     ret, thresh = cv.threshold(edgesPURE, 127, 255, 0)
 
