@@ -30,7 +30,7 @@ Un esempio di utilizzo di questo comando è il seguente
     py catenaria.py catenaTerraPulita.png 20 coord.txt
 
 In questo caso ho eseguito il codice python nella stessa cartella nel quale è contenuto. La prima volta che viene Runnato [catenaria](catenaria.py) non è importante il valore di *"N_bordi"* (consiglio di metterlo ad 1). <br>
-La prima volta che viene eseguito [catenaria](catenaria.py) serve principalmente a capire se si è settato correttamente il comando di esecuzione; se tutto è andato bene verranno aperte diverse finestre di *matplotlib* (molte sono di debugging, non davvero interessanti...), quelle su cui porre l'attenzione sono: "*Tutti i contorni*" e "*Top **n** contorni*" . Il primo mostra in verde tutti i contorni rilevati dal programma, la catena deve essere competamente verde (in caso contrario bisogna cambiare immagine oppure vedere [puliia_approfondita](#pulizia-approfondita)); il secondo mostra i *"N_bordi"* più grandi rilevati dal programma (per l'esempio di prima, mostrerà i 20 contorni più grandi). 
+La prima volta che viene eseguito [catenaria](catenaria.py) serve principalmente a capire se si è settato correttamente il comando di esecuzione; se tutto è andato bene verranno aperte diverse finestre di *matplotlib* (molte sono di debugging, non davvero interessanti...), quelle su cui porre l'attenzione sono: "*Tutti i contorni*" e "*Top **n** contorni*" . Il primo mostra in verde tutti i contorni rilevati dal programma, la catena deve essere competamente verde (in caso contrario bisogna cambiare immagine oppure vedere [puliia_approfondita](#migliorare-la-qualità-dei-bordi)); il secondo mostra i *"N_bordi"* più grandi rilevati dal programma (per l'esempio di prima, mostrerà i 20 contorni più grandi). 
 
 ### 3. Eseguire per completare la catena
 Questo punto è abbastanza autoesplicativo, si continua a inviare il comando
@@ -77,3 +77,16 @@ Arrivati a questo punto il file [coord.txt](coord.txt) sarà pieno di dati, è a
 
 Se tutto ha funzionato al meglio si aprirà la finestra con il Fit del grafico della catenaria. <br>
 Sul terminale verranno stampate diverse voci tra le quali: "*chi2*" e "*Gradi di libertà*"
+
+# Extra
+
+## Migliorare la qualità dei bordi
+
+Può capitare che quando viene eseguito [catenaria](catenaria.py) nella finestra "*Tutti i bordi*" la catena non venga colorata totalmente di verde, questo vuol dire che il programma non riesce a leggere bene l'immagine (dovuto, nella maggior parte dei casi, alla presenza di oggetti nello sfondo che si "confondono" con la catena). Per ovviare a ciò si può provare a modificare la [riga 67](https://github.com/metallo455445/uniResources/blob/169a4e3acf4a179558b80af5d935627feca946cc/catenaria/catenaria.py#L67) di [catenaria](catenaria.py):
+
+    ret, thresh = cv.threshold(edgesPURE, 127, 255, 0)
+
+modificare la voce "*edgesPURE*" con "*edges*" (nel dettaglio: i bordi vengono rilevati dopo una pulizia attraverso un filtro Gaussiano). Questa tecnica **non funziona il 100% delle volte**, se non dovesse funzionare è necessario cambiare l'immagine di partenza con una meno rumorosa.<br>
+
+*Suggerimenti*<br>
+Per evitare il rumore nella foto di partenza mettersi su uno sfondo bianco, è consigliabile utilizzare luci parallele alla fotocamera in modo tale da ridurre le ombre della catena sullo sfondo. Se necessario eliminare le parti pià rumorose attravrso un tool grafico come [photopea](photopea.com)
