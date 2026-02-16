@@ -1,0 +1,153 @@
+#py ./catenaria/catenaria.py ./catenaria/catenaTerraPulita.png 20 ./catenaria/coord.txt
+#^py     ^percorso file .py          ^percorso file di rif     ^numero di bordi da mostare   ^percorso del file su cui salvare le coordinate
+#                                                                                                                   se non esiste, lo crea
+import cv2 as cv
+import numpy as np
+from matplotlib import pyplot as plt
+import sys
+
+# Ottieni il percorso del file dall'argomento
+if len(sys.argv) > 1:
+    file_path = sys.argv[1]
+    #contour_index = int(sys.argv[2]) if len(sys.argv) > 2 else 4   #<--Non uso più questo variabile, la rimuovo
+    n_top_countours = int(sys.argv[2]) if len(sys.argv) > 2 else 5  #aggionato il nomero dell'argv da 3 a 2
+    coord_path = sys.argv[3]                                        #aggiunto, in effetti è comodo passarlo da terminale
+else:
+    file = input("Inserisci il nome del file: ")
+    file_path = './' + file
+    #contour_index = 4
+    n_top_countours = 5
+    coord_path = './coord.txt'
+
+open(coord_path, 'w').close()   #formatta il file delle coord prima di riscrivere
+#percorso file coordinate punti della parabola da fittare
+
+# Usa file_path ovunque
+img = cv.imread(file_path, cv.IMREAD_GRAYSCALE)
+assert img is not None, f"file {file_path} could not be read, check file path/integrity"
+img = cv.medianBlur(img,5)
+
+ret,th1 = cv.threshold(img,127,255,cv.THRESH_BINARY)
+th2 = cv.adaptiveThreshold(img,255,cv.ADAPTIVE_THRESH_MEAN_C,\
+            cv.THRESH_BINARY,11,2)
+th3 = cv.adaptiveThreshold(img,255,cv.ADAPTIVE_THRESH_GAUSSIAN_C,\
+            cv.THRESH_BINARY,11,2)
+
+titles = ['Original Image', 'Global Thresholding (v = 127)',
+            'Adaptive Mean Thresholding', 'Adaptive Gaussian Thresholding']
+images = [img, th1, th2, th3]
+
+plt.figure("Correzione impurezze")
+for i in range(4):
+    plt.subplot(2,2,i+1),plt.imshow(images[i],'gray')
+    plt.title(titles[i])
+    plt.xticks([]),plt.yticks([])
+
+#edge detection partendo dall'immagine pura         <---
+plt.figure("edge detection pura")
+edges = cv.Canny(img, 100, 200)
+
+edgesPURE = edges
+
+plt.subplot(121),plt.imshow(img,cmap = 'gray')
+plt.title('Original Image'), plt.xticks([]), plt.yticks([])
+plt.subplot(122),plt.imshow(edges,cmap = 'gray')
+plt.title('Edge Image'), plt.xticks([]), plt.yticks([])
+
+#edge detection post pulizia dell'adattiva gaussiana
+plt.figure("edge detection from gaussian")
+edges = cv.Canny(th3, 100, 200)
+
+plt.subplot(121),plt.imshow(img,cmap = 'gray')
+plt.title('Original Image'), plt.xticks([]), plt.yticks([])
+plt.subplot(122),plt.imshow(edges,cmap = 'gray')
+plt.title('Edge Image'), plt.xticks([]), plt.yticks([])
+
+# edges è già in scala di grigi
+ret, thresh = cv.threshold(edges, 127, 255, 0)          #<--- ho messo qui il pure per evitare sporcizia
+contours, hierarchy = cv.findContours(thresh, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
+
+# Stampa informazioni sui contorni
+print(f"Numero totale di contorni trovati: {len(contours)}")
+
+# Carica l'immagine originale a colori
+img_color = cv.imread(file_path)
+
+if img_color is not None and len(contours) > 0:
+    contours_sorted = sorted(
+        enumerate(contours),
+        key=lambda x: cv.contourArea(x[1]),
+        reverse=True
+    )
+    
+    # Disegna TUTTI i contorni
+    img_all_contours = img_color.copy()
+    cv.drawContours(img_all_contours, contours, -1, (0,255,0), 2)
+    
+    plt.figure("Tutti i contorni")
+    plt.imshow(cv.cvtColor(img_all_contours, cv.COLOR_BGR2RGB))
+    plt.title(f'Tutti i {len(contours)} contorni')
+    
+    # Disegna i primi 5 contorni più grandi (escludendo eventualmente il bordo dell'immagine)
+    img_top_contours = img_color.copy()
+    # Salta il primo se è troppo grande (potrebbe essere il bordo)
+    start_idx = 1 if len(contours_sorted) > 1 and cv.contourArea(contours_sorted[0][1]) > img.shape[0] * img.shape[1] * 0.9 else 0     ##CHAT GPT sostituisce contours_sorted[0] con contours_sorted[0][1]
+    
+    for i in range(start_idx, min(start_idx + n_top_countours, len(contours_sorted))):                    ## start_idx + 5 sostituito da me coon start_idx + n_top_countours
+        cv.drawContours(img_top_contours, [contours_sorted[i][1]], 0, (0,255,0), 3)        ##CHATGPT sostituisce contours_sorted[i] con contours_sorted[i][1]
+    
+    top_ids = [idx for idx, _ in contours_sorted[start_idx:start_idx + n_top_countours]]              ## start_idx + 5 sostituito da me coon start_idx + n_top_countours
+    print(f"\nID dei top {n_top_countours} contorni:", top_ids)
+
+    plt.figure(f"Top {n_top_countours} contorni")
+    plt.imshow(cv.cvtColor(img_top_contours, cv.COLOR_BGR2RGB))
+    plt.title(f'Top {n_top_countours} contorni più grandi')
+
+    def getCoord(indiceContornoTarget):
+        print(f"Coords di contorno {indiceContornoTarget}")
+        if len(contours) > indiceContornoTarget:       
+            cnt = contours[indiceContornoTarget]
+            img_single = img_color.copy()
+            
+            # Altezza dell'immagine per l'inversione
+            height = img.shape[0] 
+
+            for point in contours[indiceContornoTarget]:
+                x_raw = int(point[0][0])
+                y_raw = int(point[0][1])
+                
+                # INVERSIONE ASSE Y
+                x = x_raw
+                y = height - y_raw  # Ora 0 è il fondo dell'immagine
+                
+                p_plot = (x_raw, y_raw) # Per il disegno su OpenCV (che vuole ancora l'origine in alto)
+                p_calc = (x, y)         # Per il salvataggio su file (piano cartesiano)
+                
+                #print(f"Coord Originale: ({x_raw}, {y_raw}) -> Corretta: {p_calc}")
+                
+                with open(coord_path, "a") as f:
+                    f.write(f"{p_calc[0]} {p_calc[1]}\n")
+                
+                # Disegno (usa le coordinate originali altrimenti non vedi i punti sull'immagine)
+                cv.circle(img_single, p_plot, 2, (255, 0, 0), -1)
+
+            cv.drawContours(img_single, [cnt], 0, (0,0,255), 3)
+            plt.figure(f"Contorno {indiceContornoTarget}")
+            plt.imshow(cv.cvtColor(img_single, cv.COLOR_BGR2RGB))
+            plt.title(f'Contorno {indiceContornoTarget} (Visualizzazione Standard)')
+
+    def selezioneContorni(select):
+        i = 0
+        for id in top_ids:
+            if id not in select:
+                getCoord(id)
+#####
+    #INCOLLA QUI I getCoord()
+    selezione = np.array([732, 394, 893, 91, 93, 813, 739, 313, 463, 396, 399, 740, 733, 464, 378, 815, 817, 711, 316, 730, 828, 731, 850, 171,
+                          727, 768, 641, 784, 172, 831, 579, 873, 814, 851, 895, 911, 307, 314, 912, 308, 508, 874, 309, 653, 660, 652])
+    selezioneContorni(selezione)
+ 
+else:
+    print("Impossibile caricare l'immagine a colori o nessun contorno trovato")
+
+plt.show()
