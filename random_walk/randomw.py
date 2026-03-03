@@ -52,3 +52,4 @@ e_i = gauss(bin_centers, N, 0., np.sqrt(n/2.))
 # plt.gca().set_aspect('equal')
 plt.plot(o_i, N)
 plt.show()
+#prova
