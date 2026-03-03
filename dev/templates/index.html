@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>La mia app dinamica</title>
+</head>
+<body>
+    {% for nome in immagini %}
+        <img src="{{ url_for('static', filename=nome) }}" alt="Immagine generata">
+        <br>
+    {% else %}
+        <p>Nessuna immagine fornita.</p>
+    {% endfor %}
+</body>
+</html>
