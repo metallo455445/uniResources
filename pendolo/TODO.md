@@ -1,2 +1,7 @@
 - [X] rifare le immagini il formato pgf
-- [ ] spiegare perché si sono tolti alcuni dati e rifatti i fit 
+- [X] spiegare perché si sono tolti alcuni dati e rifatti i fit 
+- [X] dividere misure ed analisi
+- [X] valutare se inserire i commenti sui fit nelle conclusioni o nell'analisi dati
+- [ ] aggiustare i font usati per le unità di misura nelle tabelle
+- [ ] confrontare con le correzioni di casarosa e tenchini
+- [ ] nelle tabelle 1 e 2 le icncertezze sono uguali, si potrebbe riportare una volta sola nel testo (come suggerito in una delle ultime correzioni)
