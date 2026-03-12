@@ -3,19 +3,19 @@ from matplotlib import pyplot as plt
 from scipy.optimize import curve_fit
 import matplotlib as mpl
 
-#decommentare fino alla riga 19 per scaricare i file in .pgf Inoltre è necessario il comando plt.savefig("pendolo.pgf") a fine documento
-mpl.use("pgf")
+# #decommentare fino alla riga 19 per scaricare i file in .pgf Inoltre è necessario il comando plt.savefig("pendolo.pgf") a fine documento
+# mpl.use("pgf")
 
-plt.rcParams.update({
-    "font.family": "serif",     #!!Riga incriminata  "pgf.texsystem": "xelatex", è utilizza un'altro tipo di font
-    "text.usetex": True,
-    "pgf.rcfonts": False,
-    # Trasforma la lista in una stringa unica separata da \n
-    # "pgf.preamble": (
-    #     r"\usepackage{unicode-math}"
-    #     r"\setmainfont{Latin Modern Roman}"
-    # )
-})
+# plt.rcParams.update({
+#     "font.family": "serif",     #!!Riga incriminata  "pgf.texsystem": "xelatex", è utilizza un'altro tipo di font
+#     "text.usetex": True,
+#     "pgf.rcfonts": False,
+#     # Trasforma la lista in una stringa unica separata da \n
+#     # "pgf.preamble": (
+#     #     r"\usepackage{unicode-math}"
+#     #     r"\setmainfont{Latin Modern Roman}"
+#     # )
+# })
 
 
 nMisure = 10    #n° di misure da selezionare, si ricorda di modificare di conseguenza distanzeFori e TenOscillazioni
@@ -23,7 +23,7 @@ nMisure = 10    #n° di misure da selezionare, si ricorda di modificare di conse
 baricentro = 502 #[mm] distanza del baricentro dal lato corto
 errorBar = 1 #[mm]
                                                 #!v, 419, 520!!!!
-distanzeFori = np.array([19, 119, 219, 319, 620, 419, 520, 720, 820, 920]) #[mm] a partirre dal lato corto
+distanzeFori = np.array([19, 119, 219, 319, 419, 520, 620, 720, 820, 920]) #[mm] a partirre dal lato corto
 errorFori = 1 #[mm]
 
 distanzeFori = distanzeFori + 0.25                  #distanza dal centro del foro
@@ -46,30 +46,32 @@ TenOscillazioni = np.array([[16.18, 15.91, 15.95, 15.99, 15.91, 15.05, 15.92, 16
                            [15.81, 15.55, 15.63, 15.53, 15.46, 15.77, 15.70, 15.72, 15.59, 15.53]])
 
 SingleOscillazioni = TenOscillazioni / 10
+#divido per 10 perché questi sono i tempi ti 10 oscillazioni, dividendo per 10 abbiami il periodo di una sola oscillazione
 print(SingleOscillazioni)
 
 #calcola la media per ogni riga
+#ogni riga si traduce in ogni distanza, trovo la media delle oscillazioni per ogni distanza
 mediariga = np.empty(10)                                 #<---- 10 !!!
 for i in range(mediariga.size):
     mediariga[i] = np.mean(SingleOscillazioni[i, :])
 print(mediariga, "\n#####")
 
-#sottraggo alla media
+#totalmente opzionale, controllo quanto sballa dalla media osgn misurazione
 sballo = SingleOscillazioni.copy()
 sballo = mediariga[:, None] - SingleOscillazioni
 print(sballo)
 
 #calcolo deviazione standard per ogni foro
-devStd = np.empty(9)                                   #<--- 10 !!!
+devStd = np.empty(10)                                   #<--- 10 !!!
 for i in range(devStd.size):
     diff = SingleOscillazioni[i, :] - mediariga[i]
     devStd[i] = np.sqrt(np.sum(diff**2) / (len(diff) - 1))
 print(f"deviazione standard: {devStd}")
 
 d = distanzeBaricentro                    
-sigma_d = np.full(d.shape, 0.001)
-T = mediariga          
-sigma_T = devStd     #np.full(mediariga.shape, 0.001)             
+sigma_d = np.full(d.shape, 0.001)   #erore del metro a nastro: 1mm = 0.001 m
+T = mediariga          #periodi delle singole oscillazioni per ogni foro
+sigma_T = devStd                  
 
 # Definizione dell’accelerazione di gravita‘.
 g = 9.81
@@ -111,5 +113,5 @@ ax2.grid(ls='dashed')
 print(f"chi2: {chi2}")
 print(f"lung popt {len(popt)}")
 plt.tight_layout()
-#plt.show()
-plt.savefig("pendolo_10.pgf")
+plt.show()
+# plt.savefig("pendolo_10.pgf")
