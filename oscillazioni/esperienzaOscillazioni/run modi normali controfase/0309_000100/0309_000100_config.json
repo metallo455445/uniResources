@@ -1,0 +1,18 @@
+{
+    "Logging": {
+        "terminal_level": "DEBUG",
+        "file_level": "DEBUG"
+    },
+    "Buffering": {
+        "flush_size": 100,
+        "flush_timeout": 10.0
+    },
+    "Multicast": {
+        "enabled": false,
+        "ip_address": "127.0.0.1",
+        "port": 20004
+    },
+    "User Application": {
+        "strip_chart_max_length": 500
+    }
+}
