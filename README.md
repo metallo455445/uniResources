@@ -6,7 +6,7 @@ Repositorio nel quale archivio lavori dell'università tra relazioni e progetti 
 
 ## Scegliere la branch
 
-La branch "stabile" è quella del mese fissato in default, la versione più aggiornata è del mese corrente
+Ogni mese rilascio uan versione del mese appena passato, si può quindi trovare il lavoro nella relese. In alternativa la branch "stabile" è quella del mese fissato in default, la versione più aggiornata è del mese corrente
 
 ## Cartelle
 
