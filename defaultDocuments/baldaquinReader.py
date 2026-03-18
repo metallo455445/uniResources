@@ -27,19 +27,23 @@ else:
 
 data = np.loadtxt(percorsoData, delimiter=',', skiprows=4)
 
-tempiA = np.empty(int(len(data)/2))
-tempiB = np.empty(int(len(data)/2))
-dataA = np.empty(int(len(data)/2))
-dataB = np.empty(int(len(data)/2))
-
 mask_A = data[:, 0] == 4.0  # Tutte le righe dove il Pin è 4
 mask_B = data[:, 0] == 5.0  # Tutte le righe dove il Pin è 5
 
-tempiA = data[mask_A, 1]
-dataA = data[mask_A, 2]
+tempiA_row = data[mask_A, 1]
+dataA_row = data[mask_A, 2]
 
-tempiB = data[mask_B, 1]
-dataB = data[mask_B, 2]
+tempiB_row = data[mask_B, 1]
+dataB_row = data[mask_B, 2]
+
+#sort dei tempi dato che il progrmma di Baldini a volte non li mette in ordine cronologico
+indici_tempiA = np.argsort(tempiA_row)
+indici_tempiB = np.argsort(tempiB_row)
+
+tempiA = tempiA_row[indici_tempiA]
+dataA = dataA_row[indici_tempiA]
+tempiB = tempiB_row[indici_tempiB]
+dataB = dataB_row[indici_tempiB]
 
 plt.plot(tempiA, dataA)
 plt.plot(tempiB, dataB)
