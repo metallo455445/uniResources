@@ -1,0 +1,278 @@
+% !TEX root = /home/matteo/Documenti/uni/lab/pendolo/main.tex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath} %per le formule matematiche
+\usepackage{mathrsfs} %font e simboli fighi
+\usepackage[italian]{babel} %Perchè a noi piace soltanto l'italico idioma
+\usepackage{latexsym} %altri simboli
+\usepackage{nicefrac} %frazioni belle
+\usepackage{amsthm}
+\usepackage{geometry} %per dimensioni margini
+\usepackage{epigraph}
+%le ho incluse per le tabelle carine
+\usepackage{amsfonts}
+\usepackage{booktabs}
+\usepackage{siunitx}
+
+\usepackage{tikz} %disegnini :3
+
+\usepackage{pgf} %immagini pgf
+\newcommand{\mathdefault}[1]{#1}
+
+\linespread{1,2} %interlinea
+
+\geometry{hmargin = {3cm,3cm},vmargin = {3cm,3cm}} %settaggio margini
+
+
+\title{Relazione di Laboratorio: Pendolo}
+\author{GABRIELE FRUGONI (713463) e MATTEO LEONARDI(713343)\\ gruppo B2-3 tavolo 9}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Scopo dell'Esperienza}
+Lo scopo dell'esperienza è misurare il periodo di un pendolo, schematizzato da un'asta rigida, in relazione alla distanza dal centro di oscillazione e verificare la legge del periodo per un corpo rigido oscillante in regime di piccole oscillazioni.
+\section{Cenni teorici}
+In un'asta rigida omogenea, la forza responsabile delle oscillazioni è la forza peso. Consideriamo un'asta di lunghezza $\ell$. Il modulo del momento della forza peso sarà uguale a
+\begin{center}
+    $\mathcal M =- m g d \sin\vartheta$
+\end{center}
+Dove $d$ è la distanza del polo dal centro di massa. Essendo in un regime di piccole oscillazioni (quindi con $\vartheta\rightarrow0$) approssimiamo considerando soltanto il primo termine non nullo dell'espansione di Taylor di $\sin\vartheta$
+\begin{center}
+    $\mathcal M \approx -mgd\vartheta$
+\end{center}
+In generale il modulo del momento di un corpo rigido è uguale a
+\begin{center}
+    $\mathcal{M}=\mathcal{I} \ddot{\vartheta}$
+\end{center}
+E nel caso di un'asta rigida, il momento di inerzia $\mathcal I$ è 
+\begin{center}
+    $\mathcal I = md^2 + \dfrac{m\ell^2}{12}$
+\end{center}
+Eguagliando quindi i momenti otteniamo la seguente equazione differenziale:
+\begin{center}
+    $mgd\vartheta +\mathcal I \ddot{\vartheta}=0$
+\end{center}
+Da cui 
+\begin{equation}
+    \ddot \vartheta = -\dfrac{mgd}{\mathcal I}\vartheta\label{eq:diff_moto}
+\end{equation}
+Che è l'equazione di un moto armonico con pulsazione
+\begin{center}
+    $\omega=\sqrt{\dfrac{mgd}{\mathcal I}}$
+   
+\end{center}
+Da cui otteniamo l'espressione del periodo:
+\begin{equation}
+    T=2\pi\sqrt{\dfrac{\mathcal I}{mgd}}=2\pi\sqrt{\dfrac{d^2+\nicefrac{\ell^2}{12}}{gd}}
+\label{eq:periodo_funz_distanza}
+\end{equation}
+
+\section{Materiali e Strumenti di Misura}
+
+\begin{enumerate}
+    \item Pendolo: asta rigida di metallo, forata, di lunghezza $\ell = 10^3 \pm 1 \rm mm$
+    \item Metro a nastro con risoluzione di $1\rm mm$
+    \item Calibro ventesimale con risoluzione di $0.05\rm mm$
+    \item Cronometro con risoluzione di $ 0.01 \rm s$ %controllato :)
+\end{enumerate}
+
+\section{Misure}
+
+\subsection{Misura delle Distanze tra i Fori}  
+Per trovare il valore di $d$, ovvero la distanza tra il centro di rotazione del pendolo ed il suo centro di massa abbiamo innanzitutto preso con un metro la distanza tra il bordo di un estremo della sbarra ed il bordo esterno più vicino all'estremo di ogni foro ottenendo i risultati riportati in tabella\\ %mettere ref%
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{c|c}
+     \toprule
+     Foro  & Distanza bordi (mm) \\
+     \midrule
+     1 &  $19 \pm 1$\\
+    2 & $119 \pm "$\\
+    3 & $219 \pm "$\\
+    4 & $319 \pm "$\\
+    5 & $419 \pm "$\\
+    6 & $520 \pm "$\\
+    7 & $620 \pm "$\\
+    8 & $720 \pm "$\\
+    9 & $820 \pm "$\\
+    10 & $920 \pm "$\\
+     \bottomrule
+  \end{tabular}
+  \caption{distanze tra il bordo dei fori ed il bordo dell'asta.}\label{misure bordo bordo}
+\end{table}
+
+Quindi, per ottenere il valore corretto della distanza tra il centro del foro ed il bordo dell'asta abbiamo dovuto aggiungere ad ogni misura tra il bordo del foro e dell'asta, la misura del raggio di ogni foro. Per farlo, abbiamo preso con il calibro ventesimale la misura del diametro ottenendo un valore di:\\
+$D=(5.00\pm0.05)\rm mm$\\
+Quindi abbiamo sommato la metà di questo valore alle lunghezze misurate col metro. Tuttavia si evidenzia a questo punto un problema: se da una parte il metro aveva una risoluzione di $1\rm mm$, la misura del raggio dei fori risulta avere una risoluzione maggiore (il raggio vale infatti $2.50\rm mm$). Quindi, per prima cosa abbiamo calcolato l'incertezza media di metro e calibro con la radice della somma in quadratura delle incertezze dei due strumenti:
+\begin{center}
+    $\sigma =\sqrt{\sigma_{calibro}^2+\sigma_{metro}^2}=\sqrt{1.00^2+0.05^2}\rm mm\approx1.00mm$
+\end{center}
+Quindi, nelle misure successive scriveremo le misure, con le relative incertezze a una sola cifra decimale. (dato che l'incertezza del calibro è trascurabile rispetto a quella del metro).
+Quindi, le distanze tra centro del foro e bordo dell'asta sono riportate nella Tabella \ref{misure centro bordo}\\%mettere ref
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{c|c}
+     \toprule
+     Foro  & Distanza bordi (mm) \\
+     \midrule
+     1 &  $21.5 \pm 1.0$\\
+    2 & $121.5 \pm "$\\
+    3 & $221.5 \pm "$\\
+    4 & $321.5 \pm "$\\
+    5 & $421.5 \pm "$\\
+    6 & $522.5 \pm "$\\
+    7 & $622.5 \pm "$\\
+    8 & $722.5 \pm "$\\
+    9 & $822.5 \pm "$\\
+    10 & $922.5 \pm "$\\
+     \bottomrule
+  \end{tabular}
+  \caption{distanze tra il centro dei fori ed il bordo dell'asta.}
+\label{misure centro bordo}
+\end{table}
+\subsection{Misura dei Tempi di Oscillazione}
+Al fine di misurare il periodo medio di oscillazione relativo ad ogni foro, abbiamo preso dieci misure di tempi di dieci oscillazioni del pendolo. Nella Tabella \ref{tempi_10_oscillazioni}
+sono riportati i valori dei tempi misurati.
+\begin{table}[h!]
+\centering
+\resizebox{16cm}{!}{
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c}
+     \toprule
+     Foro  & Misura 1 (s)& Misura 2 (s)& Misura 3 (s)& Misura 4 (s)&  Misura 5 (s)& Misura 6 (s)& Misura 7 (s)& Misura 8 (s)& Misura 9 (s) & Misura 10 (s)\\
+     \midrule
+1& 16.18 & 15.91 & 16.05 &15.92 & 15.95&15.99&15.91&16.07&16.04&15.99\\
+2& 15.89 & 15.43 & 15.28&15.39&15.53&15.59&15.37&15.74&15.17&15.47\\
+3& 15.27 & 14.89 & 14.95&15.14&14.98&15.05&14.93&15.27&15.04&15.12\\
+4& 15.84 & 16.09 & 16.09&15.87&15.86&15.77&15.89&16.01&15.80&16.16\\
+5& 21.09 & 20.99 & 21.38&21.07&21.17&21.15&21.14&21.23&21.16&21.59\\
+6& 38.93& 39.31 & 39.35&39.13&38.86&38.97&38.92&39.15&39.27&39.11\\
+7& 17.67& 17.63 & 16.11&17.82&17.71&17.75&17.60&17.60&17.89&18.13\\
+8& 15.31& 15.48 & 15.27&15.27&15.58&15.25&15.29&15.17&15.43&15.29\\
+9& 15.18& 15.17 & 15.07&15.08&15.03&15.07&15.03&15.53&15.06&15.06\\
+10& 15.81& 15.55 & 15.77&15.70&15.63&15.53&15.46&15.72&15.59&15.53\\
+     \bottomrule
+  \end{tabular}
+}
+  \caption{distanze tra il centro dei fori ed il bordo dell'asta.}
+\label{tempi_10_oscillazioni}
+\end{table}
+\section{Analisi Dati}
+\subsection{Fit Dati}
+Per verificare la correttezza del modello descritto dall'Equazione~\ref{eq:periodo_funz_distanza} si è eseguito un fit con i dati raccolti. Nella Tabella~\ref{tempi_10_oscillazioni} sono riportati gli intervalli di tempo necessari per compiere 10~oscillazioni per ogni foro della barra. Per ogni set di dieci misure relative ad ogni foro abbiamo calcolato il tempo medio impiegato dal pendolo per compiere dieci oscillazioni tramite la media aritmetica dei vari tempi. Tale media verrà chiamata $\mu$. Per quanto riguarda invece l'incertezza associata ad ogni misura, essa è il risultato dell'incertezza dovuta al tempo di reazione ed a quella del cronometro. Tuttavia nei calcoli abbiamo trascurato l'incertezza del cronometro ($\sigma_{cronometro}=0.01\rm s$) considerando, invece, soltanto la deviazione standard della media:
+\begin{equation}
+   \displaystyle \sigma =\sqrt{\dfrac{\sum\limits_i^n(T_i-\mu)^2}{n(n-1)}}
+\end{equation}.
+Con questi dati e le distanze riportati in Tabella~\ref{misure centro bordo} è stato possibile ralizzare il fit in Figura~\ref{fig:10musre}.
+
+\subsection{Discussione sul $\chi^2$}
+Abbiamo eseguito un test del~$\chi^2$ nel fit ottenuto in Figura~\ref{fig:10musre} ed è resultato pari a~1603.21 per~9 gradi di libertà (10~misure - 1~parametro libero). In queste condizioni ci aspetterebbe un~$\chi^2$ che in media vale~$\nu$ = $dof$ = 9 con deviazione standard $\sigma = \sqrt{2 \nu} \approx 4.24$. \'E evidente che il valore di~$\chi^2$ trovato sia incompatibile a quello aspettato; ad avvalorare la testi si può notare come nel grafico dei residui i punti più vicini al baricentro si distaccano da zero a più di $2\sigma$.\\
+Abbiamo così deciso di provare a fare un novo fit, stavoltà eliminando la misura più vicina al baricentro. Il fit è visibile in Figura~\ref{fig:9misure}{}. Il test del~$\chi^2$ risulta uguale a~103.48 e cioè ancora incompatibile con il valore di aspettazione ovvero~$8\pm4$. Dal grafico dei residui emerge come le misure non fluttuino randomicamente attorno lo zero, probabilmente per la prima misura che anche questa volta supera i $2\sigma$. Si è quindi fatto un ulteriore fit(Figura~\ref{fig:8misure}) stavolta eliminando le 2 misure più vicine al baricentro. Di questo ultimo fit si può notare come i residui siano distribuiti come vorremmo (ovvero randomicamente attorno lo~0 e a non più di~$2\sigma$ a meno dell'ultima misura) ma il~$\chi^2$ ottenuto è anche questa volta superiore al valore di aspettazione~$7\pm3.74$.
+
+\subsection{Discussione sul \textit{best-fit}}
+Avendo usato come parametro libero la lunghezza della barra: il valore di \textit{best-fit} computato dai fit eseguiti è la lunghezza che la sbarra dovrebbe avere per giustifcare il più possibilie i periodi misurati. Chiamando con $\hat{\ell}$ il valore di \textit{best-fit}, abbiamo realizzato la Tabella~\ref{tab:best_fit_vs_misurat} che lo paragona alla lunghezza misurata: $\ell$
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{c|c|c}
+         N° misure & $\hat{\ell}$ (mm) & $\ell$ (mm)\\
+         \toprule
+         10 (Figura \ref{fig:10musre}) & $940 \pm 14$ &\\
+         9 (Figura \ref{fig:9misure}) & $993\pm6$ & $1000\pm1$ \\
+         8 (Figura \ref{fig:8misure}) & $981\pm4$&
+    \end{tabular}
+    \caption{Confronto tra i valori \textit{best-fit} e la lunghezza misurata}
+    \label{tab:best_fit_vs_misurat}
+\end{table}
+
+La Tabella~\ref{tab:best_fit_vs_misurat} evidenzia come il fit con 9~misure sia compatibilie con la misura effettiva della sbarra a differenza del primo e terzo fit.
+
+\begin{figure}
+    \centering
+    \sffamily
+    \resizebox{0.85\textwidth}{!}{%  <-- Ridimensiona all'80% della larghezza del testo
+        \input{pendolo_10_definitivp.pgf}
+    }
+    \caption{risultati fit pendolo per 10 misure}
+    \label{fig:10musre}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \sffamily
+    \resizebox{0.85\textwidth}{!}{%  <-- Ridimensiona all'80% della larghezza del testo
+        \input{pendolo_9_definitivp.pgf}
+    }
+    \caption{risultati fit pendolo per 9 misure}
+    \label{fig:9misure}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \resizebox{0.85\textwidth}{!}{%  <-- Ridimensiona all'80% della larghezza del testo
+        \input{pendolo_8_definitivp.pgf}
+    }
+    \caption{risultati fit pendolo per 8 misure}
+    \label{fig:8misure}
+\end{figure}
+
+\section{Conclusioni}
+\subsection{Esposizione delle problematiche}
+Dall'Analisi dati emerge chiaramente che la legge del periodo per un corpo rigido in regime di piccole oscillazioni non è verificata. Avendo ottenuto in tutti e 3 i fit un errore del~$\chi^2$ troppo grande ci troviamo davanti a due possibili casistiche:\\
+\begin{itemize}
+    \item Il modello usato (Formula~\ref{eq:periodo_funz_distanza}) non è adeguato a rappresentare i dati rilevati
+    \item Gli errori nelle misure sono sottostimati
+\end{itemize}
+Il modello, in un modo o nell'altro, ci ha restituito un valore di \textit{best-fit} compatibilie con la misura della barra.
+Riteniamo quindi più probabile la seconda casistica per i seguenti motivi
+\begin{enumerate}
+    \item Non è stato scelto rigorosamente un angolo~$\vartheta$ (rispetto alla posizione di riposo) adeguato a sostenere !!!%Non penso sia adeguato come termine%
+    un regime di piccole oscillazioni
+    \item i periodi di 10 oscillazioni sono stati misurati `analogicamente' da noi, pertanto sono profondamente influenzati dai nostri tempi di reazione
+\end{enumerate}
+\subsection{Possibili soluzioni}
+\subsubsection{Angolo $\vartheta$ iniziale adeguato}
+\begin{center}
+    $\ddot{\vartheta} = - \dfrac{mgd}{\mathcal{I}}\vartheta$
+\end{center}
+\begin{center}
+    $\ddot{\vartheta} = - \omega \vartheta$
+\end{center}
+\begin{center}
+    $\vartheta(t) = A \cos(\omega t + \varphi)$
+\end{center}
+\begin{center}
+    $E_{meccanica} = \dfrac{1}{2} m(l \dot{\vartheta})^2 + (1 - \cos\vartheta)mgl$
+\end{center}
+Regime di piccole oscillazioni: $\vartheta \rightarrow 0$ Sviluppo di taylor dell'energia potenziale
+\begin{center}
+    $\dot{U}(\vartheta) = mgl\sin\vartheta$\\
+    $\ddot{U}(\vartheta) = mgl\cos\vartheta$\\
+    $\dddot{U}(\vartheta) = -mgl\sin\vartheta$\\
+    $\ddddot{U}(\vartheta) = -mgl\cos\vartheta$ 
+\end{center}
+\begin{center}
+    $E_{meccanica} = \dfrac{1}{2} m(l \dot{\vartheta})^2 + (1 - \cos\vartheta)mgl +  \dot{U}(\vartheta)(\vartheta-\vartheta_0) + \ddot{U}(\vartheta)(\vartheta-\vartheta_0)^2 + \dddot{U}(\vartheta)(\vartheta-\vartheta_0)^3 +\ddddot{U}(\vartheta)(\vartheta-\vartheta_0)^4$
+\end{center}
+Che per $\vartheta \rightarrow 0$
+\begin{center}
+    $E_{meccanica} = \dfrac{1}{2} m(l \ddot{\vartheta})^2 + \dfrac{1}{2} mgl \vartheta^2 - \dfrac{1}{24}mgl\vartheta^4$
+\end{center}
+Per verificare la bontà dell'approssimazione: 
+\begin{center}
+    $\dfrac{1}{2} mgl \vartheta^2 << \dfrac{1}{24}mgl\vartheta^4$\\
+    $\vartheta^2 << 12$\\
+    $\vartheta \approx 3$rad
+\end{center}
+Ovvero l'angolo a cui il pendolo dovrebbe partire per poter usufruire delle approssimazioni dovute al 
+regime di piccole oscillazioni
+\subsubsection{Controllo elettronico dei periodi}
+Troviamo che attraverso un controllo sensoristico delle oscillazioni del pendolo si riesca a ridurre
+notevolmente l'errore sui periodi.
+\end{document}
