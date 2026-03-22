@@ -1,32 +1,37 @@
 import numpy as np                          #numeracci
 from matplotlib import pyplot as plt        #grafici
 from scipy.optimize import curve_fit        #fit
+from scipy.stats import chi2                #per calcolare il p_value
 import matplotlib as mpl                    #pgf
 import sys
 
 #####################################################################################################################################################
-#blocco preambolo pgf
-#decommentare fino alla riga 16 per scaricare i file in .pgf Inoltre è necessario il comando plt.savefig("pendolo.pgf") a fine documento
-mpl.use("pgf")
-
-plt.rcParams.update({
-    "font.family": "serif",     
-    "text.usetex": True,
-    "pgf.rcfonts": False,
-})
-#####################################################################################################################################################
 
 #blocco variabili passate come argomento
 if len(sys.argv) > 1:
-    var = sys.argv[1]
+    img = sys.argv[1]       #bool, se flaso usa plt.show, se vero usa stmpa pgf
 else:
-    var = "default value"   #se fallisce l'inserimento
+    img = False   #se fallisce l'inserimento
+
+#####################################################################################################################################################
+#blocco preambolo pgf, automaticamnte selezionato
+if img:
+    mpl.use("pgf")
+
+    plt.rcParams.update({
+        "font.family": "serif",     
+        "text.usetex": True,
+        "pgf.rcfonts": False,
+    })
 
 #####################################################################################################################################################
 
 #metti il tuo codice qui
 
 #####################################################################################################################################################
-#se si vuole usare plt.show commentare la prossima riga
-plt.savefig('nome.pgf')
+#sstampa dei grafici automaticamente differenziata
+if img:
+    plt.savefig('nome.pgf')
+else:
+    plt.show()
 #####################################################################################################################################################
