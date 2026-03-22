@@ -1,6 +1,7 @@
 import numpy as np
 from matplotlib import pyplot as plt
 from scipy.optimize import curve_fit
+from scipy  .stats import chi2
 import matplotlib as mpl
 
 # #decommentare fino alla riga 19 per scaricare i file in .pgf Inoltre è necessario il comando plt.savefig("pendolo.pgf") a fine documento
@@ -23,7 +24,7 @@ nMisure = 10    #n° di misure da selezionare, si ricorda di modificare di conse
 baricentro = 502 #[mm] distanza del baricentro dal lato corto
 errorBar = 1 #[mm]
                                                 #!v, 419, 520!!!!
-distanzeFori = np.array([19, 119, 219, 319, 419, 520, 620, 720, 820, 920]) #[mm] a partirre dal lato corto
+distanzeFori = np.array([19, 119, 219, 319,419, 520, 620, 720, 820, 920]) #[mm] a partirre dal lato corto
 errorFori = 1 #[mm]
 
 distanzeFori = distanzeFori + 0.25                  #distanza dal centro del foro
@@ -51,7 +52,7 @@ print(SingleOscillazioni)
 
 #calcola la media per ogni riga
 #ogni riga si traduce in ogni distanza, trovo la media delle oscillazioni per ogni distanza
-mediariga = np.empty(10)                                 #<---- 10 !!!
+mediariga = np.empty(nMisure)                                 #<---- 10 !!!
 for i in range(mediariga.size):
     mediariga[i] = np.mean(SingleOscillazioni[i, :])
 print(mediariga, "\n#####")
@@ -62,10 +63,10 @@ sballo = mediariga[:, None] - SingleOscillazioni
 print(sballo)
 
 #calcolo deviazione standard per ogni foro
-devStd = np.empty(10)                                   #<--- 10 !!!
+devStd = np.empty(nMisure)                                   #<--- 10 !!!
 for i in range(devStd.size):
     diff = SingleOscillazioni[i, :] - mediariga[i]
-    devStd[i] = np.sqrt(np.sum(diff**2) / (len(diff) - 1))
+    devStd[i] = np.sqrt(np.sum(diff**2) / (len(diff)*(len(diff) - 1)))      #corretto -> da calcolo della dev.std campionaria a quello della media
 print(f"deviazione standard: {devStd}")
 
 d = distanzeBaricentro                    
@@ -92,14 +93,15 @@ fig, (ax1, ax2) = plt.subplots(2, 1, sharex=True, height_ratios=[3, 1])
 
 residui = (T - period_model(d, l0))/ sigma_T
 #chi2 = np.sum(np.power((T - period_model(d,l0)/(sigma_T)),2))
-chi2 = np.sum(np.power(residui,2))
+chi2Stat = np.sum(np.power(residui,2))
+p_value = chi2.sf(chi2Stat, (len(d)-len(popt))) #calcolo p-value
 
 # --- Grafico fit ---
 ax1.errorbar(d, T, yerr=None, xerr=sigma_d, fmt='o', label="errore metro[1mm]", color="C0")
 ax1.errorbar(d, T, yerr=sigma_T, fmt="o", label="deviazione standard", color="C0")
 x = np.linspace(min(d), max(d), 200)
 #ax1.plot(x, period_model(x, l0), color="orange")
-ax1.plot(x, period_model(x, l0), color="orange", label=rf"$\chi^2/ndf = {chi2:.2f}/{len(d)-len(popt)}$" "\n" rf"$l_0 = {l0:.3f} \pm {sigma_l:.3f}$ m")
+ax1.plot(x, period_model(x, l0), color="orange", label=rf"$\chi^2/dof = {chi2Stat:.2f}/{len(d)-len(popt)}$" "\n" rf"$l_0 = {l0:.3f} \pm {sigma_l:.3f}$ m" "\n"rf"$p-value = {p_value:.3f}$")
 ax1.set_ylabel("Periodo [s]")
 ax1.grid(ls='dashed')
 ax1.legend()
@@ -110,8 +112,9 @@ ax2.errorbar(d, residui, sigma_T, fmt='o')
 ax2.set_xlabel("d [m]")
 ax2.set_ylabel("Residui [sigma]")
 ax2.grid(ls='dashed')
-print(f"chi2: {chi2}")
+print(f"chi2: {chi2Stat}")
 print(f"lung popt {len(popt)}")
+print(f"p-value: {p_value}")
 plt.tight_layout()
 plt.show()
-# plt.savefig("pendolo_10.pgf")
+#plt.savefig("pendolo_8_definitivp.pgf")
