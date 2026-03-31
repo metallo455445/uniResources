@@ -33,6 +33,9 @@ n = 1000
 xFIN = []
 yFIN = []
 
+x = [0]
+y = [0]
+
 for i in range(N):
     x, y = randomWalkFIN(n)
     xFIN.append(x)
@@ -47,9 +50,16 @@ e_i = gauss(bin_centers, N, 0., np.sqrt(n/2.))
 #quando faccio un istogramma non è normalizzato 
 
 #il contenuto delle colonne dell'istogramma fluttua, si può calcolare la deviazione standard 
-# x, y = randomWalkCUM(100000)
-# plt.plot(x, y)
+x, y = randomWalkCUM(5)
+plt.plot(x, y, color="black", label="percorso random walk")
+X_extr = [x[0], x[len(x)-1]]
+Y_extr = [y[0], y[len(y)-1]]
+plt.plot(X_extr, Y_extr, "bo", linestyle="--", color="grey", label="spostamento totale")
+plt.plot(x[0], y[0], "o", color="blue", label="inizio")
+plt.plot(x[len(x)-1], y[len(y)-1], "o", color="red", label="fine")
 # plt.gca().set_aspect('equal')
-plt.plot(o_i, N)
+#plt.plot(o_i, N)
+plt.legend()
+plt.grid()
 plt.show()
 #prova
