@@ -3,6 +3,7 @@ import numpy as np                          #numeracci
 from matplotlib import pyplot as plt        #grafici
 from scipy.optimize import curve_fit        #fit
 from scipy.signal import find_peaks
+from scipy.stats import chi2
 import matplotlib as mpl                    #pgf
 import sys
 
@@ -88,14 +89,15 @@ offset0 = popt[2]
 perr = np.sqrt(np.diag(pcov))
 print(f"{perr}")
 
-#calcolo residui e chi2
+#calcolo residui, chi2 e p-value
 residui = (max_selected_data - exp(tempi_fit, lamda0, bi, offset0)) / errorBalda 
-chi2 = np.sum(np.power(residui,2))
+chi2Calc = np.sum(np.power(residui,2))
+p_value = chi2.sf(chi2Calc, (len(tempi_fit)-len(popt)))
 
 #plot del fit 
 fig, (ax1, ax2) = plt.subplots(2, 1, sharex=True, height_ratios=[3, 1])
 ax1.errorbar(tempi_fit, max_selected_data,errorBalda, xerr=None, fmt="o", label="Massimi selezionati")
-ax1.plot(tempi_fit, exp(tempi_fit, lamda0, bi, offset0), label=rf"$\chi^2/dof = {chi2:.2f}/{len(tempi_fit)-len(popt)}$")
+ax1.plot(tempi_fit, exp(tempi_fit, lamda0, bi, offset0), label=rf"$\chi^2/dof = {chi2Calc:.2f}/{len(tempi_fit)-len(popt)}$" "\n" rf"$p-value = {p_value:.3f}$")
 ax1.legend()
 
 #plot residui
@@ -104,7 +106,7 @@ ax2.errorbar(tempi_fit, residui, errorBalda, fmt='o')
 ax2.set_xlabel("tempo [s]")
 ax2.set_ylabel("Residui [sigma]")
 ax2.grid(ls='dashed')
-print(f"chi2: {chi2}")
+print(f"chi2: {chi2Calc}")
 
 # plt.figure(2)
 # plt.plot(tempiB, dataB)

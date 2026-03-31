@@ -1,4 +1,4 @@
-#py oscillazioni/singlePendolo.py oscillazioni/esperienzaOscillazioni/run\ pendolo\ singolo/0309_000091/0309_000091_data.txt 70 oscillazioni/esperienzaOscillazioni/run\ pendolo\ singolo/0309_000092/0309_000092_data.txt 60
+#py oscillazioni/singlePendolo1.py oscillazioni/esperienzaOscillazioni/run\ pendolo\ singolo/0309_000091/0309_000091_data.txt 70 oscillazioni/esperienzaOscillazioni/run\ pendolo\ singolo/0309_000092/0309_000092_data.txt 60
 import numpy as np                          #numeracci
 from matplotlib import pyplot as plt        #grafici
 from scipy.optimize import curve_fit        #fit
