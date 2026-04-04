@@ -2,6 +2,23 @@ import time
 import numpy as np                          #numeracci
 from matplotlib import pyplot as plt        #grafici
 from scipy.optimize import curve_fit        #fit
+import matplotlib as mpl                    #pgf
+import sys
+
+if len(sys.argv) > 1:
+    img = sys.argv[1]       #bool, se flaso usa plt.show, se vero usa stmpa pgf
+else:
+    img = False   #se fallisce l'inserimento
+
+if img:
+    mpl.use("pgf")
+
+    plt.rcParams.update({
+        "font.family": "serif",     
+        "text.usetex": True,
+        "pgf.rcfonts": False,
+    })
+
 
 def random_walk(num_steps=1000):
     x = np.array(0)
@@ -26,4 +43,8 @@ plt.grid()
 plt.xlabel('x')
 plt.ylabel('y')
 plt.title(rf'numero di passi: {nPassi}')
-plt.show()
+
+if img:
+    plt.savefig('Random_pattern.pgf')
+else:
+    plt.show()

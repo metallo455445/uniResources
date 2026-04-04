@@ -1,0 +1,99 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath} %per le formule matematiche
+\usepackage{mathrsfs} %font e simboli fighi
+\usepackage[italian]{babel} %Perchè a noi piace soltanto l'italico idioma
+\usepackage{latexsym} %altri simboli
+\usepackage{nicefrac} %frazioni belle
+\usepackage{amsthm}
+\usepackage{geometry} %per dimensioni margini
+\usepackage{epigraph}
+%le ho incluse per le tabelle carine
+\usepackage{amsfonts}
+\usepackage{booktabs}
+\usepackage{siunitx}
+
+\usepackage{tikz} %disegnini :3
+
+\usepackage{pgf} %immagini pgf
+\newcommand{\mathdefault}[1]{#1}
+
+\linespread{1,2} %interlinea
+
+\geometry{hmargin = {3cm,3cm},vmargin = {3cm,3cm}} %settaggio margini
+
+
+\title{Relazione di Laboratorio: Random Walk}       %il nome 
+\author{GABRIELE FRUGONI (713463) e MATTEO LEONARDI (713343)\\ gruppo B2-3 tavolo 9}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Scopo dell'esperienza}
+Simulare l'algoritmo di random walk e studiarne le proprietà statistiche
+\section{Cenni teorici}
+\section{Materile a disposizione}
+Ambiente Python esteso dalle librerie:
+\begin{itemize}
+    \item numpy: per funzioni matematiche complesse, per la gestione semplificata degli array e per la generazione di numeri random
+    \item matplotlib: per la rappresentazione grafica dei grafici
+    \item scipy.stats: per calcolare la p-value
+\end{itemize}
+\section{Misure}
+\section{Analisi}
+\begin{figure}
+    \centering
+    \sffamily
+    \resizebox{1\textwidth}{!}{%  <-- Ridimensiona all'80% della larghezza del testo
+        \input{Random_pattern.pgf}
+    }
+    \caption{Pattern random walk}
+    \label{fig:random_pattern}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \sffamily
+    \resizebox{0.85\textwidth}{!}{%  <-- Ridimensiona all'80% della larghezza del testo
+        \input{distribuzione_x.pgf}
+    }
+    \caption{Pattern random walk}
+    \label{fig:random_pattern}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \sffamily
+    \resizebox{0.85\textwidth}{!}{%  <-- Ridimensiona all'80% della larghezza del testo
+        \input{distribuzione_d2.pgf}
+    }
+    \caption{Pattern random walk}
+    \label{fig:random_pattern}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \sffamily
+    \resizebox{0.85\textwidth}{!}{%  <-- Ridimensiona all'80% della larghezza del testo
+        \input{distribuzione_d.pgf}
+    }
+    \caption{Pattern random walk}
+    \label{fig:random_pattern}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \sffamily
+    \resizebox{0.85\textwidth}{!}{%  <-- Ridimensiona all'80% della larghezza del testo
+        \input{distribuzione_d_n.pgf}
+    }
+    \caption{Pattern random walk}
+    \label{fig:random_pattern}
+\end{figure}
+
+
+
+\end{document}
