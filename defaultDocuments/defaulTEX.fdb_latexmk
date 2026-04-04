@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1774266372.35448 "/home/matteo/Documenti/uni/lab/defaultDocuments/defaulTEX.tex" "defaulTEX.pdf" "defaulTEX" 1774266373.36758 0
-  "/home/matteo/Documenti/uni/lab/defaultDocuments/defaulTEX.tex" 1770794591.27768 955 54b68c4ad7c3684f4a67706610aa1ace ""
+["pdflatex"] 1775242243.3536 "/home/matteo/Documenti/uni/lab/defaultDocuments/defaulTEX.tex" "defaulTEX.pdf" "defaulTEX" 1775242244.48029 0
+  "/home/matteo/Documenti/uni/lab/defaultDocuments/defaulTEX.tex" 1775242243.01394 956 cc2bd0e07eea9803d215685567d6d2f3 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1246382020 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -132,9 +132,9 @@
   "/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty" 1655066402 56148 51a9a8571c07b9921892ae11063ae853 ""
   "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1770681600 40900 887e0dc8cac988a9e9c574af364cf837 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1774182302.41195 4547957 ae4e693c1ef347abaec22c0b5d473ae3 ""
-  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1774181869 7758584 0b255e385f24716f6c4cdd57bed9566c ""
-  "defaulTEX.aux" 1774266373.24162 134 5fd2fb1d8d302844018b7482ce631fa0 "pdflatex"
-  "defaulTEX.tex" 1770794591.27768 955 54b68c4ad7c3684f4a67706610aa1ace ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1775133126 7758594 10481bda045c02ce578695f8c7510d72 ""
+  "defaulTEX.aux" 1775242244.3237 134 5fd2fb1d8d302844018b7482ce631fa0 "pdflatex"
+  "defaulTEX.tex" 1775242243.01394 956 cc2bd0e07eea9803d215685567d6d2f3 ""
   (generated)
   "defaulTEX.aux"
   "defaulTEX.log"
