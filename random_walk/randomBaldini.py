@@ -10,6 +10,12 @@ if len(sys.argv) > 1:
 else:
     img = False             #se fallisce l'inserimento
 
+#convertitore da stringa a bool
+if img == 'True' or img == 'true':
+    img = True
+elif img == 'False' or img == 'false':
+    img = False
+
 if img:
     mpl.use("pgf")
 
