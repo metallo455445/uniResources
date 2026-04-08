@@ -26,7 +26,7 @@
 
 
 \title{Relazione di Laboratorio: Pendolo}
-\author{GABRIELE FRUGONI (713463) e MATTEO LEONARDI(713343)\\ gruppo B2-3 tavolo 9}
+\author{GABRIELE FRUGONI (713463) e MATTEO LEONARDI (713343)\\ gruppo B2-3 tavolo 9}
 \date{\today}
 
 \begin{document}
@@ -61,10 +61,9 @@ Da cui
     \ddot \vartheta = -\dfrac{mgd}{\mathcal I}\vartheta\label{eq:diff_moto}
 \end{equation}
 Che è l'equazione di un moto armonico con pulsazione
-\begin{center}
-    $\omega=\sqrt{\dfrac{mgd}{\mathcal I}}$
-   
-\end{center}
+\begin{equation}
+    \omega=\sqrt{\dfrac{mgd}{\mathcal I}}\label{eq:omega}
+\end{equation}
 Da cui otteniamo l'espressione del periodo:
 \begin{equation}
     T=2\pi\sqrt{\dfrac{\mathcal I}{mgd}}=2\pi\sqrt{\dfrac{d^2+\nicefrac{\ell^2}{12}}{gd}}
@@ -83,7 +82,7 @@ Da cui otteniamo l'espressione del periodo:
 \section{Misure}
 
 \subsection{Misura delle Distanze tra i Fori}  
-Per trovare il valore di $d$, ovvero la distanza tra il centro di rotazione del pendolo ed il suo centro di massa abbiamo innanzitutto preso con un metro la distanza tra il bordo di un estremo della sbarra ed il bordo esterno più vicino all'estremo di ogni foro ottenendo i risultati riportati in tabella\\ %mettere ref%
+Per trovare il valore di $d$, ovvero la distanza tra il centro di rotazione del pendolo ed il suo centro di massa abbiamo innanzitutto preso con il metro la distanza tra il bordo di un estremo della sbarra ed il bordo esterno più vicino all'estremo di ogni foro ottenendo i risultati riportati in Tabella \ref{misure bordo bordo}\\ %mettere ref%
 
 
 \begin{table}[h!]
@@ -172,8 +171,8 @@ Per verificare la correttezza del modello descritto dall'Equazione~\ref{eq:perio
 Con questi dati e le distanze riportati in Tabella~\ref{misure centro bordo} è stato possibile ralizzare il fit in Figura~\ref{fig:10musre}.
 
 \subsection{Discussione sul $\chi^2$}
-Abbiamo eseguito un test del~$\chi^2$ nel fit ottenuto in Figura~\ref{fig:10musre} ed è resultato pari a~1603.21 per~9 gradi di libertà (10~misure - 1~parametro libero). In queste condizioni ci aspetterebbe un~$\chi^2$ che in media vale~$\nu$ = $dof$ = 9 con deviazione standard $\sigma = \sqrt{2 \nu} \approx 4.24$. \'E evidente che il valore di~$\chi^2$ trovato sia incompatibile a quello aspettato; ad avvalorare la testi si può notare come nel grafico dei residui i punti più vicini al baricentro si distaccano da zero a più di $2\sigma$.\\
-Abbiamo così deciso di provare a fare un novo fit, stavoltà eliminando la misura più vicina al baricentro. Il fit è visibile in Figura~\ref{fig:9misure}{}. Il test del~$\chi^2$ risulta uguale a~103.48 e cioè ancora incompatibile con il valore di aspettazione ovvero~$8\pm4$. Dal grafico dei residui emerge come le misure non fluttuino randomicamente attorno lo zero, probabilmente per la prima misura che anche questa volta supera i $2\sigma$. Si è quindi fatto un ulteriore fit(Figura~\ref{fig:8misure}) stavolta eliminando le 2 misure più vicine al baricentro. Di questo ultimo fit si può notare come i residui siano distribuiti come vorremmo (ovvero randomicamente attorno lo~0 e a non più di~$2\sigma$ a meno dell'ultima misura) ma il~$\chi^2$ ottenuto è anche questa volta superiore al valore di aspettazione~$7\pm3.74$.
+Abbiamo eseguito un test del~$\chi^2$ nel fit ottenuto in Figura~\ref{fig:10musre} ed è resultato pari a~1603.2 per~9 gradi di libertà (10~misure - 1~parametro libero). In queste condizioni ci aspetterebbe un~$\chi^2$ che in media vale~$\nu$ = $dof$ = 9 con deviazione standard $\sigma = \sqrt{2 \nu} \approx 4.2$. \'E evidente che il valore di~$\chi^2$ trovato sia incompatibile a quello aspettato; ad avvalorare la testi si può notare come nel grafico dei residui i punti più vicini al baricentro si distaccano da zero a più di $2\sigma$.\\
+Abbiamo così deciso di provare a fare un nuovo fit, stavolta eliminando la misura più vicina al baricentro. Il fit è visibile in Figura~\ref{fig:9misure}{}. Il test del~$\chi^2$ risulta uguale a~$104$ e cioè ancora incompatibile con il valore di aspettazione ovvero~$8\pm4$. Dal grafico dei residui emerge come le misure non fluttuino randomicamente attorno lo zero, probabilmente per la prima misura che anche questa volta supera i $2\sigma$. Si è quindi fatto un ulteriore fit(Figura~\ref{fig:8misure}) stavolta eliminando le 2 misure più vicine al baricentro. Di questo ultimo fit si può notare come i residui siano distribuiti come vorremmo (ovvero randomicamente attorno lo~0 e a non più di~$2\sigma$ a meno dell'ultima misura) ma il~$\chi^2$ ottenuto (ovvero 21.0) è anche questa volta superiore al valore di aspettazione~$7\pm3.7$.
 
 \subsection{Discussione sul \textit{best-fit}}
 Avendo usato come parametro libero la lunghezza della barra: il valore di \textit{best-fit} computato dai fit eseguiti è la lunghezza che la sbarra dovrebbe avere per giustifcare il più possibilie i periodi misurati. Chiamando con $\hat{\ell}$ il valore di \textit{best-fit}, abbiamo realizzato la Tabella~\ref{tab:best_fit_vs_misurat} che lo paragona alla lunghezza misurata: $\ell$
@@ -232,47 +231,9 @@ Dall'Analisi dati emerge chiaramente che la legge del periodo per un corpo rigid
 Il modello, in un modo o nell'altro, ci ha restituito un valore di \textit{best-fit} compatibilie con la misura della barra.
 Riteniamo quindi più probabile la seconda casistica per i seguenti motivi
 \begin{enumerate}
-    \item Non è stato scelto rigorosamente un angolo~$\vartheta$ (rispetto alla posizione di riposo) adeguato a sostenere !!!%Non penso sia adeguato come termine%
-    un regime di piccole oscillazioni
+    \item Non è stato scelto rigorosamente un angolo~$\vartheta$ (rispetto alla posizione di riposo) adeguato per l'approssimazione %Non penso sia adeguato come termine%
+    delle piccole oscillazioni
     \item i periodi di 10 oscillazioni sono stati misurati `analogicamente' da noi, pertanto sono profondamente influenzati dai nostri tempi di reazione
 \end{enumerate}
-\subsection{Possibili soluzioni}
-\subsubsection{Angolo $\vartheta$ iniziale adeguato}
-\begin{center}
-    $\ddot{\vartheta} = - \dfrac{mgd}{\mathcal{I}}\vartheta$
-\end{center}
-\begin{center}
-    $\ddot{\vartheta} = - \omega \vartheta$
-\end{center}
-\begin{center}
-    $\vartheta(t) = A \cos(\omega t + \varphi)$
-\end{center}
-\begin{center}
-    $E_{meccanica} = \dfrac{1}{2} m(l \dot{\vartheta})^2 + (1 - \cos\vartheta)mgl$
-\end{center}
-Regime di piccole oscillazioni: $\vartheta \rightarrow 0$ Sviluppo di taylor dell'energia potenziale
-\begin{center}
-    $\dot{U}(\vartheta) = mgl\sin\vartheta$\\
-    $\ddot{U}(\vartheta) = mgl\cos\vartheta$\\
-    $\dddot{U}(\vartheta) = -mgl\sin\vartheta$\\
-    $\ddddot{U}(\vartheta) = -mgl\cos\vartheta$ 
-\end{center}
-\begin{center}
-    $E_{meccanica} = \dfrac{1}{2} m(l \dot{\vartheta})^2 + (1 - \cos\vartheta)mgl +  \dot{U}(\vartheta)(\vartheta-\vartheta_0) + \ddot{U}(\vartheta)(\vartheta-\vartheta_0)^2 + \dddot{U}(\vartheta)(\vartheta-\vartheta_0)^3 +\ddddot{U}(\vartheta)(\vartheta-\vartheta_0)^4$
-\end{center}
-Che per $\vartheta \rightarrow 0$
-\begin{center}
-    $E_{meccanica} = \dfrac{1}{2} m(l \ddot{\vartheta})^2 + \dfrac{1}{2} mgl \vartheta^2 - \dfrac{1}{24}mgl\vartheta^4$
-\end{center}
-Per verificare la bontà dell'approssimazione: 
-\begin{center}
-    $\dfrac{1}{2} mgl \vartheta^2 << \dfrac{1}{24}mgl\vartheta^4$\\
-    $\vartheta^2 << 12$\\
-    $\vartheta \approx 3$rad
-\end{center}
-Ovvero l'angolo a cui il pendolo dovrebbe partire per poter usufruire delle approssimazioni dovute al 
-regime di piccole oscillazioni
-\subsubsection{Controllo elettronico dei periodi}
-Troviamo che attraverso un controllo sensoristico delle oscillazioni del pendolo si riesca a ridurre
-notevolmente l'errore sui periodi.
+
 \end{document}

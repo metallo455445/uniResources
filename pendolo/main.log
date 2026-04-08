@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2026.3.22)  30 MAR 2026 14:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2026.4.7)  8 APR 2026 14:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -115,7 +115,7 @@ Package: mathrsfs 1996/01/01 Math RSFS package v1.0 (jk)
 Package: babel 2023/02/13 3.86 The Babel package
 \babel@savecnt=\count271
 \U@D=\dimen152
-\l@unhyphenated=\language86
+\l@unhyphenated=\language48
  (/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
 \bbl@readstream=\read2
 \bbl@dirlevel=\count272
@@ -552,14 +552,14 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 34.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Overfull \hbox (4.00896pt too wide) in paragraph at lines 34--34
+Overfull \hbox (8.7089pt too wide) in paragraph at lines 34--34
  [][] 
  []
 
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 86--87
+Underfull \hbox (badness 10000) in paragraph at lines 85--86
 
  []
 
@@ -567,34 +567,34 @@ Underfull \hbox (badness 10000) in paragraph at lines 86--87
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 116--118
+Underfull \hbox (badness 10000) in paragraph at lines 115--117
 
  []
 
 [2]
-Overfull \hbox (28.4592pt too wide) in paragraph at lines 145--163
+Overfull \hbox (28.4592pt too wide) in paragraph at lines 144--162
  [][] 
  []
 
 [3] [4] (./pendolo_10_definitivp.pgf) (./pendolo_9_definitivp.pgf) (./pendolo_8_definitivp.pgf)
-Underfull \hbox (badness 10000) in paragraph at lines 227--228
+Underfull \hbox (badness 10000) in paragraph at lines 226--227
 
  []
 
-[5{/usr/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [6] [7] [8] (./main.aux) ) 
+[5{/usr/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [6] [7] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 18730 strings out of 476034
- 405204 string characters out of 5792864
+ 18730 strings out of 477136
+ 405199 string characters out of 5813393
  1879388 words of memory out of 6000000
- 38855 multiletter control sequences out of 15000+600000
- 524941 words of font info for 87 fonts, out of 8000000 for 9000
- 1137 hyphenation exceptions out of 8191
- 84i,11n,89p,908b,549s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 38683 multiletter control sequences out of 15000+600000
+ 524634 words of font info for 86 fonts, out of 8000000 for 9000
+ 430 hyphenation exceptions out of 8191
+ 84i,11n,89p,914b,549s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on main.pdf (8 pages, 201206 bytes).
+Output written on main.pdf (7 pages, 196614 bytes).
 PDF statistics:
- 115 PDF objects out of 1000 (max. 8388607)
- 72 compressed objects within 1 object stream
+ 112 PDF objects out of 1000 (max. 8388607)
+ 70 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

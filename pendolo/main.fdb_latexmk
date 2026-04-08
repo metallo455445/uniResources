@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1774874585.47985 "/home/matteo/Documenti/uni/lab/pendolo/main.tex" "main.pdf" "main" 1774874587.05813 0
-  "/home/matteo/Documenti/uni/lab/pendolo/main.tex" 1774874585.18381 14246 df3a36244687a9c489357e1752949345 ""
+["pdflatex"] 1775651792.42903 "/home/matteo/Documenti/uni/lab/pendolo/main.tex" "main.pdf" "main" 1775651793.90465 0
+  "/home/matteo/Documenti/uni/lab/pendolo/main.tex" 1775651790.4632 12544 be64a3c983963f48c383eff6d5575abc ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm" 1136768653 1536 74b7293ec3713bb7fdca8dd1bd1f469c ""
@@ -164,10 +164,10 @@
   "/usr/share/texlive/texmf-dist/tex/latex/units/nicefrac.sty" 1137111039 4029 0462ee5ab265cf59dc15a41a3b883101 ""
   "/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty" 1655066402 56148 51a9a8571c07b9921892ae11063ae853 ""
   "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1770681600 40900 887e0dc8cac988a9e9c574af364cf837 ""
-  "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1774182302.41195 4547957 ae4e693c1ef347abaec22c0b5d473ae3 ""
-  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1774181869 7758584 0b255e385f24716f6c4cdd57bed9566c ""
-  "main.aux" 1774874586.89645 3232 1ca8bba7ed5c158fe83d14118228eadd "pdflatex"
-  "main.tex" 1774874585.18381 14246 df3a36244687a9c489357e1752949345 ""
+  "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1775594144.38483 1108683 96358d1b6987054525ad51d66e699cd5 ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1775594120 7572852 e16ec231a82c18cb32386218c04739ae ""
+  "main.aux" 1775651793.75042 2882 fd5fb9489f20ccc8a15ca4fdeefcc7c1 "pdflatex"
+  "main.tex" 1775651790.4632 12544 be64a3c983963f48c383eff6d5575abc ""
   "pendolo_10_definitivp.pgf" 1774167758.71272 70225 ce85445c971c140c7bbdffcbea80c015 ""
   "pendolo_8_definitivp.pgf" 1774167840.53652 76732 db1780638a03629c73a2294e52611c10 ""
   "pendolo_9_definitivp.pgf" 1774167806.97501 76535 b9eb32737654fb7f61da7df84e903b47 ""
