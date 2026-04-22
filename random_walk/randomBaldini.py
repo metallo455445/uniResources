@@ -43,19 +43,25 @@ def gauss(x, A, mu, sigma):
 def distribuzione_esponenziale(d, larg_bin):
     return (np.exp(-d/n) / n) * len(x) * larg_bin
 
-def distribuzione_rayleigh(d, larg_bin, n_passi, N_tot):
+def distribuzione_chi(d, larg_bin, n_passi, N_tot):
     return ((2 * d / n_passi) * np.exp(-(d**2) / n_passi)) * N_tot * larg_bin
 
 #dichiarazione costanti
-N = 100000
-n = 1000
-bin_width = 2.
-d2_bin_width = 10.
-range_x_dist = 80.
-max_n = 1000
-min_n = 10
-step_width = 20
-run_per_n = 200
+N               = 100000        #numero di run di random walk
+n               = 1000          #nuper di passi in una singola run
+bin_width       = 2.            #larghezza dei bin del istogramma della distribuzione della x e del istogramma della distribuzione della d  
+d2_bin_width    = 10.           #larghezza dei bin del istogramma della distribuzione della d^2
+range_x_dist    = 80.           #range dati osservati nel istogramma della x e della d (essendo centrato in 0->[-range_x_dist, +range_x_dist])
+range_d2_dist   = 4000.         #range dati osservati nel istogramma della d^2 (non essendo centrato in 0->[0, range_d2_dist])
+#-- costanti per lo studio di d(n) --
+max_n           = 1000          #
+min_n           = 10            #   
+step_width      = 20            #
+run_per_n       = 200           #numero di run che esegue per ogni step
+
+#suddivide l'inervallo da min_n a max_n in steps di grandezza step_width
+#es: se min_n = 0, max_n = 50 e step_width = 10 --> val_n = ([0, 10, 20, 30, 40, 50])
+val_n = np.arange(min_n, max_n, step_width)
 
 #richiamo il random walk N volte 
 x = []
@@ -64,7 +70,6 @@ for i in range(N):
     x_i, y_i = random_walk(n)
     x.append(x_i)
     y.append(y_i)
-
 
 ###############Sudio della distribuzione della x###############
 fig1 = plt.figure(1)
@@ -78,17 +83,21 @@ x_bin_centers = (x_bins[:-1] + x_bins[1:]) / 2.
 #trova i valori di aspettazione della x dalla formula di una distribuzione gaussiana
 x_aspettate = gauss(x_bin_centers, N * bin_width, 0., np.sqrt(n / 2.))
 
-#test chi2 + p-value per ulteriore verifica 
-ndof = len(x_osservate)
+#test chi2 
+dof_1 = len(x_osservate) - 1 #n di bin - 1 (vincolo sul numero totale di N)
 chi2_1 = np.sum((x_osservate - x_aspettate) ** 2. / x_aspettate)
-p_value_1 = chi2.sf(chi2_1, ndof)
+p_value_1 = chi2.sf(chi2_1, dof_1)
 
-#calcolo e deviazione standard per lo studio della bontà della distribuzione
+#calcolo e deviazione standard per lo studio della bonta' della distribuzione
 mediaX = np.mean(x)
 devStd = np.std(x)
 
-#plot grafico
-plt.plot(x_bin_centers, x_aspettate, 'r-', label=rf'aspettati ' '\n' rf'$\chi^2$ / dof: {chi2_1:.2f} / {ndof}' '\n' rf'p-value: {p_value_1:.2f}' '\n' rf'Media x: {mediaX:.2f}' '\n' rf'Dev std: {devStd:.2f} exp: {np.sqrt(n / 2):.2f}')
+#plot grafico (i plot da riga 97 a 100 hanno solo scopo estetico per la leggenda)
+plt.plot(x_bin_centers, x_aspettate, 'r-', label=rf'aspettati')
+plt.plot([], [], ' ', label=rf'$\chi^2$ / dof: {chi2_1:.2f} / {dof_1}')
+plt.plot([], [], ' ', label=rf'p-value: {p_value_1:.2f}')
+plt.plot([], [], ' ', label=rf'Media x: {mediaX:.2f}')
+plt.plot([], [], ' ', label=rf'Dev std: {devStd:.2f} ' '\n' rf'aspettata: {np.sqrt(n / 2):.2f}')
 plt.legend()
 plt.xlabel('Coord x')
 plt.ylabel('Frequenza')
@@ -102,7 +111,7 @@ for i in range(len(x)):
     d2[i] = x[i]**2 + y[i]**2
 
 #crea l'istogramma per la distribuzione delle distanze al quadrato
-d2_oss, d2_x_bins, _ = ax1.hist(d2, bins=np.arange(0., 4000., d2_bin_width), label=rf'$d^2$ osservata')
+d2_oss, d2_x_bins, _ = ax1.hist(d2, bins=np.arange(0., range_d2_dist, d2_bin_width), label=rf'$d^2$ osservata')
 
 #coordinate x sei centri di ogni bin dell'istogramma
 d2_x_bin_centers = (d2_x_bins[:-1] + d2_x_bins[1:]) / 2.
@@ -112,10 +121,19 @@ d2_aspettati = distribuzione_esponenziale(d2_x_bin_centers, d2_bin_width)
 
 #calcolo dei residui
 d2_residui = d2_oss - d2_aspettati
-d2_sigma_residui = np.sqrt(np.maximum(d2_oss, 1))
+
+#sto studiando una poissioniana -> varianza = media -> errore statistico sul bin e' la deviazione standard -> errore stimato = radice(n)
+d2_sigma_residui = np.sqrt(d2_oss)
+
+#test del chi2
+dof_2 = len(d2_oss) - 1 #n di bin - 1 (vincolo sul numero totale di N)
+chi2_2 = np.sum(d2_residui **2 / d2_aspettati)
+p_value_2 = chi2.sf(chi2_2, dof_2)
 
 #plot del secondo grafico + residui
 ax1.plot(d2_x_bin_centers, d2_aspettati,"r-", color="red", label=rf'$d^2$ aspettati (distribuzione esponenziale)')
+ax1.plot([], [], ' ', label=rf'$\chi^2$ / dof: {chi2_2:.2f} / {dof_2}')
+ax1.plot([], [], ' ', label=rf'p-value: {p_value_2:.2f}')
 ax1.legend()
 ax1.set_ylabel('Frequenza')
 ax2.axhline(0, color='black', linestyle='dashed')
@@ -136,15 +154,24 @@ d_oss, d_x_bins, _ = ax3.hist(d, bins=np.arange(0., 80., bin_width), label=rf'$d
 #array delle coordinate x dei centri dei bin 
 d_x_bin_centers = (d_x_bins[:-1] + d_x_bins[1:]) / 2.
 
-#calcola i valori di aspettazione dalla distribuzione di rayleigh
-d_aspettati = distribuzione_rayleigh(d_x_bin_centers, bin_width, n, len(x))
+#calcola i valori di aspettazione dalla distribuzione del chi2
+d_aspettati = distribuzione_chi(d_x_bin_centers, bin_width, n, len(x))
 
 #calcolo dei residui
 d_residui = d_oss - d_aspettati
-d_sigma_residui = np.sqrt(np.maximum(d_oss, 1))
+
+#sto studiando una poissioniana -> varianza = media -> errore statistico sul bin e' la deviazione standard -> errore stimato = radice(n)
+d_sigma_residui = np.sqrt(d_oss)
+
+#test del chi2
+dof_3 = len(d_oss) - 1 #n di bin - 1 (vincolo sul numero totale di N)
+chi2_3 = np.sum(d_residui ** 2 / d_aspettati)
+p_value_3 = chi2.sf(chi2_3, dof_3)
 
 #plot del terzo grafico + residui
 ax3.plot(d_x_bin_centers, d_aspettati, "r-", color="red", label=rf'$d$ aspettati')
+ax3.plot([], [], ' ', label=rf'$\chi^2$ / dof: {chi2_3:.2f} / {dof_3}')
+ax3.plot([], [], ' ', label=rf'p-value: {p_value_3:.2f}')
 ax3.legend()
 ax3.set_ylabel('Frequenza')
 ax4.axhline(0, color='black', linestyle='dashed')
@@ -154,9 +181,6 @@ ax4.set_ylabel('Residui (osservati - attesi)')
 ax4.set_xlabel(rf'$d$')
 
 #######################studio della d(n)#######################
-#suddivide l'inervallo da min_n a max_n in steps di grandezza step_width
-#es: se min_n = 0, max_n = 50 e step_width = 10 --> val_n = ([0, 10, 20, 30, 40, 50])
-val_n = np.arange(min_n, max_n, step_width)
 
 dist_medie = []
 error_medie = []
@@ -173,33 +197,42 @@ for i in val_n:
     media_d = np.mean(attuale_d)
     dist_medie.append(media_d)
 
-    #calcola l'errore standard della media e lo salva nella lista error_medie
+    #calcola la deviazione standard della media e la salva nella lista error_medie
     #ddof=1 per lo stimatore corretto della deviazione standard campionaria
     std_d = np.std(attuale_d, ddof=1)
     err_media = std_d / np.sqrt(run_per_n)
     error_medie.append(err_media)
 
-#converte le liste in array di numpy per semplicità
+#converte le liste in array di numpy per semplicita'
 dist_medie = np.array(dist_medie)
 error_medie = np.array(error_medie)
 
 fig4, (ax5, ax6) = plt.subplots(2, 1, sharex=True, height_ratios=[3, 1])
 
-#plot del grafico 
-ax5.errorbar(val_n, dist_medie, yerr=error_medie, label=rf'$d(n)$' ,fmt='o')
-ax5.plot(val_n, (np.sqrt(np.pi)/2) * np.sqrt(val_n), "r-",color='red', label=r'E[d]=$\frac {\sqrt{\pi}} {2} \sqrt{n}$')
-ax5.set_ylabel(rf'$d$')
-ax5.legend()
-
 #calcolo dei residui
 residui = dist_medie - (np.sqrt(np.pi)/2) * np.sqrt(val_n)
 
-#normalizzo i residui per avere l'assey y dei residui in unità dell'errore
-residui = residui/error_medie
+#normalizzo i residui per avere l'assey y dei residui in unita' dell'errore
+residui_norm = residui/error_medie
+
+#test del chi2
+dof_4 = len(dist_medie)
+chi2_4 = np.sum(residui_norm ** 2)
+p_value_4 = chi2.sf(chi2_4, dof_4)
+
+
+#plot del grafico 
+ax5.errorbar(val_n, dist_medie, yerr=error_medie, label=rf'$d(n)$' ,fmt='o')
+ax5.plot(val_n, (np.sqrt(np.pi)/2) * np.sqrt(val_n), "r-",color='red', label=r'E[d]=$\frac {\sqrt{\pi}} {2} \sqrt{n}$')
+ax5.plot([], [], ' ', label=rf'$\chi^2$ / dof: {chi2_4:.2f} / {dof_4}')
+ax5.plot([], [], ' ', label=rf'p-value: {p_value_4:.2f}')
+ax5.set_ylabel(rf'$d$')
+ax5.legend()
 
 #plot dei residui
 ax6.axhline(0, color='black', linestyle='dashed')
-ax6.errorbar(val_n, residui, yerr=error_medie, fmt='.')
+#se i residui sono normalizzati le barre di errore sono 1
+ax6.errorbar(val_n, residui_norm, yerr=1, fmt='.')
 ax6.grid()
 ax6.set_xlabel(rf'$n$')
 ax6.set_ylabel(rf'Residui normalizzati [$\sigma$]')

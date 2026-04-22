@@ -1,3 +1,4 @@
+% !TEX root = /home/matteo/Documenti/uni/lab/random_walk/main.tex
 \documentclass[a4paper,12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx} % Required for inserting images
@@ -17,15 +18,49 @@
 \usepackage{tikz} %disegnini :3
 
 \usepackage{pgf} %immagini pgf
+
+\usepackage{listings} %print codice
+\usepackage{xcolor}
+
+\usepackage{mathtools} %per il simbolo definizione
+
 \newcommand{\mathdefault}[1]{#1}
+
+%SETTINGS COLORI DEL CODICE
+\definecolor{backcolour}{rgb}{0.98, 0.98, 0.98}  % Grigio chiarissimo, quasi bianco
+\definecolor{commentcolor}{rgb}{0.25, 0.50, 0.35} % Verde smorzato e leggibile
+\definecolor{keywordcolor}{rgb}{0.00, 0.20, 0.60} % Blu scuro istituzionale
+\definecolor{stringcolor}{rgb}{0.65, 0.15, 0.15}  % Rosso mattone
+\definecolor{numbercolor}{rgb}{0.50, 0.50, 0.50}  % Grigio neutro
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{commentcolor}\itshape,  % itashape aggiunge il corsivo ai commenti
+    keywordstyle=\color{keywordcolor}\bfseries, % bfseries mette in grassetto le parole chiave (import, for, if)
+    numberstyle=\tiny\color{numbercolor},
+    stringstyle=\color{stringcolor},
+    basicstyle=\ttfamily\footnotesize\color{black}, % Testo normale in nero
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=10pt,                  % Allontana leggermente i numeri dal codice
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=4                        % Python usa 4 spazi per l'indentazione, non 2
+}
+
+\lstset{style=mystyle}
+%FINE SETTINGS 
 
 \linespread{1,2} %interlinea
 
 \geometry{hmargin = {3cm,3cm},vmargin = {3cm,3cm}} %settaggio margini
 
-
 \title{Relazione di Laboratorio: Random Walk}       %il nome 
-\author{GABRIELE FRUGONI (713463) e MATTEO LEONARDI (713343)\\ gruppo B2-3 tavolo 9}
+\author{GABRIELE FRUGONI (713463) e MATTEO LEONARDI (713343)\\ gruppo B2--3 tavolo 9}
 \date{\today}
 
 \begin{document}
@@ -33,24 +68,140 @@
 \maketitle
 
 \section{Scopo dell'esperienza}
-Simulare l'algoritmo di random walk e studiarne le proprietà statistiche
-\section{Cenni teorici}
-\section{Materile a disposizione}
+
+Simulare l'algoritmo di random walk in due dimensioni e studiarne le proprietà statistiche
+
+\section{Cenni teorici}\label{sec:cenni_teorici}
+
+Un algoritmo di random walk consiste in un percorso generato casualmente; nel nostro caso studieremo un random walk in due dimensioni con un passo che per comodità fisseremo ad~1 (in unità arbitraria).
+Partendo dall'origine del piano (0,0) l'algoritmo genererà un angolo~$\phi \in [0, 2\pi]$. Dopodiché si muoverà di un passo verso la direzione~$\phi$, operativamente vuol dire che aggiornerà le sue coordinate (x,y) in modo che:\\
+
+\begin{equation}
+    \begin{cases}
+        x \rightarrow x+\cos(\phi)\\
+        y \rightarrow y+\sin(\phi)
+    \end{cases}
+    \label{eq:step_random_walk}
+\end{equation}
+
+Iterando questa operazione~\textit{n} volte si ottiene un percorso simile a Figura~\ref{fig:random_pattern} dove la posizione finale è in coordinate $(x_{finale}, y_{finale})$ ovvero la somma degli spostamenti elementari per ogni asse
+
+\begin{equation}
+    x_{finale} = \sum_{i=1}^{n} \cos(\phi_i), \quad y_{finale} = \sum_{i=1}^{n} \sin(\phi_i)
+\end{equation}
+
+Per il Teorema del Limite Centrale: la somma di variabili casuali indipendenti, identicamente distribuite e con varianza finita%
+\footnote{Siamo sicuri della varianza finita poichè l'angolo $\phi$ viene generato in un intervallo finito e il passo è unitario. Questo determina un dominio finito entro il quale giace il random pattern} 
+tende a distribuirsi secondo una legge normale, indipendentemente dalla distribuzione originale delle singole variabili.
+Ciò vuol dire che per~\textit{n} elementi le coordinate~\textit{x} e~\textit{y} sono distribuite come una Gaussiana con media =~0 e varianza~$\sigma^2 = \frac{n}{2}$.\\
+Definendo con $d \coloneqq \sqrt{x_{finale}^2 + y_{finale}^2}$ la distanza dall'origine a cui si arriva dopo un ciclo di random walk, si può notare come $d^2$ sia distribuito come un $\chi^2$ con due gradi di libertà, ovvero una distribuzione esponenziale di media \textit{n},
+poichè somma di due gaussiane al quadrato.
+
+\begin{equation}
+    p(d^2;n) = \dfrac{1}{n} e^{-\dfrac{d^2}{n}}
+\end{equation}
+
+Attraverso un cambio di variabile è possibile risalire alla distribuzione della \textit{d} che coincide con la distribuzione di un $\chi$ riscalata (la varianza è n e non 1)
+
+\begin{equation}
+    p(d; n) = \dfrac{2d}{n} e ^ {-\dfrac{d^2}{n}}
+    \label{eq:prob_d}
+\end{equation}
+
+Calcolando il valor medio dell'Equazione~\ref{eq:prob_d} si ottiene:
+
+\[ E[d] = \int_{0}^{+\infty} d\cdot p(d; n) \,\mathrm{d}d = \int_{0}^{+\infty} d(\frac{2d}{n} e ^ {-\frac{d^2}{n}}) \,\mathrm{d}d \]
+
+Che svolgendo i calcoli risulta:
+
+\begin{equation}
+    E[d] = \dfrac{\sqrt{\pi}}{2}\sqrt{n}
+    \label{eq:d_funzione_n}
+\end{equation}
+
+\section{Materiale a disposizione}\label{sec:materiali}
+
 Ambiente Python esteso dalle librerie:
+
 \begin{itemize}
-    \item numpy: per funzioni matematiche complesse, per la gestione semplificata degli array e per la generazione di numeri random
+    \item numpy: per funzioni matematiche complesse, per la gestione semplificata degli array e per la generazione di numeri casuali
     \item matplotlib: per la rappresentazione grafica dei grafici
     \item scipy.stats: per calcolare la p-value
 \end{itemize}
-\section{Misure}
-\section{Analisi}
+
+\section{Codice}
+
+Di seguito riportato il codice e i relativi commenti
+
+\lstinputlisting[language=Python, caption={Codice random walk}]{randomBaldini.py}
+
+\subsection{Righe 1--64: Dichiarazioni}
+
+Nelle prime righe del codice vengono dichiarate:
+
+\begin{itemize}
+    \item le librerie elencate nel Capitolo~\ref{sec:materiali}:~`Materiale a disposizione'
+    \item un piccolo blocco di codice utilizzato per stampare le immagini in formato \textit{pgf}
+    \item la funzione che codifica il random walk
+    \item le funzioni modello delle distribuzioni: \textit{Gaussiana}, \textit{Esponenziale} e del $\chi$
+    \item le costanti usate nel codice
+\end{itemize}
+
+\subsection{Righe 66--72: Generazione}
+
+In questo blocco di codice viene simulato un random walk per \textit{n} passi \textit{N} volte. Le coordinate $(x_{finale}, y_{finale})$, per ogni run, vengono immagazzinate negli array \textit{x} e \textit{y}
+
+\subsection{Righe 74--103: Studio della x}
+
+Si sceglie di studiare la distribuzione della coordinata x, essa viene graficata mediante l'uso di un istrogramma per identificarne la forma, il centro e dispersione dei dati rapidamente.
+La funzione \textit{plt.hist} restituisce tre oggetti: \textit{x\_osservate} che contiene il numero di osservazioni per ciascun bin, \textit{x\_bins} dove vengono registrati gli intervalli dei bin e `\textit{\_}' che in gergo è detto \textit{patches} dove sono salvate informazioni relative alla grafica.
+Vengono poi calcolati i centri dei bin: vengono presi tutti gli estremi dei bin tranne l'ultimo e sommati a tutti gli estremi dei bin meno il primo; la somma poi viene divisa per due. In questo modo si ottiene un array contenente le coordinate x dei centri di tutti i bin.
+Per ciascuna di queste coordinate viene quindi calcolato il valore atteso secondo una distribuzione gaussiana, con media 0 e varianza~$\sigma^2 = \frac{n}{2}$. L’insieme di questi valori costituisce l’array \textit{x\_aspettate}.\\
+Viene poi fatto un test del $\chi^2$ per valutare la compatibilità dell'istrogramma con la campana Gaussiana; per decretare i gradi di libertà viene preso il numero di osservazioni fatte e vi si sottrae 1 poichè: essendo il numero delle run (uguale, in somma, al numero delle osservazioni) una grandezza arbitraria e fissata, mi basta conoscere la somma delle altezze di tutti i bin meno l'ultimo per poter calcolare l'altezza dell'ultimo.
+Per completezza viene anche calcolato il p-value.\\
+Infine si calcolano media e deviazione standard dell'array \textit{x}. L'output grafico di questo studio è visibile in Figura~\ref{fig:distribuzione_della_coordinata_x}
+
+\subsection{Righe 105--143: Studio della distanza al quadrato}
+
+Come prima cosa si calcola l'array delle distanze al quadrato per ogni run (dalla definizione di \textit{d}: $d^2 = x_{finale}^2 + y_{finale}^2$). Come fatto nel punto precedente viene calcolato l'istogramma (e di conseguenza i valori osservati) e i valori aspettati mediante la funzione per una distribuzione esponenziale.
+A questo punto vengono calcolati i residui e la stima dell'incertezza.
+Per quest'ultima bisogna ragionare su quello che sta accadendo: per una singola run la probabilità che l'esito cada in un determinato bin è descritto da una binomiale. Non si sta però simulando una sola run, ma $N >> 1$; questo ci porta a non valutare più la binomiale, bensì il suo limite matematico che converge perfettamente a una distribuzione Poissoniana. La proprietà fondamentale di tale distribuzione è che la sua varianza è identica al suo valore atteso ($\sigma^2 = \lambda$).
+L'incertezza su un conteggio è la radice quadrata della varianza, quindi risulta essere:~$\forall k \in {residui}: \sigma_k = \sqrt{k}$\\
+Anche in questo caso vengono calcolati~$\chi^2$ e p-value. Lo studio della distanza quadra è in Figura~\ref{fig:distribuzione_d2}
+
+\subsection{Righe 145--181: Studio della distanza}
+
+Viene calcolata la distanza semplicemente prendendo la lista delle $d^2$ e facendo la radice quadrata di ogni elemento. Le considerazioni sono esattamente identiche a quelle fatte per le distanze al quadrato con l'unica differenza che le distanze, come visto nel Capitolo~\ref{sec:cenni_teorici}: `Cenni Teorici', si distribuiscono come un $\chi$. Lo studio delle distanze è rappresentato in Figura~\ref{fig:distribuzione_d}
+
+\subsection{Righe 183--238: Studio della distanza in funzione del numero di passi}
+
+Per studiare il variare della distanza in funzione del numero di passi si è deciso di eseguire l'algoritmo di random walk un numero fissato di volte variando in numero di passi. Il numero di passi varia tra \textit{min\_n} e \textit{max\_n} e per ogni incremento aumenta di \textit{step\_width}.
+Ad esempio se \textit{min\_n} = 10, \textit{max\_n} = 50 e \textit{step\_width} = 10 il valore del numero di passi seguirà questo andamento: $10 \rightarrow 20 \rightarrow 30 \rightarrow 40 \rightarrow 50$. Per ogni valore di \textit{val\_n} (array che contiene i valori del numero di passi), verranno eseguiti \textit{run\_per\-n} run di random walk con quel numero di passi.
+Per ogni step, inoltre, calcola la distanza media ottenuta dalle run e la salva in \textit{dist\_medie}, allo stesso modo calcola la deviazione standard per la media (che poi salva nell'array \textit{error\_medie}). Qui sorge un problema: non si sta calcolando per un intero insieme di dati ma si sta analizzando un campione per dedurre il comportamento generale. Utilizzo quindi la media campione, questo ci costringe ad utilizzare un grado di libertà in meno, in formula:
+
+\begin{equation}
+    s = \sqrt{\dfrac{\sum_{i=1}^{N}{(x_i-\bar{x})}^2}{N-1}}
+\end{equation}
+
+Dove: N è il numero di run per ogni passo di \textit{val\_n} (ovvero \textit{run\_per\_n}), $\bar{x}$ è la media campione cioè \textit{dist\_medie} in quel passo e $x_i$ sono tutti gli elementi di \textit{attuale\_d} ovvero le distanze trovate per quel passo.
+In termini di codice diventa: \textit{np.std(attuale\_d,ddof=1)}.\\
+Per trovare l'incertezza di un singolo punto (ovvero di un singolo passo di \textit{val\_n}) devo dividere per il numero di campioni:
+
+\begin{equation}
+    \sigma_{\bar{x}} = \dfrac{s}{\sqrt{N}}
+\end{equation}
+
+In questo modo si riescono a trovare le medie per ogni valore di \textit{val\_n} e il relativo errore. I valori di aspettazione sono dati dall'Equazione~\ref{eq:d_funzione_n}, con questi è stato possibile calcolare i residui (che sono stati poi normalizzati) e fare il test del $\chi^2$ e p-value. Lo studio è riportato in Figura~\ref{fig:d_in_funzione_di_n}
+
+\section{Analisi dati}
+
 \begin{figure}
     \centering
     \sffamily
     \resizebox{1\textwidth}{!}{%  <-- Ridimensiona all'80% della larghezza del testo
         \input{Random_pattern.pgf}
     }
-    \caption{Pattern random walk}
+    \caption{Pattern random walk}%
     \label{fig:random_pattern}
 \end{figure}
 
@@ -60,9 +211,45 @@ Ambiente Python esteso dalle librerie:
     \resizebox{0.85\textwidth}{!}{%  <-- Ridimensiona all'80% della larghezza del testo
         \input{distribuzione_x.pgf}
     }
-    \caption{Pattern random walk}
-    \label{fig:random_pattern}
+    \caption{Distribuzione della coordinata x}%
+    \label{fig:distribuzione_della_coordinata_x}
 \end{figure}
+
+\subsection{Distribuzione della x}
+
+Osservando il grafico in Figura~\ref{fig:distribuzione_della_coordinata_x} appare chiaro che la coordinata x si distribuisca come una Gaussiana; ciò viene confermato dai test riportati in legenda. \\
+Il~$\chi^2_{atteso}=\upsilon \pm \sqrt{2\upsilon} = 78 \pm \sqrt{2\cdot78} \approx 78 \pm 12$ è compatibile con il $\chi^2_{osservato} = 82$. Come secondo criterio di verifica dell'ipotesi si analizza la media: come riportato nel Capitolo~\ref{sec:cenni_teorici}: `Cenni Teorici' ci si aspetta una media~$\mu_{aspettata} = 0$. \\
+La media osservata~$\mu_{osservata} = -0.04$, per decretare la compatibilità si deve calcolare l'errore associato a questa misura. Si ricava lo stimatore della varianza dello stimatore della media per ottenere l'errore sul valor medio
+
+\[ \sigma_{\mu} = \sqrt{\dfrac{\sum_{i=1}^{N}{(x_i - \mu_{osservata})}^2}{N(N-1)}} \]  
+
+Essendo $\mu_{osservata} = \dfrac{\sum_{i=1}^{N}x_i}{N}$
+
+\[ \sigma_\mu = \dfrac{\sigma_{campionaria}}{\sqrt{N}} = \dfrac{22.32}{\sqrt{100000}} \approx 0.07 \]
+
+Quindi $\mu_{osservata} = -0.04 \pm 0.07$ è compatibile con $\mu_{atteso} = 0.00$\\
+L'ultimo criterio di verifica è la deviazione standard della media: $s_{atteso} = 22.36$, se i dati di partenza sono distribuiti normalmente (ipotesi verificata dal Teorema del Limite Centrale), l'incertezza associata alla stima della deviazione standard è
+
+\[ \sigma_s = \dfrac{s_{atteso}}{\sqrt{2N}} \]
+
+Sostituendo con i dati della simulazione: $\sigma_s = \dfrac{22.36}{200000} \approx 0.05$ \\
+La deviazione standard osservata risulta essere $s_{osservata} = 22.32 \pm 0.05$ e quindi compatibile con il valore atteso. Le osservazioni fatte sono state schematizzate in Tabella~\ref{tab:sintesi_x}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{c|c|c|c}
+        \toprule
+        misura & valore atteso & valore misurato  & compatibilità \\
+        \midrule
+        $\chi^2$           & $78 \pm 12$   & $82$             & compatibile   \\
+        media ($\mu$)      & $0.00$        & $-0.04 \pm 0.07$ & compatibile   \\
+        deviazione std (s) & $22.36$       & $22.32 \pm 0.05$ & compatibile   \\
+        \bottomrule
+    \end{tabular}
+    \caption{Sintesi dello studio della coordinata x}%
+    \label{tab:sintesi_x}
+\end{table}
+%Roman
 
 \begin{figure}
     \centering
@@ -70,9 +257,27 @@ Ambiente Python esteso dalle librerie:
     \resizebox{0.85\textwidth}{!}{%  <-- Ridimensiona all'80% della larghezza del testo
         \input{distribuzione_d2.pgf}
     }
-    \caption{Pattern random walk}
-    \label{fig:random_pattern}
+    \caption{Distribuzione della distanza$^2$}%
+    \label{fig:distribuzione_d2}
 \end{figure}
+
+\subsection{Distribuzione della distanza al quadrato}
+
+Dal grafico in Figura~\ref{fig:distribuzione_d2} si può notare come la $d^2$ si distribuisca come una distribuzione esponenziale. Per verificare la tesi si è eseguito un test del~$\chi^2$ che ha riportato i dati presenti in Tabella~\ref{tab:sintesi_d2}
+Lo studio dei residui non evidenzia alcun comportamento anomalo.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{c|c|c|c}
+        \toprule
+        misura   & valore atteso & valore misurato  & compatibilità \\
+        \midrule
+        $\chi^2$ & $398 \pm 28$  & $399$            & compatibile   \\
+        \bottomrule
+    \end{tabular}
+    \caption{Sintesi dello studio della~$d^2$}%
+    \label{tab:sintesi_d2}
+\end{table}
 
 \begin{figure}
     \centering
@@ -80,9 +285,29 @@ Ambiente Python esteso dalle librerie:
     \resizebox{0.85\textwidth}{!}{%  <-- Ridimensiona all'80% della larghezza del testo
         \input{distribuzione_d.pgf}
     }
-    \caption{Pattern random walk}
-    \label{fig:random_pattern}
+    \caption{Distribuzione della distanza}%
+    \label{fig:distribuzione_d}
 \end{figure}
+
+\subsection{Distribuzione della distanza}
+
+Analizzando il grafico in Figura~\ref{fig:distribuzione_d} risulta evidente che la distribuzione della distanza segue il modello della distribuzione del $\chi$. \'E stato fatto un test del $\chi^2$ in verifica della tesi, i risultati sono riportati in Tabella~\ref{tab:sintesi_d}.
+Il test ha evidenziato come il $\chi^2$ risulti troppo piccolo, è stato però calcolato anche il p-value, pari a 0.89, indicando così un'elevata compatibilità tra i dati ed il modello. Non vi sono evidenze per rifiutare il modello; tuttavia, il valore relativamente alto del p-value potrebbe suggerire una possibile sovrastima delle incertezze sperimentali.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{c|c|c|c}
+        \toprule
+        misura   & valore atteso & valore misurato  & compatibilità            \\
+        \midrule
+        $\chi^2$ & $38 \pm 8.7$  & $27.6$           & compatibile\footnotemark[2]{} \\
+        \bottomrule
+    \end{tabular}
+    \caption{Sintesi dello studio della $d$}%
+    \label{tab:sintesi_d}
+\end{table}
+
+\footnotetext[2]{Anche se il $\chi^2$ è piccolo non si può rigettare il modello poichè la p-value sottolinea una compatibilità seppur con un errore che potrebbe essere sovrastimato}
 
 \begin{figure}
     \centering
@@ -90,10 +315,31 @@ Ambiente Python esteso dalle librerie:
     \resizebox{0.85\textwidth}{!}{%  <-- Ridimensiona all'80% della larghezza del testo
         \input{distribuzione_d_n.pgf}
     }
-    \caption{Pattern random walk}
-    \label{fig:random_pattern}
+    \caption{Grafico della distanza in funzione del numero di passi}%
+    \label{fig:d_in_funzione_di_n}
 \end{figure}
 
+\subsection{Distanza in funzione del numero di passi}
 
+Nel grafico in Figura~\ref{fig:d_in_funzione_di_n} si nota come i punti seguono l'andamento ipotizzato. Anche in questo caso è stato realizzato un test del $\chi^2$, i risultati sono presenti in Tabella~\ref{tab:sintesi_d_funz_n}.
+Il grafico dei residui ci ha fatto ipotizzare che ci potesse essere un quache errore sistematico, per confutare questa ipotesi sono state eseguite altre run di questo esperimento le quali hanno mostrato come i residui presenti in figura sono frutto del caso e non sono associabili ad errori sistematici.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{c|c|c|c}
+        \toprule
+        misura   & valore atteso & valore misurato  & compatibilità \\
+        \midrule
+        $\chi^2$ & $50 \pm 10$   & $44$             & compatibile   \\
+        \bottomrule
+    \end{tabular}
+    \caption{Sintesi dello studio della distanza in funzione del numero di passi}%
+    \label{tab:sintesi_d_funz_n}
+\end{table}
+
+\section{Conclusioni}
+
+Dalle analisi fatte si evince che i modelli ipotizzati per le distribuzioni della coordinata x, della distanza quadra e della distanza, per un algoritmo di Random Walk in 2 dimensioni, sono corretti, dimostrando che l'algoritmo rappresenta effettivamente un moto browniano. Si è anche dimostrato sperimentalmente come la distanza raggiunta da \textit{n} passi di random walk è in media $\sqrt{n}$ a meno di una costante $(\dfrac{\sqrt{\pi}}{2})$. 
+Per quanto riguarda la distribuzione della distanza, l'errore potrebbe essere sovrastimato, potremmo provare a diminuire la larghezza dei bin dell'istogramma in Figura~\ref{fig:distribuzione_d}.
 
 \end{document}
