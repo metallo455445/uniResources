@@ -1,0 +1,271 @@
+% !TEX root = /home/matteo/Documenti/uni/lab/catenaria/main.tex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath} %per le formule matematiche
+\usepackage{mathrsfs} %font e simboli fighi
+\usepackage[italian]{babel} %Perchè a noi piace soltanto l'italico idioma
+\usepackage{latexsym} %altri simboli
+\usepackage{nicefrac} %frazioni belle
+\usepackage{amsthm}
+\usepackage{geometry} %per dimensioni margini
+\usepackage{epigraph}
+%le ho incluse per le tabelle carine
+\usepackage{amsfonts}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{appendix}   %appendice
+\usepackage{hyperref}   %link
+
+\usepackage{tikz} %disegnini :3
+
+\usepackage{pgf} %immagini pgf
+
+\usepackage{listings} %print codice
+\usepackage{xcolor}
+
+\usepackage{mathtools} %per il simbolo definizione
+
+\newcommand{\mathdefault}[1]{#1}
+
+\linespread{1,1} %interlinea
+
+\geometry{hmargin = {3cm,3cm},vmargin = {3cm,3cm}} %settaggio margini
+
+\title{Relazione di Laboratorio: Catenaria}       %il nome 
+\author{GABRIELE FRUGONI (713463) e MATTEO LEONARDI (713343)\\ gruppo B2--3 tavolo 9}
+\date{\today}
+
+
+
+\begin{document}
+
+\maketitle
+
+\section{Scopo dell'esperienza}
+
+Verificare la forma assunta da una fune vincolata a due estremi e sottoposta solamente alla forza di gravità.
+
+\section{Cenni teorici}
+
+\subsection{Derivazione dell'equazione della catenaria}
+
+Deriviamo l'equazione di una catenaria in un sistema di coordinate cartesiane. Definiamo intanto la densità lineare della catena come $\lambda\equiv\dfrac{dm}{d\ell}$ dove $dm$ è un elemento infinitesimo di massa e $d\ell$ è un elemento infinitesimo di lunghezza. Nella nostra modellizzazione la catena sarà di densità lineare costante, ossia $\lambda=\dfrac{dm}{d\ell}=\dfrac{M}{L}$ cioè uguale al rapporto tra la massa totale $M$ e la lunghezza della catena $L$. Passiamo quindi a studiare le forze agenti sulla nostra catena: per farlo concentriamoci su un elemento di lunghezza $d\ell$ su cui agiscono sicuramente
+\begin{enumerate}
+    \item la forza peso $\vec gdm=\vec g\lambda d\ell$ diretta verso il basso
+    \item una tensione al capo sinistro dell'elemento di lunghezza $\vec T(\ell)$
+    \item una tensione al capo destro $\vec T(\ell+d\ell)$
+\end{enumerate}
+Detto $\vartheta(x)$ l'angolo rispetto all'orizzontale del vettore tangente alla catena relativo all'ascissa $x$, imponiamo l'equilibrio delle forze lungo $\hat x$ e lungo $\hat y$.
+\begin{center}
+    $T(\ell +d\ell)\cos\vartheta(x+dx)-T(\ell)\cos\vartheta(x)=0$\\
+    $T(\ell+d\ell)\sin\vartheta(x+dx)-T(\ell)\sin\vartheta(x)-\lambda g\
+    d\ell=0$
+    
+\end{center}
+Dall'equilibrio lungo $\hat x$ osserviamo che la componente orizzontale della tensione è costante lungo tutta la catena, quindi conviene definire $T(\ell)\cos\vartheta(x)\equiv T_0$ che non è altro che il modulo delle due tensioni che agiscono sul vertice della catenaria, che si ha per $\vartheta=0$. Così l'equilibrio lungo $\hat y$ può essere scritto come:
+\begin{center}
+    $T_0 \tan \vartheta(x+dx)-T_0\tan(x)-\lambda g d\ell=0$
+\end{center}
+Osserviamo poi che la lunghezza infinitesima $d\ell$ della curva può essere vista come una distanza infinitesima tra due punti della catena: $\Delta \ell=\sqrt{(\Delta x)^2+(\Delta y)^2 }=\Delta x\sqrt{1+\left(\dfrac{\Delta y}{\Delta x}\right)^2}$ che passando al limite per $\Delta x \rightarrow 0 $ diventa 
+\begin{center}
+    $d\ell=dx\sqrt{1+[y'(x)]^2}$.
+\end{center} Ma notiamo anche che
+\begin{center}
+    $\tan \vartheta (x)=\dfrac{dy}{dx}=y'(x)$
+\end{center} mentre possiamo approssimare \begin{center}
+    $\tan \vartheta(x+dx)=y'(x)+y"(x)dx$
+\end{center} sviluppando con Taylor al secondo ordine.
+Riscriviamo quindi l'equilibrio lungo la direzione verticale:\\
+\begin{center}
+    $T_0(y'(x)+y"(x)dx)-T_0y'(x)-\lambda g dx\sqrt{1+[y'(x)]^2}=0$\\
+\end{center}
+    Da cui\\
+
+\begin{center}
+    
+
+    $T_0y"(x)=\lambda g\sqrt{1+[y'(x)]^2}$
+    
+\end{center}
+Che è una equazione differenziale che riconduciamo ad una equazione a variabili separabili ponendo $u=y'$:\\
+\begin{center}
+    $\dfrac{du}{\sqrt{1+u^2}}=Kdx$ con $K=\dfrac{\lambda g}{T_0}$\\
+\end{center}
+    Integrando otteniamo:
+    \begin{center}
+        $u(t)=\sinh(Kx+C)$\\
+    \end{center}
+    
+    Ma poichè supponiamo nulla la pendenza della catenaria quando $x=0$ allora $u(0)=0$, cioè $C=0$.\\
+    Integrando di nuovo per trovare $y(x)$ troviamo l'equazione della catenaria:\\
+
+\begin{equation}
+    y(x)=y_0+\dfrac{T_0}{\lambda g}\cosh\left( \dfrac{\lambda g}{T_0}x\right )
+    \label{eq:cat_rudi}
+\end{equation}
+
+\subsection{lunghezza della corda}
+
+In una curva generica la formula per calcolare la lunghezza $S$ tra due punti~$x_1$ e~$x_2$
+
+\[ S = \int_{x_1}^{x_2} \sqrt{1 + {[f'(x)]}^2} \,dx \]
+
+Calcoliamo allora la derivata prima dell'Equazione~\ref{eq:modello} e la sostituiamo nell'Equazione sovrastante
+
+\[ S = \int_{x_1}^{x_2} \sqrt{1 + {\sinh^2{ \left(\dfrac{x-b}{a} \right) }}} \,dx \]
+
+Utilizzando l'identità fondamentale: $\cosh^2{(z)} - \sinh^2{(z)} = 1$ si ottiene che $\sqrt{1 - \sinh^2{(z)}} = \cosh(z)$, da cui
+
+\[ S = \int_{x_1}^{x_2} \cosh \left(\dfrac{x - b}{a} \right) \,dx \]
+
+Risolvendo l'integrale
+
+\[ S = \left[ a \sinh \left( \dfrac{x-b}{a} \right) \right]_{x_1}^{x_2} \]
+
+\[ S = a \sinh \left( \dfrac{x_2-b}{a} \right) - a \sinh \left( \dfrac{x_1-b}{a} \right) \]
+
+Supponendo che le due ancore siano disposte simmetricamente rispetto al vertice (in posizione $x = b$), definiamo la distanza tra le due ancore $D = 2d$
+\begin{itemize}
+    \item $x_1 = b-d$
+    \item $x_2 = b+d$
+\end{itemize}
+Sostituendo
+
+\[ S = a \sinh \left( \dfrac{(b+d)-b}{a} \right) - a \sinh \left( \dfrac{(b-d)-b}{a} \right)\]
+
+\[ S = a \sinh \left( \dfrac{d}{a} \right) - a \sinh \left( \dfrac{-d}{a} \right)\]
+
+E poichè il seno iperbolico è una funzione dispari
+
+\begin{equation}
+    S = 2a \sinh \left( \dfrac{d}{a} \right)
+    \label{eq:dist_px}
+\end{equation}
+
+\section{Materiale a disposizione}
+
+\begin{itemize}
+    \item Catena in acciaio lunga $94.2 \pm 0.1$~cm. Ogni maglia  lunga $1.5\pm0.1$~cm e larga $0.6\pm0.1$~cm
+    \item Metro a nastro con sensibilità di 0.1cm
+    \item Smartphone, useremo la fotocamera con risoluzione di 108 MP ($12000 \times 9000$ pixel)
+\end{itemize} 
+
+\section{Misure}
+
+Per questa esperienza è stato utilizzato il codice descritto in Appendice~\ref{sec:codice}.
+L'immagine della catenaria scattata è visibile in Figura~\ref{fig:catenaria_iniziale}. Attraverso il programma sono stati selezionati semi-automaticamente 71 contorni visibili in Figura~\ref{fig:contorni}. In seguito, per ovviare al problema di avere più punti disposti sulla stessa coordinata x, per ogni colonna di pixel si è verificato che ci fosse solo un punto dei contorni, in caso contrario il programma conta quanti contorni si trovano su quella colonna e fa la media aritmetica delle loro altezze.%\footnote{L'errore sulla y è dato quindi dalla semidispersione massima di questi punti. Per motivi di tempo l'errore è stato poi calcolato in un altro modo (vedere le pagine successive)} 
+In questo modo si ottengono le coordinate (x,y), in pixel, dei punti della catenaria. A questo punto il software utilizza queste coordinate per eseguire un fit con il modello derivato dall'Equazione~\ref{eq:cat_rudi}, ovvero l'Equazione~\ref{eq:modello} (ottenuta con i seguenti parameti: $a = \dfrac{T_0}{\lambda g}$ parametro di forma, $b$ costante di traslazione sull'asse x e $c=y_0$ costante di traslazione sull'asse y).\\
+Quando è stata fotografata la catenaria è stata anche misurata la lunghezza tra le due ancore ed è risultata pari a: $D = 71.0 \pm 0.1$~cm.
+Questa misura ci è fondamentale per poter ricavare una costante di conversione $\gamma$ da mm a px, poiché la stessa distanza risulta essere pari a $1184$~px\footnote{$D_{px}$ è stata calcolata mediante un software grafico a partire dall'immagine~\ref{fig:catenaria_iniziale}} allora $\gamma = \dfrac{D_{mm}}{D_{px}} = \dfrac{710}{1184} \approx 0.6$~mm/px.
+
+\begin{equation}
+    y(x)=c+a\cosh\left( \dfrac{x - b}{a}\right)
+    \label{eq:modello}
+\end{equation}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{exp1.jpg}
+    \caption{Immagine di partenza}%
+    \label{fig:catenaria_iniziale}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.95\linewidth]{contorni_selezionati.pdf}
+    \caption{Contorni selezionati}%
+    \label{fig:contorni}
+\end{figure}
+
+Gli errori sugli assi sono stati stimati a 4px poichè nei punti più sottili (i punti di giunzione) la catena, mediamente, ha proprio quello spessore. Il fit, rappresentato in Figura~\ref{fig:fit}, è stato costruito calcolando la $\sigma_{efficace}$ dato che l'errore sulla x non è trascurabile
+rispetto all'errore sulla y.
+
+\begin{figure}
+    \centering
+    \sffamily
+    \resizebox{0.85\textwidth}{!}{%  <-- Ridimensiona all'80% della larghezza del testo
+        \input{grafico_fit.pgf}
+    }
+    \caption{Grafico dove sono disegnati i punti della catenaria rilevati dal programa e il fit}%
+    \label{fig:fit}
+\end{figure}
+
+\section{Analisi dati}
+
+\subsection{Fit e test del $\chi^2$}\label{sec:fit_e_chi2}
+
+Il fit mostra una buona approssimazione dei dati ottenendo come valori di \textit{bestfit} quelli mostrati in Tabella~\ref{tab:best_fit}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{c|c}
+        \toprule
+        parametro & \textit{bestfit} \\
+        \midrule
+        a & $452.5 \pm 0.5$ \\
+        b & $630.5 \pm 0.2$ \\
+        c & $-165.2 \pm 0.4$ \\
+        \bottomrule
+    \end{tabular}
+    \caption{valori best fit}%
+    \label{tab:best_fit}
+\end{table}
+
+Il test del $\chi^2$ prodotto ($\chi^2 = 948$ su 971 gradi di libertà) mostra una ottima compatibilità tra il modello e i dati ottenuti, tesi supportata anche dal p-value (pari a 0.7). 
+Lo studio dei residui evidenzia un errore che supera i $2\sigma$ maggiormente negli estremi. Questo fenomeno lo associamo ad un errore sistematico generato dalle lenti: il cosiddetto effetto \textit{fish eye} che consiste, seppure in maniera poco pronunciata, nella distorsione degli estremi di una fotografia a causa della forma della lente.
+
+\subsection{Verifica della lunghezza}
+
+Modificando l'Equazione~\ref{eq:dist_px} per trovare la lunghezza in mm si ricava
+
+\begin{equation}
+    S_{mm} = \gamma S = D_{mm} \left[ \dfrac{2 a_{px}}{D_{px}} \sinh \left( \dfrac{D_{px}}{2 a_{px}} \right) \right] 
+    \label{dist_mm}
+\end{equation}
+
+Dove: $D_{mm}$ è la distanza tra le ancore in mm, $D_{px}$ è la distanza tra le ancore in px e $a_{px}$ è il parametro di \textit{best fit} in px mostrato in Tabella~\ref{tab:best_fit}
+Sostituendo con i valori misurati si ottiene il valore centrale della distanza $\hat{S} = 930.6$~mm
+
+Per il calcolo dell'errore si utilizza la formula generale della propagazione degli errori a partire dall'Equazione~\ref{dist_mm} (ci è permesso in quanto $D_{mm}$, $D_{px}$ e $a_{px}$ sono tre variabili indipendenti)
+
+\[ \sigma_S = \sqrt{\left( \dfrac{\partial S}{\partial D_{mm}} \sigma_{Dmm} \right )^2 + \left( \dfrac{\partial S}{\partial D_{px}} \sigma_{Dpx} \right )^2 + \left( \dfrac{\partial S}{\partial a_{px}} \sigma_{apx} \right )^2} \]
+
+Calcolo delle derivate
+
+\[ \dfrac{\partial S}{\partial D_{mm}} = \sinh \left( \dfrac{D_{px}}{2a_{px}} \right) \dfrac{2a_{px}}{D_{px}} \]
+
+\[ \dfrac{\partial S}{\partial D_{px}} = \dfrac{D_{mm}}{D_{px}} \left[ \cosh \left( \dfrac{D_{px}}{2a_{px}} \right) - \sinh \left( \dfrac{D_{px}}{2a_{px}} \right) \dfrac{2a_{px}}{D_{px}} \right] \]
+
+\[ \dfrac{\partial S}{\partial a_{px}} = - \dfrac{D_{mm}}{a_{px}} \left[ \cosh \left( \dfrac{D_{px}}{2a_{px}} \right) - \sinh \left( \dfrac{D_{px}}{2a_{px}} \right) \dfrac{2a_{px}}{D_{px}} \right] \]
+
+Dalle quali si ricava
+
+\[ \sigma_{Smm} \approx \sqrt{1.31^2 + 2.29^2 + 0.53^2} \approx 2.7 \]
+
+Quindi la lunghezza stimata della catena risulta essere $S = 930.6 \pm 2.7$mm che però risulta incompatibile con la misura iniziale della lunghezza della catena; ovvero: $L = 942 \pm 1$. 
+
+\section{Conclusioni}
+
+Sulla base dell'analisi dati deduciamo che l'ipotesi è verificata, ovvero: una corda inestensibile ed omogenea, vincolata ai due estremi e lasciata pendere sotto la sola azione del suo peso, si dispone nel piano verticale secondo una curva descritta dall'Equazione~\ref{eq:cat_rudi}.\\
+Ciononostante la stima della lunghezza della catena non risulta compatibile con la lunghezza effettiva. Questo errore supponiamo sia derivato da due fattori: distorsione dell'immagine dovuta all'effetto \textit{fish eye} come spiegato anche nella sezione~\ref{sec:fit_e_chi2} e l'approssimazione di una catena formata da maglie a file sottile non consistente.\\
+Infine ad avvalorare le conclusioni presentiamo la Figura~\ref{fig:fit_bg} dove all'immagine iniziale è stata sovrapposta la rappresentazione grafica del \textit{best fit}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.85\linewidth]{fit_back.pdf}
+    \caption{In rosso il grafico di best fit con sfondo l'immagine originale}%
+    \label{fig:fit_bg}
+\end{figure}
+
+\appendix
+
+\section{Codice}\label{sec:codice}
+
+Il codice utilizzato in questa esperienza è stato interamene scritto da Matteo Leonardi e attualmente è in fase di sviluppo. Per visualizzare i dettagli, domande o per contribuire è disponibile un repositorio GitHub: \url{https://github.com/metallo455445/catplot}
+
+\subsection{Funzionamento (in breve)}
+
+Utilizzando la libreria OpenCv l'immagine iniziale viene ripulita, successivamente vengono cercati, organizzati dal più grande al più piccolo e stampati di colore verde tutti i contorni rilevati dal programma. L'utente sceglie un numero n di contorni da selezione (verranno mostrati singolarmente gli n contorni più grandi) e ne visualizza uno alla volta ognuno di questi n contorni cercando possibili errori (ovvero elementi della foto originale identificati come parte della catenaria ma che sono solo rumore). Una volta salvati gli ID dei contorni errati e fatto ripartire il programma verranno salvate le coordinate di questi punti selezionati (ora segnati di colore rosso). Da questi punti poi viene fatto il fit.
+
+\end{document}

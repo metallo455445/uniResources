@@ -88,13 +88,13 @@ if img_color is not None and len(contours) > 0:
     plt.imshow(cv.cvtColor(img_all_contours, cv.COLOR_BGR2RGB))
     plt.title(f'Tutti i {len(contours)} contorni')
     
-    # Disegna i primi 5 contorni più grandi (escludendo eventualmente il bordo dell'immagine)
+    # Disegna i primi n contorni più grandi (escludendo eventualmente il bordo dell'immagine)
     img_top_contours = img_color.copy()
     # Salta il primo se è troppo grande (potrebbe essere il bordo)
-    start_idx = 1 if len(contours_sorted) > 1 and cv.contourArea(contours_sorted[0][1]) > img.shape[0] * img.shape[1] * 0.9 else 0     ##CHAT GPT sostituisce contours_sorted[0] con contours_sorted[0][1]
+    start_idx = 1 if len(contours_sorted) > 1 and cv.contourArea(contours_sorted[0][1]) > img.shape[0] * img.shape[1] * 0.9 else 0    
     
     for i in range(start_idx, min(start_idx + n_top_countours, len(contours_sorted))):                    ## start_idx + 5 sostituito da me coon start_idx + n_top_countours
-        cv.drawContours(img_top_contours, [contours_sorted[i][1]], 0, (0,255,0), 3)        ##CHATGPT sostituisce contours_sorted[i] con contours_sorted[i][1]
+        cv.drawContours(img_top_contours, [contours_sorted[i][1]], 0, (0,255,0), 3)        
     
     top_ids = [idx for idx, _ in contours_sorted[start_idx:start_idx + n_top_countours]]              ## start_idx + 5 sostituito da me coon start_idx + n_top_countours
     print(f"\nID dei top {n_top_countours} contorni:", top_ids)
@@ -102,6 +102,9 @@ if img_color is not None and len(contours) > 0:
     plt.figure(f"Top {n_top_countours} contorni")
     plt.imshow(cv.cvtColor(img_top_contours, cv.COLOR_BGR2RGB))
     plt.title(f'Top {n_top_countours} contorni più grandi')
+
+    # Inizializza un dizionario globale per raccogliere i punti PRIMA di getCoord
+    coordinate_grezze = {}
 
     def getCoord(indiceContornoTarget):
         print(f"Coords di contorno {indiceContornoTarget}")
@@ -120,15 +123,15 @@ if img_color is not None and len(contours) > 0:
                 x = x_raw
                 y = height - y_raw  # Ora 0 è il fondo dell'immagine
                 
-                p_plot = (x_raw, y_raw) # Per il disegno su OpenCV (che vuole ancora l'origine in alto)
-                p_calc = (x, y)         # Per il salvataggio su file (piano cartesiano)
+                p_plot = (x_raw, y_raw)
+                p_calc = (x, y)
                 
-                #print(f"Coord Originale: ({x_raw}, {y_raw}) -> Corretta: {p_calc}")
+                # INVECE DI SALVARE SU FILE, RAGGRUPPA LE Y PER OGNI X
+                if x not in coordinate_grezze:
+                    coordinate_grezze[x] = [] # Crea una nuova lista se la X non esiste
+                coordinate_grezze[x].append(y) # Aggiunge la Y alla colonna X
                 
-                with open(coord_path, "a") as f:
-                    f.write(f"{p_calc[0]} {p_calc[1]}\n")
-                
-                # Disegno (usa le coordinate originali altrimenti non vedi i punti sull'immagine)
+                # Disegno
                 cv.circle(img_single, p_plot, 2, (255, 0, 0), -1)
 
             cv.drawContours(img_single, [cnt], 0, (0,0,255), 3)
@@ -143,10 +146,47 @@ if img_color is not None and len(contours) > 0:
                 getCoord(id)
 #####
     #INCOLLA QUI I getCoord()
-    selezione = np.array([732, 394, 893, 91, 93, 813, 739, 313, 463, 396, 399, 740, 733, 464, 378, 815, 817, 711, 316, 730, 828, 731, 850, 171,
-                          727, 768, 641, 784, 172, 831, 579, 873, 814, 851, 895, 911, 307, 314, 912, 308, 508, 874, 309, 653, 660, 652])
+    selezione = np.array([2083, 2082, 2042, 2459, 2458, 2041, 1223, 1222, 2523, 2522
+                          ,24, 574, 593, 541, 395, 1908, 1909, 2638, 306, 1949, 2288, 1950, 23, 2639, 325, 2287, 279, 323, 2129
+                          ])
     selezioneContorni(selezione)
- 
+
+    #stampa tutti i contorni selezionati (scartando gli errori)
+    img_contorni_finali = img_color.copy()
+    
+    # Cicliamo su tutti i contorni trovati all'inizio
+    for id_corrente in top_ids:
+        # Se l'ID NON è nella lista degli scarti, allora è un pezzo buono della catena!
+        if id_corrente not in selezione:
+            if id_corrente < len(contours): 
+                # (0, 0, 255) è il colore rosso, 3 è lo spessore
+                cv.drawContours(img_contorni_finali, [contours[id_corrente]], 0, (0, 0, 255), 3)
+
+    # Creazione della finestra Matplotlib dedicata
+    plt.figure("Catenaria Finale Selezionata")
+    plt.imshow(cv.cvtColor(img_contorni_finali, cv.COLOR_BGR2RGB))
+    
+    # Calcoliamo quanti contorni sono sopravvissuti per il titolo
+    contorni_buoni = len(top_ids) - len(selezione)
+    plt.title(f"I {contorni_buoni} contorni salvati per il Fit")
+    plt.axis('off')
+
+    # CALCOLO DELLA LINEA CENTRALE E SALVATAGGIO DEFINITIVO
+    print("\nCalcolo della linea centrale in corso...")
+    
+    # Riscrive il file 'w' (sovrascrive quello vuoto creato all'inizio)
+    with open(coord_path, "w") as f:
+        # Ordina le X dalla più piccola alla più grande (utile per i fit successivi!)
+        for x_corrente in sorted(coordinate_grezze.keys()):
+            lista_y = coordinate_grezze[x_corrente]
+            
+            # Calcola la media delle Y per questa X
+            y_media = sum(lista_y) / len(lista_y)
+            
+            # Scrive sul file la X e la Y media (con 2 cifre decimali)
+            f.write(f"{x_corrente} {y_media:.2f}\n")
+            
+    print(f"File {coord_path} generato con successo! Punti mediati salvati.")
 else:
     print("Impossibile caricare l'immagine a colori o nessun contorno trovato")
 
