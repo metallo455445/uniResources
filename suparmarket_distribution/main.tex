@@ -1,0 +1,212 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath} %per le formule matematiche
+\usepackage{mathrsfs} %font e simboli fighi
+\usepackage[italian]{babel} %Perchè a noi piace soltanto l'italico idioma
+\usepackage{latexsym} %altri simboli
+\usepackage{nicefrac} %frazioni belle
+\usepackage{amsthm}
+\usepackage{geometry} %per dimensioni margini
+\usepackage{epigraph}
+%le ho incluse per le tabelle carine
+\usepackage{amsfonts}
+\usepackage{booktabs}
+\usepackage{siunitx}
+
+\usepackage{tikz} %disegnini :3
+
+\usepackage{pgf} %immagini pgf
+\newcommand{\mathdefault}[1]{#1}
+
+\linespread{1,2} %interlinea
+
+\geometry{hmargin = {3cm,3cm},vmargin = {3cm,3cm}} %settaggio margini
+
+
+\title{Relazione di Laboratorio: Conteggi}       %il nome 
+\author{GABRIELE FRUGONI (713463) e MATTEO LEONARDI (713343)\\ gruppo B2--3 tavolo 9}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Scopo dell'esperienza}
+
+Verificare la distribuzione di Poisson utilizzando come processo stazionario (nel dominio del tempo) l'ingresso di una persona in un supermercato in due fasce orarie (una più frequentata e una meno frequentata) e studiarne le proprietà statistiche.
+
+\section{Cenni Teorici}
+
+\subsection{Definizione di distribuzione poissoniana}\label{sec:hp_poissoniane}
+
+Un processo poissoniano è detto tale se rispetta le seguenti ipotesi:
+
+\begin{enumerate}
+    \item indipendenza (il verificarsi di un evento in un determinato istante di tempo non influenza la probabilità che si verifichi un secondo evento in un momento successivo)
+    \item non simultaneità (gli eventi non devono verificarsi contemporaneamente)
+    \item stazionarietà (il numero medio di eventi per unità di tempo è lo stesso in qualsiasi intervallo)
+\end{enumerate}
+
+Un processo poissoniano si distribuisce secondo l'espressione
+
+\begin{equation}
+    \mathcal{P} (k;\mu) = \dfrac{\mu^k}{k!}e^{-\mu}
+    \label{eq:poisson}
+\end{equation}
+
+Dove $k$ è una variabile aleatoria detta \textit{variabile Poissoniana} e rappresenta quante volte si verifica un evento in un intervallo temporale (o spaziale) definito e $\mu$ indica la media degli eventi attesi nello stesso lasso di tempo (spazio).
+La particolarità statistica di questa distribuzione è che
+
+\[ \mathrm{E}[k] = \mathrm{E}[k^2] = \mu \]
+
+cioè che $\mu$ è uguale alla media della distribuzione e alla varianza (comporta $\sigma = \sqrt{\mu}$).\\
+Nell'ingresso di una persona nel supermercato riconosciamo un processo poissoniano poiché le tre ipotesi sono rispettate: 
+
+\begin{enumerate}
+    \item l'ingresso di una persona non influenza l'ingresso delle successive (a meno  che non si tratti di una coppia / gruppo ma a quel punto verrebbe meno l'ipotesi di non simultaneità)
+    \item se si considerano solo gli ingressi delle singole persone, contando come eventi singoli l'ingresso di gruppi, allora anche la non simultaneità è rispettata
+    \item per la stazionarietà bisogna fare una considerazione: in generale il tasso di persone che entrano in un supermercato (in una giornata) non è omogeneo, avremo fasce orarie più dense e meno dense. Se però si analizzano degli intervalli temporali brevi (nel nostro caso di 30 minuti) allora il nostro tasso, anche detto frequenza caratteristica $\lambda$ ($\lambda = \dfrac{\mu}{\Delta t}$ dove $\Delta t$ è l'intervallo di tempo in cui vegono prese le misure), sarà costante.
+\end{enumerate}
+
+\subsection{Somma di variabili poissoniane}\label{sec:somma_di_poiss}
+
+Si hanno due variabili poissoniane idipendenti $o$ e $p$ con medie rispettivamente $\mu_o$ e $\mu_p$ e la loro somma $k = o + p$. Teoricamente dovremmo sommare, per ogni valore di k, tutte le coppie di numeri positivi che danno come somma $k$. Sfruttando la moltiplicazione delle probabilità per eventi indipendenti si può semplificare la scrittura
+
+\[ P(k) = \sum_{o=0}^{k}\mathcal{P} (o;\mu_o)\mathcal{P} (k-o;\mu_p) \]
+
+Sostituendo dove necessario con l'Equazione~\ref{eq:poisson}
+
+\[ P(k) = \sum_{o=0}^{k} \dfrac{\mu_{o}^{o}}{o!} e^{\mu_o} \cdot \dfrac{\mu_{p}^{k-o}}{(k-o)!} e^{-\mu_p} = e^{-(\mu_o+\mu_p)} \sum_{o=0}^{k}\dfrac{\mu_{o}^{o} \mu_{p}^{k-o}}{o!(k-p)!} \]
+\[ P(k) = \dfrac{e^{-(\mu_o+\mu_p)}}{k!}\sum_{o=0}^{k}\binom{k}{o}\mu_{o}^{o}\mu_{p}^{k-o}\]
+
+Sfruttando la definizione di potenza di binomio
+
+\begin{equation}
+    P(k) = \dfrac{{(\mu_o+\mu_p)}^k}{k!}e^{-(\mu_o+\mu_p)} = \mathcal{P}(k;\mu_o+\mu_p)
+\end{equation}
+
+Si è così dimostrato che la somma di due variabili Poissoniane è ancora una variabile Poissoniana avente come media la somma delle medie
+
+\section{Materiali a disposizione}
+
+Per questa esperienza sono stati utilizzati
+
+\begin{itemize}
+    \item un timer
+    \item carta e penna
+    \item l'ambiente Python
+\end{itemize}
+
+\section{Misure}
+
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{c c c|c c c}
+        \toprule
+        N° run & $\vec{m}$ & $\vec{p}$ & N° run & $\vec{m}$ & $\vec{p}$ \\
+        \midrule
+        $1$  & $2$ & $4$ & $16$ & $3$ & $2$ \\
+        $2$  & $3$ & $1$ & $17$ & $2$ & $3$ \\
+        $3$  & $2$ & $2$ & $18$ & $1$ & $7$ \\
+        $4$  & $2$ & $3$ & $19$ & $4$ & $1$ \\
+        $5$  & $1$ & $4$ & $20$ & $1$ & $1$ \\
+        $6$  & $2$ & $4$ & $21$ & $2$ & $5$ \\
+        $7$  & $2$ & $1$ & $22$ & $3$ & $6$ \\
+        $8$  & $2$ & $3$ & $23$ & $2$ & $5$ \\
+        $9$  & $1$ & $3$ & $24$ & $2$ & $1$ \\
+        $10$ & $1$ & $3$ & $25$ & $0$ & $5$ \\
+        $11$ & $3$ & $3$ & $26$ & $1$ & $1$ \\
+        $12$ & $3$ & $2$ & $27$ & $4$ & $2$ \\
+        $13$ & $3$ & $2$ & $28$ & $2$ & $1$ \\
+        $14$ & $1$ & $2$ & $29$ & $3$ & $4$ \\
+        $15$ & $3$ & $3$ & $30$ & $2$ & $3$ \\
+        \bottomrule
+    \end{tabular}
+    \caption{Conteggi fatti per ogni run: per $\vec{m}$ si intendono i dati raccolti nella minima affluenza mentre per $\vec{p}$ si intendono i dati della massima affluenza}%
+    \label{tab:conteggi}
+\end{table}
+
+Arrivati all'ingresso del supermercato abbiamo programmato il timer per scandire 60 secondi e lo abbiamo fatto partire. In questo lasso di tempo (che chiameremo per semplicità \textit{run}) abbiamo segnato sul foglio di carta ogni volta che una persona è entrata nel negozio rispettando la definizione di processo poissoniano descritta nella sezione~\ref{sec:hp_poissoniane}. 
+Si è ripetuto questo procedimento per un totale di 30 volte consecutive in un orario in cui il supermercato era poco affollato. Tutto l'iter è poi stato poi eseguito di nuovo in un momento della giornata dove il supermercato risultava visibilmente più affollato. Gli ingressi per ogni run sono riportati in Tabella~\ref{tab:conteggi}
+
+\section{Analisi dati}
+
+Indichiamo, come fatto anche in Tabella~\ref{tab:conteggi}, con $\vec{m}$ i conteggi del momento della giornata con minore affluenza e con $\vec{p}$ i conteggi del momento della giornata con maggiore affluenza. 
+
+\subsection{Minore affluenza}\label{sec:min_affluenza}
+
+Come primo passo si è calcolata la media campione di $\vec{m}$ e l'incertezza sulla media che risulta quindi essere
+
+\[ \mu_m = 2.10 \pm 0.96 \]
+
+Successivamente si è realizzato un istogramma con il vettore delle occorrenze $\vec{m}$ e i valori attesi dalla distribuzione di Poisson calcolati mediante l'Equazione~\ref{eq:poisson} e utilizzando come media $\mu_m$. Il grafico è riportato in Figura~\ref{fig:set1}\\
+\`E stato poi realizzato il grafico dei residui sottraendo (per ogni occorrenza) la frequenza aspettata a quella osservata, i residui sono poi stati normalizzati dividendo per $\sqrt{\vec{E}}$ ovvero l'incertezza associata ad ogni singolo bin è la radice del suo valore atteso teorico.
+Il test del $\chi^2$ (dove $\chi^2 = 5.2$ e i dof$=3$) evidenzia una possibile sottostima degli errori però decidiamo di non rigettare il modello sulla base del p-value ottenuto (che risulta uguale a 0.16).
+Il grafico dei residui, infine, mostra delle fluttuazioni casuali attorno al valore atteso che non superano mai le $\pm2\sigma$ motivo in più per non rifiutare il modello.
+
+\begin{figure}
+    \centering
+    \sffamily
+    \resizebox{0.85\textwidth}{!}{%  <-- Ridimensiona all'80% della larghezza del testo
+        \input{set1.pgf}
+    }
+    \caption{Dati acquisiti nel momento della giornata con minore affluenza}%
+    \label{fig:set1}
+\end{figure}
+
+\subsection{Maggiore affluenza}\label{sec:max_affluenza}
+
+I passaggi svolti per questa sezione sono identici a quelli svolti nella sezione~\ref{sec:min_affluenza} (dove è stato utilizzato $\vec{p}$ al posto di $\vec{m}$) e hanno prodotto i seguenti risultati:
+
+\begin{itemize}
+    \item $\mu_p = 2.9 \pm 1.6$
+    \item $\chi^2 = 2$, dof$=5$, $\chi^2_\text{ridotto} = 0.4$
+    \item p-value$=0.85$
+\end{itemize}
+
+L'istogramma risultante è riportato in Figura~\ref{fig:set2}. Dai dati estrapolati si può dire che il test del $\chi^2$ risulta leggermente minore rispetto il valore atteso, il che generalmente indica una sovrastima dell'incertezza. Anche qui però decidiamo di non scartare il modello per il valore di p-value.
+
+\begin{figure}
+    \centering
+    \sffamily
+    \resizebox{0.85\textwidth}{!}{%  <-- Ridimensiona all'80% della larghezza del testo
+        \input{set2.pgf}
+    }
+    \caption{Dati acquisiti nel momento della giornata con maggiore affluenza}%
+    \label{fig:set2}
+\end{figure}
+
+\subsection{Somma delle distribuzioni}
+
+Si vuole a questo punto verificare sperimentalmente la teoria dimostata nella sezione~\ref{sec:somma_di_poiss}: si definisce dunque il vettore $\vec{s} = \vec{m} + \vec{p}$ come la somma, componente per componente, dei due vettori $\vec{m}$ e $\vec{p}$ che non rappresenta un singolo evento fisico ma è piuttosto un artificio matematico per poter dimostrare la teoria. L'analisi di questo nuovo set di dati è ancora una volta identica a quelle fatte nelle sezioni~\ref{sec:min_affluenza} e~\ref{sec:max_affluenza}, da cui estraiamo:
+
+\begin{itemize}
+    \item $\mu_s = 5.0 \pm 1.6$
+    \item $\chi^2 = 5.2$, dof$=6$, $\chi^2_\text{ridotto} = 0.88$
+    \item p-value$=0.51$ 
+\end{itemize}
+
+L'istogramma di questa analisi è visibile in Figura~\ref{fig:set3}. Ci si rende subito conto, grazie al test del $\chi^2$, dal p-value e dai residui, che $\vec{s}$ è fortemente correlato al modello fornito dall'Equazione~\ref{eq:poisson}
+
+\begin{figure}
+    \centering
+    \sffamily
+    \resizebox{0.85\textwidth}{!}{%  <-- Ridimensiona all'80% della larghezza del testo
+        \input{set3.pgf}
+    }
+    \caption{Somma delle due acquisizioni}%
+    \label{fig:set3}
+\end{figure}
+
+\section{Conclusioni}
+
+Attraverso la verifica sperimentale si è dimostrato che 
+
+\begin{enumerate}
+    \item L'ingresso di una persona in un supermercato è considerabile un processo Poissoniano (sempre se rispettate le ipotesi dettate in sezione~\ref{sec:hp_poissoniane}).
+    \item La somma di due variabili poissoniane è a sua volta una variabile poissoniana avente come media la somma delle medie.
+\end{enumerate}
+
+\end{document}
