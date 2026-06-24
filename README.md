@@ -1,3 +1,7 @@
+# Disclaimer!!
+
+I codici non sono puliti e le relazioni sono tutte da rivedere, post sessione estiva ci metterò mano
+
 # Scopo 
 
 Repositorio nel quale archivio lavori dell'università tra relazioni e progetti extra. 
