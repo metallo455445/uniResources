@@ -183,7 +183,6 @@ rispetto all'errore sulla y.
 
 \begin{figure}
     \centering
-    \sffamily
     \resizebox{0.85\textwidth}{!}{%  <-- Ridimensiona all'80% della larghezza del testo
         \input{grafico_fit.pgf}
     }
@@ -239,9 +238,9 @@ Calcolo delle derivate
 
 \[ \dfrac{\partial S}{\partial a_{px}} = - \dfrac{D_{mm}}{a_{px}} \left[ \cosh \left( \dfrac{D_{px}}{2a_{px}} \right) - \sinh \left( \dfrac{D_{px}}{2a_{px}} \right) \dfrac{2a_{px}}{D_{px}} \right] \]
 
-Dalle quali si ricava
+Ponendo $\sigma_{px} = 0.5$px, $\sigma_{Dmm} = 1$mm e $\sigma_{Dpx} = \sqrt{4^2 + 4^2} \approx 5.66$px (come spiegato in precedenza si è stimato l'errore sui punti della catenaria pari a 4px) si ricava 
 
-\[ \sigma_{Smm} \approx \sqrt{1.31^2 + 2.29^2 + 0.53^2} \approx 2.7 \]
+\[ \sigma_{Smm} = \sqrt{1.31^2 + 2.29^2 + 0.53^2} \approx 2.7 \]
 
 Quindi la lunghezza stimata della catena risulta essere $S = 930.6 \pm 2.7$mm che però risulta incompatibile con la misura iniziale della lunghezza della catena; ovvero: $L = 942 \pm 1$. 
 

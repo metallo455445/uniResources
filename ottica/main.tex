@@ -1,0 +1,430 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath} %per le formule matematiche
+\usepackage{mathrsfs} %font e simboli fighi
+\usepackage[italian]{babel} %Perchè a noi piace soltanto l'italico idioma
+\usepackage{latexsym} %altri simboli
+\usepackage{nicefrac} %frazioni belle
+\usepackage{amsthm}
+\usepackage{geometry} %per dimensioni margini
+\usepackage{epigraph}
+%le ho incluse per le tabelle carine
+\usepackage{amsfonts}
+\usepackage{booktabs}
+\usepackage{siunitx}
+
+\usepackage{tikz} %disegnini :3
+\usetikzlibrary{shapes.misc} % Necessario per "cross out"
+
+\usepackage{pgf} %immagini pgf
+\newcommand{\mathdefault}[1]{#1}
+\renewcommand{\thefootnote}{\alph{footnote}}    %footnote con le lettere
+
+\linespread{1,2} %interlinea
+
+\geometry{hmargin = {3cm,3cm},vmargin = {3cm,3cm}} %settaggio margini
+
+
+\title{Relazione di Laboratorio: Ottica}       %il nome 
+\author{GABRIELE FRUGONI (713463) e MATTEO LEONARDI (713343)\\ gruppo B2--3 tavolo 9}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Scopo dell'esperienza}
+
+L'esperienza si compone di due parti: ricavare l'indice di rifrazione del plexiglass e calcolare la distanza focale di una lente divergente
+
+\section{Cenni teorici}
+
+% \subsection{Legge di Snell}
+% La luce si propaga con velocità differente a seconda del materiale in cui si trova: si definisce infatti \textit{indice di rifrazione} di un materiale il rapporto tra la velocità della luce nel vuoto $c=3\cdot 10^8 \mathrm{ms}^{-1}$ e la velocità della luce nel materiale: \begin{equation}
+%     n=\dfrac{c}{v}
+% \end{equation}
+% Quando un raggio luminoso passa da un materiale con un certo indice di rifrazione ad un altro con un indice di rifrazione diverso, il suo percorso devia. Sia $n_1$ l'indice di rifrazione di un mezzo e si consideri un raggio luminoso proveniente da tale mezzo che incide con angolo $\vartheta_i$ in un secondo mezzo il cui indice di rifrazione è $n_2$. Il raggio verrà rifratto con un angolo $\vartheta_r$ rispetto alla normale della superficie di contatto tra i due mezzi. La relazione fra queste quantità è data dalla \textit{legge di Snell:}
+% \subsection{Equazione delle lenti sottili}
+% Una lente è un oggetto ottico trasparente che può far convergere (la lente si dice convergente) o divergere (lente divergente) dei raggi luminosi. Se un fascio di raggi paralleli attraversa una lente convergente, questi verranno fatti convergere in un unico punto detto fuoco. Se invece dei raggi paralleli passano in una lente divergente, questi verranno fatti divergere in modo radiale, i loro prolungamenti tuttavia si intersecano in un unico punto che, anche in questo caso, è detto fuoco. La distanza tra il centro della lente ed il fuoco è detta \textit{distanza focale} e si indica con $f$. Si consideri un oggetto a distanza $q$ da una lente: se la lente è convergente i raggi provenienti dall'oggetto verranno fatti convergere nuovamente in un punto oltre la lente, generando una cosiddetta immagine reale. Se la lente è divergente, i prolungamenti dei raggi rifratti dalla lente si intersecano in un punto generando una cosiddetta immagine virtuale. Chiamata $p$ la distanza tra il centro della lente e l'immagine dell'oggetto essa è per convenzione positiva se l'immagine è reale e negativa se l'immagine è virtuale. La seguente relazione, detta \textit{equazione delle lenti sottili}, lega le quantità appena definite: 
+
+Nella nostra esperienza useremo come modello, per calcolare l'indice di rifrazione del plexiglass, la legge di Snell (Equazione~\ref{eq:legge_snell}):
+
+\begin{equation}
+    n_1 \sin \vartheta _i=n_2 \sin\vartheta_r
+    \label{eq:legge_snell}
+\end{equation}
+
+Dove $n_1$ e $n_2$ sono gli indici di rifrazione dei due mezzi, in questa esperisanza sono rispettivamente l'aria ($\approx 1$) e il plexiglass ($1.49$), $\vartheta_i$ è l'angolo tra il raggio incidente e la retta normale e $\vartheta_r$ è l'angolo tra il raggio rifratto e la retta normale. In Figura~\ref{fig:schema_snell} è presente uno schema riassuntivo.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{schema_rif.png}
+    \caption{Schema legge di Snell. La retta tratteggiata è la retta normale, la semicirconferenza indica il mezzo di cui vogliamo calcolare l'indice di rifrazione (il plexiglass)}%
+    \label{fig:schema_snell}
+\end{figure}
+
+Le ipotesi necessarie per questo modello sono le seguenti:
+
+\begin{itemize}
+    \item Si considera la luce come un raggio sottile che si propaga il lina retta all'interno di mezzi omogenei (considerando l'aria mezzo omogeneo)
+    \item I due mezzi sono divisi da una superficie netta: il raggio incidente, quello rifratto e la normale alla superficie giacciono sullo stesso piano.
+\end{itemize}
+
+Per calcolare la distanza focale della lente divergente si usa come modello l'Equazione delle legge sottili (Equazione~\ref{eq:lenti_sottili})
+
+\begin{equation}
+    \dfrac{1}{q}+\dfrac{1}{p}=\dfrac{1}{f}
+    \label{eq:lenti_sottili}
+\end{equation}
+
+Dove $p$ è la distanza tra il centro della lente e l'oggetto, per definizione è positiva se l'oggetto è reale (e quindi `generato' da lenti convergenti) e negativa se virtuale (e cioò `generato' da lenti divergenti). Con $f$ si intende la distanza focale e con $q$ si indica la distanza tra il centro della lente e l'immagine.
+In questa esperienza si vuole misurare la distanza focale di una lente divergente è perciò necessario avere un oggetto virtuale cosa che con una sorgente luminosa convenzionale non è possibile. Si decide allora di usare come sorgente `virtuale' l'immagine di una lente convergente come da schema in Figura~\ref{fig:schema_focale}.\\
+L'Equazione~\ref{eq:lenti_sottili} he ha come ipotesi:
+
+\begin{itemize}
+    \item Lo spessore della lente è trascurabile 
+    \item Si considera la luce come un raggio sottile 
+    \item I raggi di luce subiscono rifrazione solo sul piano centrale della lente, non sulle due superfici separate
+    \item La lente è immersa in un mezzo omogeneo (nel nostro caso l'aria)
+\end{itemize}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{schema_foc.png}
+    \caption{Schema studio della lente divergente. $-p$ e $q$ fanno riferimento alla lente divergente}%
+    \label{fig:schema_focale}
+\end{figure}
+
+\section{Materiale a disposizione}
+
+\subsection{Strumenti di misura}
+
+\begin{itemize}
+    \item Metro a nastro con risoluzione di $0.1$ cm
+\end{itemize}
+
+\subsection{Apparato sperimentale indice di rifrazione}\label{sec:apparato_snell}
+
+\begin{tikzpicture}
+    \draw (0,0) rectangle (6,-0.5);
+    \draw (0,0) rectangle (1,1);
+    \draw (5,0) rectangle (5.4, 0.4);
+    \draw[thick, dashed] (1,0.2) -- (5, 0.2);
+    \draw[->, thick] (0.5, -1.5) -- (0.5, 0.5) node[at start, below] {a};
+    \draw[->, thick] (2.5, -1.5) -- (2.5, -0.25) node[at start, below] {b};
+    \draw[->, thick] (3.5, -1.5) -- (3.5, 0.2) node[at start, below] {c};
+    \draw[->, thick] (5.2, -1.5) -- (5.2, 0.2) node[at start, below] {d}; 
+    \draw[<->, thick] (1, 2) -- (5, 2) node[midway, above] {e};
+    %legenda
+    \node[draw, align=left] at (10,0.5) {
+        \textbf{Legenda}\\
+        \text{a: Fonte luminosa}\\
+        \text{b: Banco}\\
+        \text{c: Raggio sottile (spesso $2 \pm 1$mm)}\\
+        \text{d: Semicilindro in plexiglass}\\
+        \text{e: Distanza sorgente--semicilindro}
+    };
+\end{tikzpicture}
+
+La fonte luminosa in questo apparato è dotata di una fenditura verticale dello spessore di $0.2 \pm 0.1$ cm che permette al raggio prodotto dalla sorgente di avere uno spessore di circa $2$ mm.
+Il semicilindro in plexiglass ha raggio $r = 3.6 \pm 0.1$ cm. La forma del solido non è casuale: facendo impattare il raggio incidente sulla superficie piana esso verrà rifratto secondo la legge di Snell (Equazione~\ref{eq:legge_snell}) il raggio rifratto attraverserà il solido fino ad arrivare alla superficie circolare che attraverserà senza essere rifratto una seconda volta (poiché l'angolo tra il raggio e la normale è 0 per ogni punto di una circonferenza). 
+Tra il semicilindro e il banco è presente una guida, riportata in Figura~\ref{fig:guida_rif}. Questa guida è composta da: una circonferenza esterna è di raggio $R = 8.2 \pm 0.1$ cm e una semicirconferenza interna, dove alloggia il semicilindro, di raggio $r = 3.6 \pm 0.1$ cm. Sullo sfondo è presente una griglia quadrettata dove ogni quadretto ha dimensioni $2 \pm 1$ mm $\times$ $2 \pm 1$ mm. L'utilizzo della guida è giustificato da:
+
+\begin{itemize}
+    \item Lo sfondo millimetrato permette di effettuare misurazioni con un'incertezza di $2$ mm 
+    \item La circonferenza esterna permette di riscrivere l'Equazione~\ref{eq:legge_snell}: \\ $n_1 R \sin \theta_i = n_2 R \sin \theta_r$ che, definendo $d_i$ e $d_r$ rispettivamente come la distanza tra l'intersezione del raggio incidente e rifratto dalla bisettrice della semicirconferenza, diventa l'Equazione~\ref{eq:snell_sempli}
+\end{itemize}
+
+\begin{equation}
+    n_1 d_i = n_2 d_r
+    \label{eq:snell_sempli}
+\end{equation}
+
+La distanza tra la sorgente e il semicilindro (\textit{e} nello schema) nel nostro caso è di circa $60 \pm 0.1$ cm, variazioni dell'ordine dei centimetri di questa misura sono ininfluenti mentre variazioni di ordine metrico compromettono l'attendibilità.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{apparato_rif.png}
+    \caption{Guida per il calcolo dell'indice di rifrazione}%
+    \label{fig:guida_rif}
+\end{figure}
+
+\subsection{Apparato sperimentale distanza focale}
+
+\begin{tikzpicture}
+    %banco inferiore
+    \draw (0,0) rectangle (8, -0.5);
+    \draw (0,0) rectangle (1,1);
+    %lente b 
+    \draw (2,0.3) rectangle (2.2, 0.7);
+    \draw (2.1, 0.3) -- (2.1, 0);
+    %lente c
+    \draw (4.3,0.3) rectangle (4.5, 0.7);
+    \draw (4.4, 0.3) -- (4.4, 0);
+    %schermo
+    \draw (6.4,0.2) rectangle (6.6, 0.8);
+    \draw (6.5, 0.2) -- (6.5, 0);
+    %raggio
+    \draw[thick, dashed] (1,0.5) -- (6.4, 0.5);
+    %fuoco convergente
+    \node[cross out, draw=black, minimum size=5pt, inner sep=0pt] at (5.5,0.5) {};
+    %frecce
+    \draw[->, thick] (0.5, -1.5) -- (0.5, 0.5) node[at start, below] {a};
+    \draw[->, thick] (2.1, -1.5) -- (2.1, 0) node[at start, below] {b};
+    \draw[->, thick] (4.4, -1.5) -- (4.4, 0) node[at start, below] {c};
+    \draw[->, thick] (6.5, -1.5) -- (6.5, 0) node[at start, below] {d};
+    \draw[->, thick] (4, -1.5) -- (4, -0.25) node[at start, below] {e};
+    \draw[->, thick] (3.2, -1.5) -- (3.2, 0.5) node[at start, below] {f};
+    \draw[<->, thick] (1, 2) -- (2.1, 2) node[midway, above] {o};
+    \draw[<->, thick] (4.4, 1.3) -- (5.4,1.3) node[midway, above] {$-p$};
+    \draw[<->, thick] (4.4, 2) -- (6.5, 2) node[midway, above] {$q$};
+    %legenda
+    \node[draw, align=left] at (12,2.5) {
+        \textbf{Legenda}\\
+        \text{a: Fonte luminosa}\\
+        \text{b: Lente convergente}\\
+        \text{c: Lente divergente}\\
+        \text{d: Schermo}\\
+        \text{e: Banco}\\
+        \text{f: Raggio sottile (spesso $2 \pm 1$mm)}\\
+        \text{g: Schermo posizionato sul fuoco di b}\\
+        \text{o: distanza sorgente--b}\\
+        \text{$p$: distanza c--immagine di b}\\
+        \text{$q$: distanza c--schermo}
+    };
+    %banco superiore
+    \draw (0,5) rectangle (8, 4.5);
+    \draw (0,5) rectangle (1,6);
+    %lente b
+    \draw (2,5.3) rectangle (2.2, 5.7);
+    \draw (2.1, 5.3) -- (2.1, 5);
+    %schermo
+    \draw (5.4,5.2) rectangle (5.6, 5.8);
+    \draw (5.5, 5.2) -- (5.5, 5);
+    %raggio
+    \draw[thick, dashed] (1,5.5) -- (5.4, 5.5);
+    %frecce
+    \draw[->, thick] (0.5, 3.5) -- (0.5, 5.5) node[at start, below] {a};
+    \draw[->, thick] (2.1, 3.5) -- (2.1, 5) node[at start, below] {b};
+    \draw[->, thick] (4, 3.5) -- (4, 4.75) node[at start, below] {e};
+    \draw[->, thick] (5.5, 3.5) -- (5.5, 5) node[at start, below] {g};
+    \draw[opacity=0.5] (5.5, 3) -- (5.5, 0.5);
+\end{tikzpicture}
+
+L'apparato sperimentale per la distanza focale si compone di 
+
+\begin{itemize}
+    \item una fonte luminosa dotata di una fenditura di forma triangolare di base \\
+    $0.1 \pm 0.1$~m
+    \item una lente divergente, con potere diottrico di $-3$ m $^{-1}$ nel nostro caso
+    \item una lente convergente di potere diottrico maggiore (in modulo) della lente divergente, nel nostro caso $+12$ m$^{-1}$ 
+    \item uno schermo rettangolare di dimensioni $10.0 \pm 0.1$ cm $\times$ $16.0 \pm 0.1$ cm
+\end{itemize} 
+
+\section{Misure}
+
+\subsection{Indice di rifrazione}
+
+Nella fase iniziale dell'esperimento si è proceduto alla calibrazione dell'apparato: la guida e il semicilindro sono stati allineati in modo che il raggio luminoso, proveniente dalla sorgente, incidesse esattamente nel centro della faccia piana del solido in plexiglass. 
+Successivamente, la guida e il semicilindro, a essa solidale, sono stati fatti ruotare attorno all'asse centrale. Durante la rotazione, sono stati rilevati i punti in cui il raggio intersecava il perimetro della guida circolare. Di conseguenza, per ogni singola misurazione, è stato possibile registrare le distanze $d_i$ e $d_r$ (così come definite in Sezione~\ref{sec:apparato_snell}).
+Le misure di queste distanze state fatte contando i quadretti sullo sfondo della guida, pertanto l'incertezza sulle misure $\sigma_i = \sigma_o =0.2$~cm e sono riportate in sono riportate in Tabella~\ref{tab:misure_rif}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{c c c|c c c}
+        \toprule
+        N° misura & $d_i$ [cm] & $d_r$ [cm] & N° misura & $d_i$ [cm] & $d_r$ [cm] \\
+        \midrule
+        1 & 6.8 & 4.4 & 7 & 0.7 & 0.4 \\
+        2 & 5.4 & 3.4 & 8 & 1.6 & 1.1 \\
+        3 & 4.4 & 3.0 & 9 & 2.4 & 1.4 \\
+        4 & 3.4 & 2.4 & 10 & 3.2 & 2.0 \\
+        5 & 2.6 & 1.7 & 11 & 4.4 & 2.8 \\
+        6 & 1.4 & 1.0 & 12 & 6.8 & 4.2 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Misure delle distanze dei raggi incidenti ($d_i$) e dei corrispettivi raggi rifratti ($d_r$) dalla bisettrice della semicirconferenza entrambe con incertezza di $0.2$~cm}%
+    \label{tab:misure_rif}
+\end{table}
+
+\subsection{Distanza focale}
+
+Anche in questo caso si è passata la prima parte dell'esperienza calibrando l'apparato; nello specifico sono state regolate le altezze delle lenti in modo tale che il raggio incidesse, quanto più possibile, nel centro della lente.
+Finita la calibrazione sono state montate sul banco la lente convergente e lo schermo. Si è posizionata la lente ad una distanza $\alpha$ arbitraria (nel nostro caso $\alpha = 11.5 \pm 0.1$ cm) e si è allontanato lo schermo dalla lente finché l'immagine del triangolo non ci è parsa a fuoco (nel nostro caso $42.0 \pm 0.1$ cm).
+Tenendo fissa la lente convergente è stata posizionata la lente divergente tra la convergente e lo schermo a distanza $-p$ dallo schermo. Si è poi allontanato lo schermo dalla divergente finché l'immagine non ci è parsa di nuovo a fuoco, non trattandosi di un punto fisso ma di una distanza abbiamo registrato la distanza minima tale che l'immagine era a fuoco ($q_{\min}$) e la distanza massima ($q_{\max}$).
+Il processo è stato ripetuto un totale di 5 volte, i dati raccolti sono riportati in Tabella~\ref{tab:misure_foc}. Tutte le misure di $p$ e $q$ sono state fatte con il metro a nastro e pertanto hanno un errore $\sigma_p = \sigma_{qmax} = \sigma_{qmin} = 0.1$cm
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{c c c c}
+        \toprule
+        N° misura & $-p$ [cm] & $q_{\min}$ [cm] & $q_{\max}$ [cm] \\
+        \midrule
+        1 & $-10.5$ & 27.0 & 32.2 \\
+        2 & $-11.5$ & 31.6 & 39.0 \\
+        3 & $-12.5$ & 29.8 & 56.1 \\
+        4 & $-13.5$ & 37.0 & 51.9 \\
+        5 & $-14.5$ & 48.9 & 58.6 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Misure per il calcolo della distanza focale. $p$, $q_{\max}$ e $q_{\min}$ hanno un errore associato pari a $0.1$ cm}%
+    \label{tab:misure_foc}
+\end{table}
+
+\section{Analisi dati}
+
+\subsection{Indice di rifrazione}
+
+A partire dall'Equazione~\ref{eq:snell_sempli} essa è equivalente a $n_2 = n_1 \dfrac{d_i}{d_r}$ inoltre, considerando che il raggio luminoso passa dall'aria al plexiglass, $n1 \approx 1$ da cui
+
+\begin{equation}
+    n_2 = \dfrac{d_i}{d_r}
+    \label{eq:modello_snell}
+\end{equation}
+
+Per ogni coppia di $d_i$ e $d_r$ della Tabella~\ref{tab:misure_rif} è stato calcolato, attraverso l'Equazione~\ref{eq:modello_snell}, l'$n_2$ corrispondente. Per calcolare l'errore su ogni $n_2$ si è utilizzata la formula per la propagazione dell'errore
+
+\[ \sigma_{n2} = n_2 \sqrt{{\left( \dfrac{\sigma_i}{d_i} \right)}^2 + {\left( \dfrac{\sigma_r}{d_r} \right)}^2 } \]
+
+\`E stata quindi realizzata la Tabella~\ref{tab:n2_calc} in cui sono riportati i valori di $n_2$ e dei corrispettivi errori
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{c c | c c }
+        \toprule
+        N° misura & n2 & N° misura & n2 \\
+        \midrule
+        1 &  $ 1.5 \pm 0.1$ & 7 &  $ 1.8 \pm 1.0$ \\
+        2 &  $ 1.6 \pm 0.1$ & 8 &  $ 1.4 \pm 0.3$ \\
+        3 &  $ 1.5 \pm 0.1$ & 9 &  $ 1.7 \pm 0.3$ \\
+        4 &  $ 1.4 \pm 0.1$ & 10 & $ 1.6 \pm 0.2$ \\
+        5 &  $ 1.5 \pm 0.2$ & 11 & $ 1.6 \pm 0.1$ \\
+        6 &  $ 1.4 \pm 0.3$ & 12 & $ 1.6 \pm 0.1$ \\
+        \bottomrule
+    \end{tabular}
+    \caption{Valori di $n_2$ calcolati a partire dalle misure in Tabella~\ref{tab:misure_rif} attraverso l'Equazione~\ref{eq:modello_snell} e usando come errore la propagazione}%
+    \label{tab:n2_calc}
+\end{table}
+
+\`E stato poi realizzato il grafico in Figura~\ref{fig:fit_rif} dove sono riportati i dati della Tabella~\ref{tab:n2_calc}.
+A partire da questi dati si è voluto poi eseguire un fit\footnote{Si è deciso di eseguire un fit degli indici di rifrazione piuttosto che delle distanze per evitare di avere un errore sull'asse $x$ non trascurabile che avrebbe comportato calcoli ulteriori per l'algoritmo ODR o $\sigma_{\text{efficace}}$}, trattandosi di un fit di una costante si è utilizzata la formula della media pesata ovvero
+
+\begin{align}
+    n_{2\text{atteso}} = \dfrac{\displaystyle\sum_{k=1}^{12} \dfrac{n_{2,k}}{\sigma_{n2,k}^2}}{\displaystyle\sum_{k=1}^{12} \dfrac{1}{\sigma_{n2,k}^2}} \qquad \sigma_{n2\text{atteso}} = \dfrac{1}{\sqrt{\displaystyle\sum_{k=1}^{12} \dfrac{1}{\sigma_{n2,k}^2}}}
+\end{align}
+
+A conti fatti: $n_{2\text{atteso}} = 1.55 \pm 0.04$.\\
+Sono stati quindi calcolati i residui ed è stato fatto un test del $\chi^2$ che è risultato
+
+\begin{itemize}
+    \item $\chi^2 = 2.8$, dof$=11$\footnote{12 misure a cui si sottrae 1 parametro} e $\chi_{\text{ridotto}}^2 = 0.26$
+    \item p-value$=0.99$
+\end{itemize}
+
+\begin{figure}
+    \centering
+    \resizebox{0.85\textwidth}{!}{%  <-- Ridimensiona all'80% della larghezza del testo
+        \input{rifrazione.pgf}
+    }
+    \caption{Grafico dove sono riportati gli $n_{2\text{calcolati}}$ provenienti dalla Tabella~\ref{tab:n2_calc} e l'$n_{2\text{atteso}}$ indicato come `media pesata'}%
+    \label{fig:fit_rif}
+\end{figure}
+
+\subsection{Distanza focale}
+
+Si è deciso di voler rappresentare i dati raccolti in un grafico avente sulle ascisse $-\nicefrac{1}{p}$ (che definiamo $p_f$) e sulle ordinate $\nicefrac{1}{q}$ (che definiamo $q_f$). A partire dalle misure in Tabella~\ref{tab:misure_foc} sono stati calcolati i valori centrali (e contemporaneamente sono stati convertiti in metri)
+
+\begin{equation}
+    \begin{cases}
+        \hat{p_f} = \dfrac{1}{p} \times 100\\
+        \hat{q_f} = \dfrac{2}{q_{\max} + q_{\min}} \times 100
+    \end{cases}
+    \label{eq:centrali_p_q}
+\end{equation}
+
+Mentre per gli errori sugli assi si è calcolata la propagazione dell'errore:\\
+
+\begin{equation}
+    \sigma_{\hat{p_f}} = \dfrac{\sigma_p}{p^2} \qquad \sigma_{\hat{q_f}} = \left|-\dfrac{1}{\hat{q}^2}\right| \Delta_q = \dfrac{\dfrac{q_{\max} - q_{\min}}{2}}{{\left(\dfrac{q_{\max} + q_{\min}}{2}\right)}^2}
+    \label{eq:errori_p_q}
+\end{equation}
+
+I punti $p_f$ e $q_f$ con i relativi errori sono riportati in Tabella~\ref{tab:p_and_q_finali}. Con questi dati si è realizzato il grafico in Figura~\ref{fig:fit_foc}.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{c c c}
+        \toprule
+        N° misura & $p_f$ [m$^{-1}$] & $q_f$ [m$^{-1}$] \\
+        \midrule
+        1 & $ -9.52 \pm 0.09 $ & $ 3.4 \pm 0.3 $ \\
+        2 & $ -8.69 \pm 0.08 $ & $ 2.8 \pm 0.3 $ \\
+        3 & $ -8.00 \pm 0.06 $ & $ 2.3 \pm 0.7 $ \\
+        4 & $ -7.41 \pm 0.05 $ & $ 2.2 \pm 0.4 $ \\
+        5 & $ -6.90 \pm 0.05 $ & $ 1.9 \pm 0.2 $ \\
+        \bottomrule
+    \end{tabular}
+    \caption{Valori di $p_f$ e $q_f$ e dei rispettivi errori calcolati a partire dalle Equazioni~\ref{eq:centrali_p_q} e~\ref{eq:errori_p_q}}%
+    \label{tab:p_and_q_finali}
+\end{table}
+
+Si è poi voluto realizzare un fit basato sui minimi quadrati attraverso la funzione \texttt{curve\_fit} di Python. Il modello scelto per questo fit è il lineare (Equazione~\ref{eq:modello_lineare}). Anche il fit è presente nel Grafico~\ref{fig:fit_foc}.
+
+\begin{equation}
+    y = ax + b
+    \label{eq:modello_lineare}
+\end{equation}
+
+\begin{figure}
+    \centering
+    \resizebox{0.85\textwidth}{!}{%  <-- Ridimensiona all'80% della larghezza del testo
+        \input{focale.pgf}
+    }
+    \caption{Grafico contenente i valori di $p_f$ e $q_f$ contenuti in Tabella~\ref{tab:p_and_q_finali} e il fit lineare}%
+    \label{fig:fit_foc}
+\end{figure}
+
+Il fit lineare ha restituito i valori di best fit contenuti in Tabella~\ref{tab:bestfit_foc}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{c c}
+        \toprule
+        parametro & \textit{best fit} [m$^{-1}$] \\
+        \midrule
+        a & $-0.6 \pm 0.1$ \\
+        b & $-2.0 \pm 0.9$ \\
+        \bottomrule
+    \end{tabular}
+    \caption{Risultati del fit in Figura~\ref{fig:fit_foc}}%
+    \label{tab:bestfit_foc}
+\end{table}
+
+Dall'Equazione~\ref{eq:lenti_sottili}, rendendo negativo $\nicefrac{1}{p}$, si ottiene: $\dfrac{1}{q} = - \dfrac{1}{p} + \dfrac{1}{f}$, eguagliandolo al modello (Equazione~\ref{eq:modello_lineare}) si ottengono i valori aspettati $-1$ m$^{-1}$ per il coefficiente angolare (parametro a) e $-3$ m$^{-1}$ per l'intercetta (parametro b).
+
+Infine sono stati calcolati i residui ed è stato eseguito un test del $\chi^2$ che è risultato
+
+\begin{itemize}
+    \item $\chi^2 = 0.15$, dof\footnote{Si tratta di 5 punti a cui bisogna togliere 2 parametri}$ = 3$, $\chi^2_{\text{ridotto}} = 0.05$
+    \item p-value$=0.95$
+\end{itemize}
+
+\section{Conclusioni}
+
+Dallo studio dell'indice di rifrazione del plexiglass risulta che il miglior estimatore di $n_2 = 1.55 \pm 0.04$ e perciò incompatibile con il valore aspettato $n_{\text{plexiglass}} = 1.49$. Il test del $\chi^2$ e il p-value evidenziano una sovrastima dell'errore (come si può notare chiaramente anche dal grafico in Figura~\ref{fig:fit_rif} nel punto 7).
+%Crediamo che la fonte principale di errore derivi dal modo in cui sono state fatte le misure: il semicilindro è stato semplicemente appoggiato alla guida perciò è capitato, durante le misurazioni, che facendo roteare la guida il cilindro non si muovesse portandoci a dover calibrare l'apparato diverse volte.\\
+Crediamo che la fonte principale di errore derivi dal modo in cui sono state prese le misure.\\
+
+Per quanto riguarda, invece, lo studio della distanza focale della lente divergente, i valori di best fit riportati in Tabella~\ref{tab:bestfit_foc} risultano (anche qui) incompatibili con i valori aspettati: $-1$ m$^{-1}$ per il coefficiente angolare e $-3$ m$^{-1}$ per l'intercetta, ovvero la potenza diottrica della lente divergente.
+Il test del $\chi^2$ ha evidenziato un \textit{overfitting} dovuto a due cause:
+
+\begin{enumerate}
+    \item un numero di punti non sufficiente
+    \item una sovrastima dell'errore
+\end{enumerate}
+
+In particolare per il secondo punto vi sono state non poche difficoltà nello stimare l'intervallo di messa a fuoco nel setup con lente convergente e lente divergente. %(difficoltà che hanno sottratto diverso tempo durante l'esperienza portandoci ad eseguire un numero insufficiente di misurazioni).
+Altre fonti di errore derivano dalla approssimazione delle lenti sottili e da possibli errori svolti in fase di calibrazione.
+
+\end{document}

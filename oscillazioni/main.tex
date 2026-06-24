@@ -33,9 +33,326 @@
 
 \maketitle
 
-\section{Scopo dell'esperienza}
-\section{Cenni teorici}
-\section{Misure e analisi dati}
+\section{Scopo dell'Esperienza}
+
+Lo scopo dell'esperienza è l'osservazione e l'analisi quantitativa del moto di due pendoli accoppiati. Nello specifico, ci si prefigge di:
+
+\begin{itemize}
+    \item Calcolare teoricamente la pulsazione propria $\omega_0$ del singolo pendolo (trattato come pendolo fisico).
+    \item Misurare la pulsazione smorzata e il tempo di decadimento $\tau$ per un singolo pendolo.
+    \item Ricavare le frequenze dei modi normali del sistema accoppiato ($\omega_f$ in fase e $\omega_c$ in controfase).
+    \item Analizzare il fenomeno dei battimenti, confrontando le pulsazioni misurate con le previsioni teoriche derivanti dai modi normali.
+\end{itemize}
+
+\section{Cenni Teorici}
+
+\subsection{Pendolo Fisico}
+
+Il sistema studiato non è un pendolo semplice, ma un pendolo fisico. La sua pulsazione angolare propria $\omega_0$ è data da:
+
+\begin{equation}
+    \omega_0 = \sqrt{\frac{M_{tot} \, g \, L_{CM}}{I_{tot}}}
+    \label{eq:pulsazione_angolare}
+\end{equation}
+
+dove $M_{tot}$ è la massa totale, $L_{CM}$ è la distanza del centro di massa dal perno e $I_{tot}$ è il momento d'inerzia rispetto all'asse di rotazione.
+
+Poiché la strumentazione non permetteva la pesata diretta, le masse sono state stimate dalla densità:
+
+\begin{align}
+    m_{1} &= \rho_{Al} \cdot (L \cdot a \cdot s) \quad \text{(Sbarra di alluminio)}\label{eq:massa_1} \\
+    m_{2} &= \rho_{Ott} \cdot (\pi \cdot R^2 \cdot h) \quad \text{(Disco di ottone)}\label{eq:massa_2}
+\end{align}
+
+Fissato l'origine nel perno, la posizione del centro di massa è la media pesata:
+
+\begin{equation}
+    L_{CM} = \frac{m_1 \left(\frac{L}{2}\right) + m_2 d_2}{m_1 + m_2}
+    \label{eq:cm_medio}
+\end{equation}
+
+Invece il momento d'inerzia totale, calcolato applicando il teorema di Huygens-Steiner, risulta:
+
+\begin{equation}
+    I_{tot} = \underbrace{\frac{1}{3} m_1 L^2}_{\text{Sbarra}} + \underbrace{\left( \frac{1}{2} m_2 R^2 + m_2 d_2^2 \right)}_{\text{Disco}}
+    \label{eq:momento_inerzia_tot}
+\end{equation}
+
+\subsection{Oscillazioni Smorzate}
+
+In presenza dello smorzatore (che dovrebbe smorzare la frequenza delle oscillazioni), l'equazione del moto del pendolo singolo smorzato è descritta dalla legge:
+
+\begin{equation}
+    \theta_0(t) = \theta_0(0) \cdot e^{- \frac{t}{\tau}}  
+    \label{eq:moto_pendolo_smorzato}
+\end{equation}
+
+dove $\tau$ è il tempo di decadimento.
+
+\subsection{Modi normali}
+
+Quando i due pendoli sono accoppiati (in questo caso tramite una molla), il sistema possiede due modi normali di oscillazione, ovvero due configurazioni iniziali tali per cui il moto di entrambi i pendoli è armonico. Essi sono:
+
+\begin{itemize}
+    \item \textbf{In fase ($\omega_f$)}: i pendoli si muovono insieme (spostandoli nello stesso verso di una stessa ampiezza $A$), non deformando la molla, che quindi non ne influenzerà il moto. La frequenza sarà simile a quella del pendolo singolo ($\omega_0$).
+    \item \textbf{In controfase ($\omega_c$)}: i pendoli si muovono in direzioni opposte (spostandoli in verso opposto di una stessa ampiezza $A$), comprimendo/estendendo al massimo la molla. La frequenza ottenuta sarà maggiore della frequenza ottenuta in fase.
+\end{itemize}ù
+
+\subsection{Fenomeno dei Battimenti}
+
+Per studiare il fenomeno dei battimenti, è sufficiente collegare i due pendoli con una molla (come fatto in precedenza), facendo partire il primo di un angolo $\theta_1$ non nullo, ed il secondo con un angolo $\theta_2 = 0$ (posizione di equilibrio). Il sistema inizierà a oscillare, ed il moto risultante è dato dalla somma dei due modi normali (con uguali ampiezze):
+
+\[
+    x(t) = A_0 \cdot [\cos(\omega_f \cdot t + \phi_1) \ + \ \cos(\omega_c \cdot t + \phi_2) ] \ \ .
+\]
+
+Semplificando con le formule di prostaferesi, si ottiene:
+
+\begin{equation}
+    x(t) = 2A_0 \cdot \cos\biggl[\frac{(\omega_c + \omega_f)t}{2} \ + \ \frac{(\phi_2 + \phi_1)}{2}] \cdot [\frac{(\omega_c - \omega_f)t}{2} \ + \ \frac{(\phi_2 - \phi_1)}{2}\biggr] \ \ .
+    \label{eq:moto_battimenti}
+\end{equation}
+
+L'oscillazione risultante ha dunque una $\omega_p$, detta pulsazione angolare portante, pari a 
+
+\begin{equation}
+    \omega_p = \frac{\omega_c + \omega_f}{2} \approx \omega_c \ , \  \omega_f \ \ ,
+    \label{eq:puls_ang_p}
+\end{equation}
+
+che è tuttavia modulata da un'onda sinusoidale di pulsazione modulante (o di battimento) definita come
+
+\begin{equation}
+    \omega_b = \frac{\omega_c - \omega_f}{2} << \omega_c \ , \ \omega_f \ \ .
+    \label{eq:puls_mod}
+\end{equation}
+
+Dato che questa pulsazione di battimento è molto più piccola, il periodo misurato in questa parte dell'esperienza risulterà molto più grande.
+
+\section{Materiali e Strumenti di Misura }
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{apparato.pdf}
+    \caption{Schema dell'apparato. $a$ apparecchiatura di supporto (contiene la sensoristica necessaria per la presa dati digitale), $b$ perno per il fissaggio dei pendoli, $c$ sbarra in allumio, $d$ disco in ottone che insieme a $c$ compongono i pendoli, $e$ molla di accoppiamento, $f$ recipiente con acqua, $g$ galleggiante smorzatore}%
+    \label{fig:schema}
+\end{figure}
+
+L'apparato sperimentale è riportato in Figura~\ref{fig:schema}.\\
+
+Sono stati usati i seguenti strumenti di misura:
+
+\begin{itemize}
+    \item Un calibro ventesimale (risoluzione di $0.05$mm).
+    \item Un metro a nastro (risoluzione di $1$mm)
+    \item Un sistema elettronico per l'acquisizione della poszione dei pendoli (risoluzione tempo: $0.05$ s, risoluzione ampiezza: $1$ u.a.\footnote{Il programma di acquisizione dati è il baldaquin (versione 0.10.2 https://github.com/lucabaldini/baldaquin/releases/tag/0.10.2), l'unità di misura è arbitraria e non è stato calcolato un riscontro con la realtà poichè del tutto ininfluente con le misurazioni richieste durante l'esperienza})
+\end{itemize}
+
+\section{Misure e Analisi Dati}
+
+Per le misure e i successivi calcoli, abbiamo effettuato una serie di approssimazioni: abbiamo trascurato l'effetto dell'attrito con l'acqua, abbiamo considerato i perni dei pendoli come coincidenti con gli estremi superiori delle aste e abbiamo trascurato i piccoli fori presenti su di esse.\\
+Inoltre, per facilitare la posizione iniziale da cui far partire i pendoli per lo studio dei modi normali e del fenomeno dei battimenti, abbiamo scelto un angolo $\theta_0$ da utilizzare per tutte queste esperienze. Per trovarlo, abbiamo misurato l'altezza $h = 56.4 \ \pm \ 0.1$ cm (ovvero l'altezza dell'apparato, dalla posizione del perno alla base della vasca) e la distanza $b = 5.0 \ \pm \ 0.1$ cm (distanza dalla posizione verticale del pendolo, scelta da noi arbitrariamente), tali per cui:
+
+\begin{equation}
+    \theta_0 = \arctan\bigg(\frac{b}{h}\bigg) = \arctan\bigg(\frac{5}{56.4}\bigg) = 0.0884 \ \ \mathrm{rad} \ \ .
+\end{equation}
+
+%Mentre, per quanto riguarda l'analisi dei dati, essa è stata effettuata utilizzando script in Python, sfruttando la libreria \texttt{scipy.optimize.curve\_fit} per eseguire adattamenti non lineari sulle serie temporali campionate.
+
+\subsection{Pendolo singolo}
+
+Al fine di ottenere il valore della pulsazione teorica, le misure effettuate con il calibro ventesimale e il metro a nastro (riportate in Tabella~\ref{tab:misure_dirette_pendoli}) sono state inserite nelle formule~\ref{eq:massa_1},~\ref{eq:massa_2},~\ref{eq:cm_medio} e~\ref{eq:momento_inerzia_tot} e i valori ottenuti nell'Equazione~\ref{eq:pulsazione_angolare}; 
+per stimarne l'incertezza, invece, ci siamo serviti della propagazione degli errori:
+
+\[
+    \sigma_{\omega_{0,t}} = \omega_{0, t} \dfrac{1}{2} \sqrt{ \left( \dfrac{\sigma_{M_{tot}}}{M_{tot}} \right)^2 + \left( \dfrac{\sigma_{L_{CM}}}{L_{CM}} \right)^2 + \left( \dfrac{\sigma_{I_{tot}}}{I_{tot}} \right)^2 }
+\]
+
+con le incertezze delle variabili ricavate dalle relazioni~\ref{eq:massa_1},~\ref{eq:massa_2},~\ref{eq:cm_medio} e~\ref{eq:momento_inerzia_tot}.\\
+Otteniamo dunque:
+
+\[ \omega_{0, \text{teorico}} = \text{4.802} \pm \text{0.036} \text{rad/s}  \]
+
+e tale valore andrà ora confrontato con la pulsazione ricavabile dal programma di acquisizione. Per fare ciò abbiamo osservato il grafico ottenuto (avente l'andamento di una sinusoide), ricavando il periodo $T$ come distanza tra i primi due massimi del grafico (ovvero i tempi $t_0$ e $t_1$ presenti in Tabella 2, in quanto l'asse x corrispondeva proprio all'asse dei tempi). Per diminuire il più possibile l'errore sistematico, abbiamo svolto questa prima parte dell'esperienza per $10$ volte, scegliendo come $\hat{T}$ (valore centrale del periodo) la media aritmetica dei valori precedentemente calcolati. Per l'incertezza, utilizziamo invece la deviazione standard:
+
+\[
+    \sigma_T = \sqrt{\frac{1}{10} \cdot \frac{1}{9} \cdot \sum_{i=1} ^{10} \big(T_i \ - \ \hat{T}\big)^2} \ \ \ .
+\]
+
+Il periodo risulta quindi essere $T = 1.402 \ \pm \ 0.005 \ \mathrm{s}$. Sapendo poi che $T = \dfrac{2\pi}{\omega_0}$, ricaviamo il valore centrale di $\omega_0$ come:
+
+\begin{equation}
+        \hat{\omega}_0 = \frac{2\pi}{T} = 4.483 \ \ \text{rad/s} \ \ ;
+        \label{eq:omega_tempo}
+\end{equation}
+
+mentre per l'incertezza, utilizziamo la propagazione degli errori:
+
+\[
+    \sigma_{w_0} = \frac{2 \pi}{\hat{T}^2} \cdot \sigma_T = 0.017 \ \ \text{rad/s} \ \ .
+\]
+
+Il valore teorico della pulsazione angolare e il valore sperimentale; è chiara la loro compatibilità.
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{c c c c c}
+         \toprule
+         $a \ \mathrm{[mm]}$&$s \ \mathrm{[mm]}$&$L \ \mathrm{[mm]}$&$h \ \mathrm{[mm]}$&$d \ \mathrm{[mm]}$ \\
+         \midrule
+         $26.45\ \pm \ 0.05$&$26.45 \ \pm \ 0.05$&$478 \ \pm \ 1$&$15.45 \ \pm \ 0.05$&$70 \ \pm \ 1$\\ 
+         \bottomrule
+    \end{tabular}
+    \caption{\centering valori misurati, dove $a$, $s$ e $L$ sono le dimensioni del parallelepipedo, mentre $d$ e $h$ sono rispettivamente diametro e altezza del cilindro.}
+    \label{tab:misure_dirette_pendoli}
+\end{table}
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{c c c c}
+        \toprule
+        numero di ripetizione &$t_0 \ \pm \ 0.001 \ \mathrm{[s]}$&$t_1 \ \pm \ 0.001 \ \mathrm{[s]}$&$T \ \mathrm{[s]}$ \\
+        \midrule
+        $1$&$1.064$&$2.482$&$1.418$\\
+        $2$&$0.913$&$2.330$&$1.417$\\
+        $3$&$0.738$&$2.131$&$1.393$\\
+        $4$&$0.863$&$2.280$&$1.417$\\
+        $5$&$0.661$&$2.032$&$1.371$\\
+        $6$&$0.860$&$2.251$&$1.391$\\
+        $7$&$0.639$&$2.033$&$1.394$\\
+        $8$&$0.892$&$2.281$&$1.389$\\
+        $9$&$0.862$&$2.279$&$1.417$\\
+        $10$&$0.815$&$2.231$&$1.416$\\
+        \bottomrule
+    \end{tabular}
+    \caption{\centering valori dei primi due massimi $t_0$ e $t_1$} ricavati dal programma di acquisizione, e rispettiva differenza $T=t_1 - t_0$.
+    \label{tab:misure_picchi}
+\end{table}
+
+\subsection{Pendolo Singolo Smorzato}
+
+Il primo set di dati acquisito, relativo all'oscillazione del pendolo singolo con smorzatore, è stato interpolato con il modello dell'oscillatore armonico smorzato (Equazione~\ref{eq:moto_pendolo_smorzato}).
+
+\begin{figure}
+    \centering
+    \resizebox{0.95\textwidth}{!}{%  <-- Ridimensiona all'80% della larghezza del testo
+        \input{pendolo_singolo_inviluppo.pgf}
+    }
+    \caption{Fit al modello dell'oscillatore armonico smorzato, con la linea tratteggiata rossa che indica l'inviluppo esponenziale $A(t) = A_0 e^{-t/\tau}$.}%
+    \label{fig:Figura1}
+\end{figure}
+
+Dal fit (visibile in~\ref{fig:Figura1}) si è ricavato il tempo di decadimento $\tau = 43.56 \pm 0.08 \, \text{s}$ e la pulsazione sperimentale:
+
+\[
+ \omega_{1} = 4.43515 \pm 0.00004 \ \ \text{rad/s} \ \ .   
+\]
+
+Sapendo che il periodo precedentemente calcolato (per $\omega_0$) è:
+
+\[
+    T_0 = 1.402 \ \pm \ 0.005 \ \ \mathrm{s} \ \ ,
+\]
+
+procediamo con il calcolare anche questo secondo periodo $T_1$, così da osservare come esso è variato aggiungendo lo smorzatore. Partendo dalla relazione~\ref{eq:omega_tempo}, troviamo che
+
+\[
+    \hat{T}_1 = \frac{2 \pi}{\omega_1} = 1.416679 \ \mathrm{s}
+\]
+
+mentre per l'incertezza, utilizzando la propagazione degli errori, ricaviamo:
+
+\[
+    \sigma_{T_1} = \frac{2 \pi}{\omega_1^2} \cdot \sigma_{\omega_1} = 0.000013 \ \mathrm{s} \ \ .
+\]
+
+
+
+\subsection{Modi Normali}
+
+Applicando la medesima funzione di fit (visibile in Figura~\ref{fig:Figura2} per i pendoli in fase e in Figura~\ref{fig:Figura3} per i pendoli in controfase) ai dati delle oscillazioni in fase e in controfase, sono state estratte le pulsazioni dei modi normali:
+
+\begin{align*}
+    \omega_f &= 4.4468 \pm 0.0002 \ \ \text{rad/s} \ \ ,\\ 
+    \omega_c &= 4.8932 \pm 0.0002 \ \ \text{rad/s} \ \ .
+\end{align*}
+
+Sapendo che $\omega_0 = 4.483 \ \pm \ 0.017$ (rad/s), affermiamo che $\omega_0$ e $\omega_f$ non sono compatibili.
+Per quanto riguarda la pulsazione dei pendoli in controfase, essa risulta effettivamente maggiore di $\omega_f$, come ci aspettavamo dalle previsioni teoriche.
+\\
+A partire da $\omega_f$ e $\omega_c$, è possibile infine ricavare le pulsazioni teoriche dei battimenti attese, seguendo le relazioni~\ref{eq:puls_ang_p} e~\ref{eq:puls_mod}:
+
+\[
+    \omega_{p, attesa} = 4.6700 \ \pm \ 0.0003 \ \ \text{rad/s}\ \ , \ \ \omega_{b, attesa} = 0.2232 \ \pm \ 0.0003 \ \ \text{rad/s}\ \ ,
+\]
+
+le cui incertezze sono date dalla somma in quadratura degli errori di $\omega_c$ e $\omega_f$.
+
+\begin{figure}
+    \centering
+    \resizebox{0.95\textwidth}{!}{%  <-- Ridimensiona all'80% della larghezza del testo
+        \input{fase.pgf}
+    }
+    \caption{Fit del modo normale in fase. Il grafico mostra l'andamento dei dati acquisiti sovrapposti al modello teorico di oscillazione armonica smorzata.}%
+    \label{fig:Figura2}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \resizebox{0.95\textwidth}{!}{%  <-- Ridimensiona all'80% della larghezza del testo
+        \input{controfase.pgf}
+    }
+    \caption{Fit del modo normale in controfase. Si osserva l'incremento della pulsazione $\omega_c$ rispetto al modo in fase, dovuto al contributo della forza elastica della molla di accoppiamento.}%
+    \label{fig:Figura3}
+\end{figure}
+
+\subsection{Fenomeno dei Battimenti}
+
+Infine, l'ultimo dataset è stato interpolato usando una funzione che modella il decadimento esponenziale moltiplicato per una portante e un inviluppo modulante. \\
+
+\begin{figure}
+    \centering
+    \resizebox{0.95\textwidth}{!}{%  <-- Ridimensiona all'80% della larghezza del testo
+        \input{battimenti_definitivo.pgf}
+    }
+    \caption{Fit del fenomeno dei battimenti, si evidenzia la portante ad alta frequenza e l'inviluppo a bassa frequenza.}%
+    \label{fig:Figura4}
+\end{figure}
+
+Il fit (visibile in figura~\ref{fig:Figura4}) restituisce:
+
+\[
+    \omega_p = 4.6708 \ \pm \ 0.0005 \ \ \text{rad/s} \ \ , \ \ \omega_b = 0.2238 \pm 0.0005 \ \ \text{rad/s} \ \ \ .
+\]
+
+I valori di $\omega_p$ e $\omega_b$ risultano quindi essere compatibili con i valori attesi.
+\\
+Secondo le previsioni teoriche (relazione~\ref{eq:puls_ang_p}), ci aspettiamo che $\omega_p$ sia compatibile con $\omega_c$ (o $\omega_f$), ipotesi rigettata poiché le misure risultano incompatibili.
+\\
+Infine, ci aspettiamo che $\omega_b$ sia molto minore di $\omega_c$, ovvero che:
+
+\[
+    \frac{\omega_b}{\omega_c} \approx 0.1 \ \ .
+\]
+
+Poichè tale rapporto risulta 0.046, la previsione teorica è verificata.
+
+
 \section{Conclusioni}
+
+Dai risultati ottenuti durante l'esperienza ne si evince:
+\\
+Il confronto tra la pulsazione teorica $\omega_{0, teorico} = 4.802 \pm 0.036$ rad/s e quella sperimentale $\omega_{0, sperim} = 4.483 \pm 0.017$ rad/s ha evidenziato una netta incompatibilità. Tale discrepanza è attribuibile ad errori sistematici nella modellizzazione del pendolo fisico, come l'approssimazione delle densità dei materiali a `leghe pure' per il calcolo del momento d'inerzia e l'aver trascurato l'attrito dell'aria e la presenza di fori nelle aste.
+\\
+Al contrario, l'aggiunta dello smorzatore non ha alterato significativamente il periodo di oscillazione, con $T_0 = 1.402 \pm 0.005$ s e $T_1 = 1.417 \pm 0.00001$ s che risultano compatibili, confermando che lo smorzamento è limitato ($\tau = 43.56 \pm 0.08$ s).  
+\\
+L'analisi dei modi normali ha confermato le previsioni teoriche: la pulsazione in controfase $\omega_c = 4.8932 \pm 0.0002$ rad/s è risultata maggiore di quella in fase $\omega_f = 4.4468 \pm 0.0002$ rad/s. Tuttavia, dal punto di vista statistico, i fit per entrambi i modi (Figura~\ref{fig:Figura2} e~\ref{fig:Figura3}) presentano valori di $\chi^2_{rid}$ elevati (44.44 per il modo in fase e 22.67 per la controfase) e un $p-value \approx 0$. Questi risultati indicano che il modello dell'oscillatore armonico smorzato non descrive perfettamente i risultati dei dati sperimentali. Ciò può essere dovuto a una sottostima delle incertezze da parte del software di acquisizione o alla presenza di effetti non lineari legati all'angolo di partenza scelto ($\theta_0 \approx 0.088$ rad).
+Inoltre lo studio dei residui evidenzia un errore sistematico periodico sia nel moto in fase che controfase. Ipotizziamo che si tratti di un errore umano avvenuto nella messa in moto dei pendoli ovvero: non si ha certezza assoluta che, sia nel modo in fase che nel modo controfase, i due pendoli siano partiti contemporaneamente.
+\\
+Infine nell'analisi del fenomeno dei battimenti: i valori misurati per la pulsazione portante ($\omega_p = 4.6708 \pm 0.0005$ rad/s) e modulante ($\omega_b = 0.2238 \pm 0.0005$ rad/s) sono risultati pienamente compatibili con i valori attesi calcolati a partire dai modi normali ($\omega_{p, attesa} = 4.6700 \pm 0.003$ rad/s e $\omega_{b, attesa} = 0.2232 \pm 0.0003$ rad/s).
+Nonostante l'elevato $\chi^2_{rid} \approx 95$ del fit dei battimenti (Figura~\ref{fig:Figura4}), la coerenza interna tra le misure dei modi normali e l'osservazione dei battimenti conferma l'affidabilità delle pulsazioni estratte. 
+Il grafico dei residui, anche in questo caso, evidenzia un errore sistematico periodico che crediamo sia derviato da: il pendolo di destra non perfettamente immobile durante la partenza e la costruzione dell'apparato sperimentale (possibili oscillazioni si potrebbero trasferire attraverso l'apparato e non mediante la molla).
+\\
+Si è quindi dimostrato che la dinamica degli oscillatori accoppiati è stata verificata con successo, mostrando la consistenza dei modelli fisici descritti nelle relazioni di prostaferesi.
 
 \end{document}

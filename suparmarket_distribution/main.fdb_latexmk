@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1777731015.69225 "/home/matteo/Documenti/uni/lab/suparmarket_distribution/main.tex" "main.pdf" "main" 1777731016.43538 0
-  "/home/matteo/Documenti/uni/lab/suparmarket_distribution/main.tex" 1777731015.47999 10974 651553d03eb9cfe20dcdba5b9c4d0604 ""
+["pdflatex"] 1777746369.48753 "/home/matteo/Documenti/uni/lab/suparmarket_distribution/main.tex" "main.pdf" "main" 1777746371.07051 0
+  "/home/matteo/Documenti/uni/lab/suparmarket_distribution/main.tex" 1777746368.99258 10974 7a017c22c995ba19cf1d5cfb92283829 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm" 1136768653 1536 74b7293ec3713bb7fdca8dd1bd1f469c ""
@@ -165,8 +165,8 @@
   "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1775001600 40900 887e0dc8cac988a9e9c574af364cf837 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1776628435.81258 4547358 dea78b31c47846eb8f72ed74019fd353 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1776628199 7758584 113322c688271403c6171d155173430a ""
-  "main.aux" 1777731016.34397 2375 37ec70adc58e3bcdbe5551d2e1a62dda "pdflatex"
-  "main.tex" 1777731015.47999 10974 651553d03eb9cfe20dcdba5b9c4d0604 ""
+  "main.aux" 1777746370.85057 2375 37ec70adc58e3bcdbe5551d2e1a62dda "pdflatex"
+  "main.tex" 1777746368.99258 10974 7a017c22c995ba19cf1d5cfb92283829 ""
   "set1.pgf" 1777730505.56369 45722 c1b2ead2b01b003383c320054a694810 ""
   "set2.pgf" 1777730505.67602 54680 dfa43c40af318009d1b2e404c6a1a2ca ""
   "set3.pgf" 1777730505.77202 55767 c9fc28de041e68b86fa9b31675cdaa0b ""

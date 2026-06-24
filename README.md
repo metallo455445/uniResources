@@ -19,3 +19,5 @@ la cartella defaultDocuments contiene degli "scheletri" di codici python e latex
 # About me
 ![Alt text](dev/fotoREADME.jpg)
 ^Quello con il basso viola sono io :)
+
+https://www.youtube.com/watch?v=171SPE9mp4c&list=RD171SPE9mp4c&start_radio=1

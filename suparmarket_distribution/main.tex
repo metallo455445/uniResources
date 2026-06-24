@@ -43,8 +43,8 @@ Verificare la distribuzione di Poisson utilizzando come processo stazionario (ne
 Un processo poissoniano è detto tale se rispetta le seguenti ipotesi:
 
 \begin{enumerate}
-    \item indipendenza (il verificarsi di un evento in un determinato istante di tempo non influenza la probabilità che si verifichi un secondo evento in un momento successivo)
     \item non simultaneità (gli eventi non devono verificarsi contemporaneamente)
+    \item indipendenza (il verificarsi di un evento in un determinato istante di tempo non influenza la probabilità che si verifichi un secondo evento in un momento successivo)
     \item stazionarietà (il numero medio di eventi per unità di tempo è lo stesso in qualsiasi intervallo)
 \end{enumerate}
 
@@ -64,8 +64,8 @@ cioè che $\mu$ è uguale alla media della distribuzione e alla varianza (compor
 Nell'ingresso di una persona nel supermercato riconosciamo un processo poissoniano poiché le tre ipotesi sono rispettate: 
 
 \begin{enumerate}
-    \item l'ingresso di una persona non influenza l'ingresso delle successive (a meno  che non si tratti di una coppia / gruppo ma a quel punto verrebbe meno l'ipotesi di non simultaneità)
     \item se si considerano solo gli ingressi delle singole persone, contando come eventi singoli l'ingresso di gruppi, allora anche la non simultaneità è rispettata
+    \item l'ingresso di una persona non influenza l'ingresso delle successive (a meno  che non si tratti di una coppia / gruppo ma a quel punto verrebbe meno l'ipotesi di non simultaneità)
     \item per la stazionarietà bisogna fare una considerazione: in generale il tasso di persone che entrano in un supermercato (in una giornata) non è omogeneo, avremo fasce orarie più dense e meno dense. Se però si analizzano degli intervalli temporali brevi (nel nostro caso di 30 minuti) allora il nostro tasso, anche detto frequenza caratteristica $\lambda$ ($\lambda = \dfrac{\mu}{\Delta t}$ dove $\Delta t$ è l'intervallo di tempo in cui vegono prese le misure), sarà costante.
 \end{enumerate}
 

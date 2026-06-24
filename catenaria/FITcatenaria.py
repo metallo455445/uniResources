@@ -9,7 +9,9 @@ import sys
 # --- GESTIONE INPUT ---
 if len(sys.argv) > 1:
     coord_path = sys.argv[1]
-    img1 = sys.argv[2]
+    bg_path = sys.argv[2]
+    img1 = sys.argv[3]
+
 else:
     # Fallback per test o errore
     print("Nessun file specificato, uso percorso default o esco.")
@@ -139,11 +141,11 @@ print(f"chi2 ridotto: {chi2_ridotto:.2f}")
 fig1 = plt.figure(1)
 #plt.figure("Verifica Visiva Fit", figsize=(10, 10))
 
-# 1. Carica l'immagine originale e mostrala come sfondo
-img = plt.imread("/home/matteo/Documenti/uni/lab/catenaria/photos/exp1.jpg")
+#Carica l'immagine come sfondo
+img = plt.imread(bg_path) ##!!!!
 plt.imshow(img, cmap='gray') # Mostra l'immagine
 
-# 2. Traccia i dati grezzi (quelli invertiti salvati nel file)
+# Traccia i dati grezzi
 # Poiché imshow ha già l'origine in alto a sinistra, e i dati sono invertiti, 
 # dobbiamo "re-invertirli" per metterli nel posto giusto.
 # L'inversione 'height - y' è stata fatta in catenaria.py.

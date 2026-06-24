@@ -47,11 +47,11 @@ def distribuzione_chi(d, larg_bin, n_passi, N_tot):
     return ((2 * d / n_passi) * np.exp(-(d**2) / n_passi)) * N_tot * larg_bin
 
 #dichiarazione costanti
-N               = 100000        #numero di run di random walk
-n               = 1000          #nuper di passi in una singola run
+N               = 10000        #numero di run di random walk
+n               = 100          #nuper di passi in una singola run
 bin_width       = 2.            #larghezza dei bin del istogramma della distribuzione della x e del istogramma della distribuzione della d  
 d2_bin_width    = 10.           #larghezza dei bin del istogramma della distribuzione della d^2
-range_x_dist    = 80.           #range dati osservati nel istogramma della x e della d (essendo centrato in 0->[-range_x_dist, +range_x_dist])
+range_x_dist    = 30.           #range dati osservati nel istogramma della x e della d (essendo centrato in 0->[-range_x_dist, +range_x_dist])
 range_d2_dist   = 4000.         #range dati osservati nel istogramma della d^2 (non essendo centrato in 0->[0, range_d2_dist])
 #-- costanti per lo studio di d(n) --
 max_n           = 1000          #

@@ -1,0 +1,284 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath} %per le formule matematiche
+\usepackage{mathrsfs} %font e simboli fighi
+\usepackage[italian]{babel} %Perchè a noi piace soltanto l'italico idioma
+\usepackage{latexsym} %altri simboli
+\usepackage{nicefrac} %frazioni belle
+\usepackage{amsthm}
+\usepackage{geometry} %per dimensioni margini
+\usepackage{epigraph}
+%le ho incluse per le tabelle carine
+\usepackage{amsfonts}
+\usepackage{booktabs}
+\usepackage{siunitx}
+
+\usepackage{wasysym}
+\usepackage{tikz} %disegnini :3
+\usetikzlibrary{shapes.misc}
+
+\usepackage{pgf} %immagini pgf
+\newcommand{\mathdefault}[1]{#1}
+
+\linespread{1,2} %interlinea
+
+\geometry{hmargin = {3cm,3cm},vmargin = {3cm,3cm}} %settaggio margini
+
+
+\title{Relazione di Laboratorio: Pendolo fisico}       %il nome 
+\author{MATTEO LEONARDI (713343)\\ gruppdeno B2--3 tavolo 2}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Scopo dell'esperienza}
+
+Lo scopo dell'esperienza è misurare il periodo di un pendolo, schematizzato da un'asta rigida, in relazione alla distanza dal centro di oscillazione e verificare la legge del periodo per un corpo rigido oscillante in regime di piccole oscillazioni.
+
+\section{Cenni teorici}
+
+Si è utilizzato come modello l'Equazione~\ref{eq:modello} ovvero il periodo di oscillazione $T$ di un'asta sottile, in regime di piccole oscillazioni, in funzione della distanza $d$ tra il punto di sospensione e il centro di massa. $\ell$ è la lunghezza della barra e $g$ è l'accelerazione di gravità (che stimo a $9.81 \nicefrac{\text{m}}{\text{s}^2}$).
+
+\begin{equation}
+    T = 2 \pi \sqrt{\dfrac{\nicefrac{\ell^2}{12}+d^2}{gd}}
+    \label{eq:modello}
+\end{equation}
+
+Le ipotesi necessare per poter utilizzare questo modello sono le seguenti:
+
+\begin{itemize}
+    \item Il corpo rigido è approssimabile ad una sbarra sottile
+    \item Il moto avviene in regime di piccole oscillazioni
+    \item Non vi è attrito con l'aria o tra la barra e l'apparato 
+\end{itemize}
+
+\section{Materiale a disposizione}
+
+\subsection{Schema dell'apparato}
+
+\begin{tikzpicture}
+    \draw(0,0) rectangle (0.7,-6.5);
+
+    \draw(0.35, -0.5) circle (0.15);
+    \draw(0.35, -1) circle (0.15);
+    \draw(0.35, -1.5) circle (0.15);
+    \draw(0.35, -2) circle (0.15);
+    \draw(0.35, -2.5) circle (0.15);
+    \draw(0.35, -3) circle (0.15);
+    \draw(0.35, -3.5) circle (0.15);
+    \draw(0.35, -4) circle (0.15);
+    \draw(0.35, -4.5) circle (0.15);
+    \draw(0.35, -5) circle (0.15);
+    \draw(0.35, -5.5) circle (0.15);
+
+    \draw[->, thick] (0.35, -7) -- (0.35, -6.5) node[at start, below] {a};
+    \draw[->, thick] (1, -1.5) -- (0.35, -1.5) node[at start, right] {b};
+    \draw[->, thick] (3, -1.5) -- (2.3, -1.5) node[at start, right] {c};
+
+    \draw(0.2, -0.35) rectangle (2, -0.65);
+    \draw(2, -0.35) rectangle (2.3, -7);
+
+    \node[draw, align=left] at (8,-3) {
+        \textbf{Legenda}\\
+        \text{a: Pendolo $\ell = 1050 \pm 1$ mm}\\
+        \text{b: Foro $\emptyset = 5.00 \pm 0.05$ mm}\\
+        \text{c: Apparato di sospensione}\\
+    };
+\end{tikzpicture}
+
+\subsection{Strumenti di misura}
+
+\begin{itemize}
+    \item Metro a nastro con risoluzione di $1$ mm
+    \item Calibro ventesimale di risoluzione $0.05$ mm
+    \item Cronometro con risoluzione di $0.01$ s
+\end{itemize}
+
+\section{Misure}
+
+\subsection{Distanze fori-cm}
+
+Per trovare il valore di $d$, ovvero la distanza tra il centro di rotazione del pendolo ed il suo centro di massa ho innanzitutto preso con il metro la distanza tra il bordo di un estremo della sbarra ed il bordo esterno più vicino all'estremo di ogni foro ottenendo i risultati riportati in Tabella~\ref{tab:misure_bordo_bordo}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{c c}
+     \toprule
+     Foro  & Distanza bordi $b\pm1$ (mm) \\
+     \midrule
+    1 &  $97$\\
+    2 &  $197$\\
+    3 &  $297$\\
+    4 &  $397$\\
+    5 &  $497$\\
+    6 &  $597$\\
+    7 &  $697$\\
+    8 &  $797$\\
+    9 &  $897$\\
+    10 & $997$\\
+     \bottomrule
+  \end{tabular}
+  \caption{distanze tra il bordo dei fori ed il bordo dell'asta.}\label{tab:misure_bordo_bordo}
+\end{table}
+
+Quindi, per ottenere il valore corretto della distanza tra il centro del foro ed il bordo dell'asta ho dovuto aggiungere ad ogni misura tra il bordo del foro e dell'asta, la misura del raggio di ogni foro. Per farlo, ho preso con il calibro ventesimale la misura del diametro ottenendo un valore di: $\emptyset=(5.00\pm0.05)\rm mm$\\
+Quindi ho sommato la metà di questo valore alle lunghezze misurate col metro. Tuttavia si evidenzia a questo punto un problema: se da una parte il metro aveva una risoluzione di $1\rm mm$, la misura del raggio dei fori risulta avere una risoluzione maggiore (il raggio vale infatti $2.50\rm mm$). Quindi, per prima cosa ho calcolato l'incertezza media di metro e calibro con la radice della somma in quadratura delle incertezze dei due strumenti:
+\begin{center}
+    $\sigma =\sqrt{\sigma_{calibro}^2+\sigma_{metro}^2}=\sqrt{1.00^2+0.05^2}\rm mm\approx1.00mm$
+\end{center}
+Quindi, nelle misure successive ho riportato le misure, con le relative incertezze a una sola cifra decimale (dato che l'incertezza del calibro è trascurabile rispetto a quella del metro).
+Quindi, le distanze tra centro del foro e bordo dell'asta sono riportate nella Tabella~\ref{tab:misure_centro_bordo}\\%mettere ref
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{c c}
+     \toprule
+     Foro  & Distanza bordi $d_c\pm 1.0$ (mm) \\
+     \midrule
+    1 &  $ 99.5 $\\
+    2 &  $199.5$\\
+    3 &  $299.5$\\
+    4 &  $399.5$\\
+    5 &  $499.5$\\
+    6 &  $599.5$\\
+    7 &  $699.5$\\
+    8 &  $799.5$\\
+    9 &  $899.5$\\
+    10 & $999.5$\\
+     \bottomrule
+  \end{tabular}
+  \caption{distanze tra il centro dei fori ed il bordo dell'asta.}%
+\label{tab:misure_centro_bordo}
+\end{table}
+
+Infine si è calcolata la distnza dal bordo dell'asta del centro di massa. La misura è stata fatta poggiando la barra sul ciglio del banco e spingendola piano piano verso l'esterno. Ho rilevato il centro di massa quando la barra ha iniziato a sollevarsi dal banco. I risultati delle misure sono riportati in Tabella~\ref{tab:rcm}, risulta un $\mu_{rcm}$ pari a $52.1 \pm 0.1$ cm
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{c c}
+    \toprule 
+    Misura & $r_{cm} \pm 0.1$ cm\\
+    \midrule
+    1 & $52.1$ \\
+    2 & $52.2$ \\
+    3 & $52.1$ \\
+    \bottomrule
+\end{tabular}
+\caption{Misure della distanza del cm dal bordo della barra}%
+\label{tab:rcm}
+\end{table}
+
+Infine con i dati della Tabella~\ref{tab:misure_centro_bordo} e della $\mu_{rcm}$ ho potuto calcolare le distanze $d$ (Tabella~\ref{tab:d})
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{c c}
+    \toprule 
+    Foro & $d \pm 1.0$ mm\\
+    \midrule
+    1 & $423.7$ \\
+    2 & $323.7$ \\
+    3 & $223.7$ \\
+    4 & $123.7$ \\
+    5 & $23.7$ \\
+    6 & $76.3$ \\
+    7 & $176.2$ \\
+    8 & $276.3$ \\
+    9 & $376.2$ \\
+    10 & $476.3$ \\
+    \bottomrule
+\end{tabular}
+\caption{Misure dei centri dei fori dal centro di massa della sbarra}%
+\label{tab:d}
+\end{table}
+
+\subsection{Periodi}
+
+Al fine di misurare il periodo medio di oscillazione relativo ad ogni foro, ho preso cinque misure di tempi di dieci oscillazioni del pendolo. 
+Nella Tabella~\ref{tab:periodi} sono riportati i valori dei tempi misurati.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{c|c c c c c}
+    \toprule 
+    Foro & Misura 1 s & Misura 2 s & Misura 3 s & Misura 4 s & Misura 5 s\\
+    \midrule
+    1 &  16.08& 16.10 & 16.11 & 16.02 & 16.08  \\
+    2 &  15.70& 15.63& 15.62& 15.74& 15.56  \\
+    3 &  15.80& 15.88& 15.91& 15.97& 15.87  \\
+    4 &  18.65& 18.60& 18.62& 18.63& 18.55  \\
+    5 &  38.96& 38.92& 39.05& 38.77& 38.91  \\
+    6 &  22.67& 22.76& 22.70& 22.92& 22.85  \\
+    7 &  16.77& 16.87& 16.91& 16.72& 16.86  \\
+    8 &  15.71& 15.72& 15.69& 15.69& 15.76  \\
+    9 &  15.74& 15.92& 15.94& 15.86& 15.83  \\
+    10 & 16.44& 16.35& 16.36& 16.42& 16.35 \\
+
+    \bottomrule
+\end{tabular}
+\caption{Misure dei periodi per ogni foro}%
+\label{tab:periodi}
+\end{table}
+
+\section{Analisi dati}
+
+Come primo passaggio sono stati divisi i periodi delle 10 oscillazioni per 10 in modo da ottenere una stima del periodo di una sola oscillazione (si è quindi scelto di contare 10 oscillazioni al posto di una sola al fine di minimizzare gli errori umani in presa dati).
+Per ogni foro si è calcolata la media e la deviazione standard campionaria, in quanto la risoluzione del cronometro è trascurabile rispetto all'errore umano. I valori calcolati sono stati riportati in Tabella~\ref{tab:periodi_med}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{c c}
+    \toprule 
+    Foro & $\mu_t \pm \sigma_t$ s\\
+    \midrule
+    1 &  $1.608 \pm 0.002$ \\
+    2 &  $1.565 \pm 0.003$ \\
+    3 &  $1.583 \pm 0.003$ \\
+    4 &  $1.861 \pm 0.002$ \\
+    5 &  $3.892 \pm 0.004$ \\
+    6 &  $2.278 \pm 0.005$ \\
+    7 &  $1.683 \pm 0.004$ \\
+    8 &  $1.571 \pm 0.001$ \\
+    9 &  $1.586 \pm 0.003$ \\
+    10 & $1.638 \pm 0.002$ \\
+    \bottomrule
+\end{tabular}
+\caption{Media e deviazione standard di un singolo periodo per ogni foro.}%
+\label{tab:periodi_med}
+\end{table}
+
+Si è eseguito un fit non lineare dei minimi quadrati attraverso la funzione \texttt{curve\_fit} della libreria \texttt{scipy.optimize} di Python. \`E stato usato come come modello l'Equazione~\ref{eq:modello}. Il grafico è riportato in Figura~\ref{fig:fit_10}
+
+\begin{figure}
+    \centering
+    \resizebox{1\textwidth}{!}{%  <-- Ridimensiona all'80% della larghezza del testo
+        \input{10misure.pgf}
+    }
+    \caption{Grafico contenente i valori di $\mu_t$ (Tabella~\ref{tab:periodi_med}) per ogni distanza $d$ (Tabella~\ref{tab:d}) per un totale di 10 misure e il fit}%
+    \label{fig:fit_10}
+\end{figure}
+
+Il $\chi^2$ restituito è pari a $217$ per 9 gradi di libertà (10 misure $-$ un parametro). Il valore di \textit{best fit} del parametro $\ell$ risulta uguale a $1.045 \pm 0.003$ m e cioè distante $\approx 2 \sigma$ dal valore atteso.
+Il grafico dei residui mostra che le misure del foro 5 (ovvero quello più vicino al centro di massa) risultano avere un errore di oltre $10 \sigma$ in modulo.
+Ho deciso quindi di eliminare questa misura dal fit per vedere cosa succede. Il risultato è visibile nel Grafico~\ref{fig:fit_9}.
+
+\begin{figure}
+    \centering
+    \resizebox{1\textwidth}{!}{%  <-- Ridimensiona all'80% della larghezza del testo
+        \input{9misure.pgf}
+    }
+    \caption{Grafico contenente i valori di $\mu_t$ (Tabella~\ref{tab:periodi_med}) per ogni distanza $d$ (Tabella~\ref{tab:d}) meno del foro 5, per un totale di 9 misure.\`E riportato anche il fit}%
+    \label{fig:fit_9}
+\end{figure}
+
+Il fit fatto con 9 misure e il relativo test del $\chi^2$ evidenziano una migiore rappresentazione dei dati misurati da parte del modello. Il $\chi^2$ risulta pari a $60$ per 8 gradi di libertà. Il valore di \textit{best fit} per il parametro $\ell$ risulta uguale a $1.050 \pm 0.002$ m e cioè perfettamente compatibilie con il valore aspettato entro una $\sigma$.
+
+\section{Conclusioni}
+
+Entrambi i fit dei minimi quadrati utilizzando come come modello l'Equazione~\ref{eq:modello} hanno riportato dei valori di best fit del parametro $\ell$ compatibili con la misura diretta. I test del $\chi^2$ hanno però evidenziato una sottostima delle incertezze per i periodi di delle oscillazioni. Il miglioramente del valore del $\chi^2$ in seguito all'omissione delle misure per il foro 5 indica che probabilmente le ipotesi del modello non sono verificate per $d$ così piccole.
+Ad avvalorare questa ipotesi, durante la presa dati sono stato costretto, quando si è trattato di misurare i periodi per i fori più centrali, a far partire il pendolo da un angolo notevolmente paggiore rispetto a quello scelto per le altre misure in quanto il pendolo (altrimenti) tendeva a farmarsi sotto effetto dell'attrito.
+
+\end{document}

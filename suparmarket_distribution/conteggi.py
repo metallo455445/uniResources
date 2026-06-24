@@ -64,6 +64,9 @@ def analisiCampione(l, nome=None):
     #residui
     residui = oss - exp_poisson
 
+    print(f'oss:{np.sum(oss)}, poisson:{np.sum(exp_poisson)}')
+    
+
     #normalizza i residui (divido per la radice dei conteggi attesi) statistica poisson
     residui = residui / np.sqrt(exp_poisson)
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2026.3.22)  31 MAR 2026 08:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2026.4.19)  7 MAY 2026 15:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -558,20 +558,55 @@ Overfull \hbox (8.7089pt too wide) in paragraph at lines 34--34
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./main.aux) ) 
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [2]
+<apparato.pdf, id=23, 145.54375pt x 192.72pt>
+File: apparato.pdf Graphic file (type pdf)
+<use apparato.pdf>
+Package pdftex.def Info: apparato.pdf  used on input line 136.
+(pdftex.def)             Requested size: 213.39568pt x 282.58627pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 141--142
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 148--148
+[][]\OT1/cmr/m/n/10 Il pro-gram-ma di ac-qui-si-zio-ne da-ti ^^Re il bal-da-quin (ver-sio-ne 0.10.2
+ []
+
+
+Underfull \hbox (badness 3029) in paragraph at lines 148--148
+\OT1/cmr/m/n/10 https://github.com/lucabaldini/baldaquin/releases/tag/0.10.2), l'u-nit^^Ra di mi-su-ra ^^Re ar-bi-tra-
+ []
+
+[3] [4 <./apparato.pdf>] [5]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 197.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 210.
+
+(./pendolo_singolo_inviluppo.pgf) [6] [7] (./fase.pgf) (./controfase.pgf)
+Underfull \hbox (badness 10000) in paragraph at lines 311--312
+
+ []
+
+(./battimenti_definitivo.pgf) [8] [9] [10] [11] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 18598 strings out of 476034
- 402878 string characters out of 5792864
- 1852388 words of memory out of 6000000
- 38751 multiletter control sequences out of 15000+600000
- 516903 words of font info for 53 fonts, out of 8000000 for 9000
+ 18752 strings out of 476034
+ 405638 string characters out of 5792864
+ 3929385 words of memory out of 6000000
+ 38876 multiletter control sequences out of 15000+600000
+ 523928 words of font info for 84 fonts, out of 8000000 for 9000
  1137 hyphenation exceptions out of 8191
- 84i,6n,89p,429b,526s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb>
-Output written on main.pdf (1 page, 38638 bytes).
+ 84i,10n,89p,859b,526s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
+Output written on main.pdf (11 pages, 377374 bytes).
 PDF statistics:
- 26 PDF objects out of 1000 (max. 8388607)
- 16 compressed objects within 1 object stream
+ 135 PDF objects out of 1000 (max. 8388607)
+ 85 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 18 words of extra memory for PDF output out of 10000 (max. 10000000)
 

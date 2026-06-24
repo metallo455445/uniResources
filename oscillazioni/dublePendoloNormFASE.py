@@ -78,8 +78,17 @@ else:
 #################################################################################
 # CARICAMENTO ED ELABORAZIONE
 #################################################################################
-data1 = np.loadtxt(percorsoData1, delimiter=',', skiprows=4)
-data2 = np.loadtxt(percorsoData2, delimiter=',', skiprows=4)
+# Prova a caricare data1 con la virgola, se fallisce usa gli spazi
+try:
+    data1 = np.loadtxt(percorsoData1, delimiter=',', skiprows=4)
+except ValueError:
+    data1 = np.loadtxt(percorsoData1, skiprows=4)
+
+# Prova a caricare data2 con la virgola, se fallisce usa gli spazi
+try:
+    data2 = np.loadtxt(percorsoData2, delimiter=',', skiprows=4)
+except ValueError:
+    data2 = np.loadtxt(percorsoData2, skiprows=4)
 
 # Chiamo la funzione 4 volte (una per ogni traccia!)
 t1A, d1A, tm1A, pm1A, t1A_raw, d1A_raw = elabora_canale(data1, 4.0, tempMin1, tempMax1, prom1)

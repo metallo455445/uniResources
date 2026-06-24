@@ -48,9 +48,8 @@ class Particella:
 # --- IMPOSTAZIONE DELLA SIMULAZIONE ---
 particelle = [
     Particella("P1", massa=2.0 * 10**12, posizione=(0,0,0), velocita=(0,0,0)), 
-    Particella("P2", massa=10.0**10, posizione=(5.0,0,0), velocita=(0, np.sqrt((constants.G * 2.0 * 10**12) / 5.0), 0)),
-    Particella("buco nero", massa=10**12, posizione=(5, -1, 0), velocita=(-5,5,0))
-    # Particella("P3", massa=11.0**9, posizione=(0,2.5,0), velocita=(0,1,5)),
+    Particella("P2", massa=10.0**7, posizione=(5.0,0,0), velocita=(0, np.sqrt((constants.G * 2.0 * 10**12) / 5.0), 0)),
+    #Particella("P3", massa=11.0**9, posizione=(0,2.5,0), velocita=(0,1,5)),
     # Particella("P1", 10**12, (2.5,0,0),(0,2,0)),
     # Particella("P2", 10**9, (-2.5,0,0),(0,-2,0))
 ]
