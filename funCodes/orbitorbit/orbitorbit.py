@@ -45,14 +45,21 @@ class Particella:
         self.EPOT = 0
 
 
-# --- IMPOSTAZIONE DELLA SIMULAZIONE ---
+# !!! IMPOSTAZIONE DELLA SIMULAZIONE !!!
 particelle = [
     Particella("P1", massa=2.0 * 10**12, posizione=(0,0,0), velocita=(0,0,0)), 
-    Particella("P2", massa=10.0**7, posizione=(5.0,0,0), velocita=(0, np.sqrt((constants.G * 2.0 * 10**12) / 5.0), 0)),
+    Particella("P2", massa=10.0 * 10**11, posizione=(5.0,0,0), velocita=(0, np.sqrt((constants.G * 2.0 * 10**12) / 5.0), 0)),
     #Particella("P3", massa=11.0**9, posizione=(0,2.5,0), velocita=(0,1,5)),
     # Particella("P1", 10**12, (2.5,0,0),(0,2,0)),
     # Particella("P2", 10**9, (-2.5,0,0),(0,-2,0))
 ]
+
+# Impostazioni grafiche
+axis_limits = (-8, 8)
+
+# on/off per visualizzare energia e momento angolare
+visualizza_energia = False
+visualizza_momento_angolare = False
 
 def gravitazione(parti):
     for i in range(len(parti)):
@@ -141,9 +148,9 @@ fig1.canvas.manager.set_window_title("Orbite")
 ax1 = fig1.add_subplot(111, projection='3d')
 
 # Limiti dello spazio
-ax1.set_xlim(-8, 8)
-ax1.set_ylim(-8, 8)  
-ax1.set_zlim(-8, 8)
+ax1.set_xlim(axis_limits)
+ax1.set_ylim(axis_limits)
+ax1.set_zlim(axis_limits)
 ax1.set_xlabel('X')
 ax1.set_ylabel('Y')
 ax1.set_zlabel('Z')
@@ -156,10 +163,10 @@ ax1.legend()
 
 #FInestra 2: campo potenziale
 fig2 = plt.figure()
-fig2.canvas.manager.set_window_title("Campo potenziale")
+fig2.canvas.manager.set_window_title("Campo forza gravitazionale")
 ax2 = fig2.add_subplot()
-x = np.linspace(-8, 8, 20)
-y = np.linspace(-8, 8, 20)
+x = np.linspace(axis_limits[0], axis_limits[1], 20)
+y = np.linspace(axis_limits[0], axis_limits[1], 20)
 X, Y = np.meshgrid(x,y)
 
 #dichiarazioni colore
@@ -176,8 +183,11 @@ campo = ax2.quiver(X, Y, U_iniziale,V_iniziale)
 
 def cicle1(frame):
     gravitazione(particelle)
-    energia(particelle)
-    
+    if visualizza_energia:
+        energia(particelle)
+    if visualizza_momento_angolare:
+        momento_angolare(particelle, pos_cm)
+
     for p, punto, scia in zip(particelle, punti_grafici, scie_grafiche):
         p.update(dt)
         p.printinfo()
@@ -193,7 +203,8 @@ def cicle1(frame):
         
     # Aggiornamento CM
     pos_cm = calcola_cm(particelle)
-    momento_angolare(particelle, pos_cm)
+    if visualizza_momento_angolare:
+        momento_angolare(particelle, pos_cm)
     punto_cm.set_data([pos_cm[0]], [pos_cm[1]])
     punto_cm.set_3d_properties([pos_cm[2]])
             
@@ -216,7 +227,7 @@ def cicle2(frame):
     return color_mesh,
 
 try:
-    print("Avvio simulazione... l'orbita dovrebbe essere circolare!")
+    print("Avvio simulazione... ")
     ani1 = FuncAnimation(fig1, cicle1, frames=frames, interval=1000/fps, blit=False)
     ani2 = FuncAnimation(fig2, cicle2, frames=frames, interval=1000/fps, blit=False)
     plt.show()
