@@ -1,3 +1,4 @@
+#By Matteo Leonardi 07/2026
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
